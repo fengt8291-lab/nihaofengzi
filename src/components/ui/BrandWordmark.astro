@@ -1,0 +1,100 @@
+---
+import { SITE } from '@/data/site';
+
+interface Props {
+  variant?: 'header' | 'hero';
+  href?: string;
+  english?: string;
+  chinese?: string;
+  class?: string;
+}
+
+const {
+  variant = 'header',
+  href,
+  english = SITE.englishName.toUpperCase(),
+  chinese = SITE.name,
+  class: className,
+} = Astro.props;
+
+const classes = ['brand-wordmark', `brand-wordmark--${variant}`, className];
+---
+
+{
+  href ? (
+    <a class:list={classes} href={href} aria-label={`${chinese}首页`}>
+      <span class="brand-wordmark__chinese">{chinese}</span>
+      <span class="brand-wordmark__divider" aria-hidden="true">/</span>
+      <span class="brand-wordmark__english">{english}</span>
+    </a>
+  ) : (
+    <p class:list={classes}>
+      <span class="brand-wordmark__english">{english}</span>
+      <span class="brand-wordmark__divider" aria-hidden="true">/</span>
+      <span class="brand-wordmark__chinese">{chinese}</span>
+    </p>
+  )
+}
+
+<style>
+  .brand-wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    width: fit-content;
+    margin: 0;
+    color: var(--color-text-primary);
+    text-decoration: none;
+  }
+
+  .brand-wordmark--header {
+    gap: 0.45rem;
+    font-size: 0.875rem;
+    line-height: 1;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+
+  .brand-wordmark--header:hover {
+    color: var(--color-accent);
+  }
+
+  .brand-wordmark--header .brand-wordmark__chinese {
+    font-weight: 650;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-wordmark--header .brand-wordmark__english {
+    color: var(--color-text-secondary);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+  }
+
+  .brand-wordmark--header .brand-wordmark__divider {
+    color: var(--color-border-strong);
+    font-size: 0.6875rem;
+  }
+
+  .brand-wordmark--hero {
+    gap: var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: 0.6875rem;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+  }
+
+  .brand-wordmark--hero .brand-wordmark__chinese {
+    letter-spacing: 0.08em;
+  }
+
+  .brand-wordmark--hero .brand-wordmark__divider {
+    color: var(--color-border-strong);
+  }
+
+  @media (max-width: 23rem) {
+    .brand-wordmark--header .brand-wordmark__divider,
+    .brand-wordmark--header .brand-wordmark__english {
+      display: none;
+    }
+  }
+</style>

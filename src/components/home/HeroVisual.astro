@@ -1,0 +1,176 @@
+<div class="hero-visual" aria-hidden="true">
+  <div class="hero-visual__field">
+    <span class="hero-visual__path hero-visual__path--vertical"></span>
+    <span class="hero-visual__path hero-visual__path--upper"></span>
+    <span class="hero-visual__path hero-visual__path--middle"></span>
+    <span class="hero-visual__path hero-visual__path--lower"></span>
+
+    <span class="hero-visual__marker hero-visual__marker--one"></span>
+    <span class="hero-visual__marker hero-visual__marker--two"></span>
+    <span class="hero-visual__marker hero-visual__marker--three"></span>
+
+    <span class="hero-visual__hint hero-visual__hint--learning">学习</span>
+    <span class="hero-visual__hint hero-visual__hint--research">研究</span>
+    <span class="hero-visual__hint hero-visual__hint--create">创造</span>
+    <span class="hero-visual__hint hero-visual__hint--practice">实践</span>
+  </div>
+</div>
+
+<style>
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    max-width: 35rem;
+    margin-inline: auto;
+  }
+
+  .hero-visual__field {
+    position: relative;
+    min-height: clamp(19rem, 54vw, 33rem);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero-visual__path,
+  .hero-visual__marker,
+  .hero-visual__hint {
+    position: absolute;
+    opacity: 1;
+    transition:
+      opacity var(--duration-reveal) var(--ease-standard),
+      transform var(--duration-reveal) var(--ease-emphasized);
+  }
+
+  .hero-visual__path {
+    display: block;
+    background: var(--color-trajectory);
+  }
+
+  .hero-visual__path--vertical {
+    top: 8%;
+    left: 52%;
+    width: 1px;
+    height: 82%;
+    transform: scaleY(1);
+    transform-origin: top;
+    transition-delay: 80ms;
+  }
+
+  .hero-visual__path--upper {
+    top: 25%;
+    left: 19%;
+    width: 62%;
+    height: 1px;
+    transform: scaleX(1);
+    transform-origin: left;
+    transition-delay: 160ms;
+  }
+
+  .hero-visual__path--middle {
+    top: 51%;
+    left: 7%;
+    width: 78%;
+    height: 1px;
+    transform: scaleX(1);
+    transform-origin: right;
+    transition-delay: 240ms;
+  }
+
+  .hero-visual__path--lower {
+    top: 74%;
+    left: 30%;
+    width: 60%;
+    height: 1px;
+    transform: scaleX(1);
+    transform-origin: left;
+    transition-delay: 320ms;
+  }
+
+  .hero-visual__marker {
+    z-index: 1;
+    display: block;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-growth);
+    transform: scale(1);
+  }
+
+  .hero-visual__marker--one {
+    top: calc(25% - 0.2rem);
+    left: calc(52% - 0.2rem);
+    transition-delay: 360ms;
+  }
+
+  .hero-visual__marker--two {
+    top: calc(51% - 0.2rem);
+    left: calc(33% - 0.2rem);
+    background: var(--color-text-secondary);
+    transition-delay: 420ms;
+  }
+
+  .hero-visual__marker--three {
+    top: calc(74% - 0.2rem);
+    left: calc(72% - 0.2rem);
+    background: var(--color-accent);
+    transition-delay: 480ms;
+  }
+
+  .hero-visual__hint {
+    color: var(--color-text-tertiary);
+    font-size: 0.6875rem;
+    font-weight: 520;
+    letter-spacing: 0.16em;
+    transition-delay: 420ms;
+  }
+
+  .hero-visual__hint--learning {
+    top: 31%;
+    left: 7%;
+  }
+
+  .hero-visual__hint--research {
+    top: 11%;
+    right: 7%;
+  }
+
+  .hero-visual__hint--create {
+    top: 62%;
+    right: 13%;
+  }
+
+  .hero-visual__hint--practice {
+    bottom: 5%;
+    left: 20%;
+  }
+
+  @starting-style {
+    .hero-visual__path--vertical {
+      opacity: 0;
+      transform: scaleY(0.25);
+    }
+
+    .hero-visual__path--upper,
+    .hero-visual__path--middle,
+    .hero-visual__path--lower {
+      opacity: 0;
+      transform: scaleX(0.25);
+    }
+
+    .hero-visual__marker {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+
+    .hero-visual__hint {
+      opacity: 0;
+      transform: translateY(0.35rem);
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .hero-visual__field {
+      min-height: clamp(27rem, 42vw, 34rem);
+    }
+  }
+</style>

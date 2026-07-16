@@ -1,7 +1,180 @@
 ---
+import HeroVisual from '@/components/home/HeroVisual.astro';
+import BrandWordmark from '@/components/ui/BrandWordmark.astro';
+import Button from '@/components/ui/Button.astro';
+import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import { HERO_CONTENT } from '@/data/home';
 ---
 
 <Section id="hero" ariaLabel="Hero" spacing="spacious">
-  <slot />
+  <Container>
+    <div class="hero">
+      <div class="hero__content">
+        <BrandWordmark
+          variant="hero"
+          english={HERO_CONTENT.brand.english}
+          chinese={HERO_CONTENT.brand.chinese}
+        />
+
+        <h1 class="hero__title">{HERO_CONTENT.title}</h1>
+        <p class="hero__description">{HERO_CONTENT.description}</p>
+
+        <div class="hero__actions" aria-label="首屏操作">
+          <Button href={HERO_CONTENT.primaryAction.href} variant="primary">
+            {HERO_CONTENT.primaryAction.label}
+          </Button>
+          <Button href={HERO_CONTENT.secondaryAction.href} variant="secondary">
+            {HERO_CONTENT.secondaryAction.label}
+          </Button>
+        </div>
+
+        <a class="hero__current-link" href={HERO_CONTENT.currentExploration.href}>
+          <span class="hero__current-mark" aria-hidden="true"></span>
+          {HERO_CONTENT.currentExploration.label}
+          <span class="hero__current-arrow" aria-hidden="true">↘</span>
+        </a>
+      </div>
+
+      <div class="hero__visual">
+        <HeroVisual />
+      </div>
+    </div>
+  </Container>
 </Section>
+
+<style>
+  .hero {
+    display: grid;
+    align-items: center;
+    gap: var(--space-7);
+    min-height: calc(100svh - var(--header-height) - (var(--space-9) * 2));
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    max-width: 45rem;
+  }
+
+  .hero__title,
+  .hero__description,
+  .hero__actions,
+  .hero__current-link {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity var(--duration-reveal) var(--ease-standard),
+      transform var(--duration-reveal) var(--ease-emphasized);
+  }
+
+  .hero__title {
+    max-width: 10em;
+    margin: var(--space-5) 0 0;
+    font-size: clamp(2.875rem, 12vw, 4.5rem);
+    font-weight: 650;
+    letter-spacing: -0.065em;
+    line-height: 1.04;
+    text-wrap: balance;
+    transition-delay: 80ms;
+  }
+
+  .hero__description {
+    max-width: 37rem;
+    margin: var(--space-5) 0 0;
+    color: var(--color-text-secondary);
+    font-size: clamp(1.0625rem, 3.6vw, 1.25rem);
+    letter-spacing: -0.018em;
+    line-height: 1.72;
+    text-wrap: pretty;
+    transition-delay: 150ms;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    transition-delay: 220ms;
+  }
+
+  .hero__current-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-6);
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      color var(--duration-fast) var(--ease-standard),
+      opacity var(--duration-reveal) var(--ease-standard),
+      transform var(--duration-reveal) var(--ease-emphasized);
+    transition-delay: 280ms;
+  }
+
+  .hero__current-mark {
+    width: 1.75rem;
+    height: 1px;
+    background: var(--color-growth);
+    transition: transform var(--duration-fast) var(--ease-standard);
+    transform-origin: left;
+  }
+
+  .hero__current-arrow {
+    color: var(--color-growth);
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .hero__current-link:hover {
+    color: var(--color-text-primary);
+  }
+
+  .hero__current-link:hover .hero__current-mark {
+    transform: scaleX(1.15);
+  }
+
+  .hero__current-link:hover .hero__current-arrow {
+    transform: translate(0.125rem, 0.125rem);
+  }
+
+  .hero__visual {
+    min-width: 0;
+  }
+
+  @starting-style {
+    .hero__title,
+    .hero__description,
+    .hero__actions,
+    .hero__current-link {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .hero {
+      grid-template-columns: minmax(0, 1.08fr) minmax(21rem, 0.92fr);
+      gap: clamp(var(--space-7), 6vw, var(--space-9));
+      min-height: calc(100svh - var(--header-height) - (var(--space-10) * 2));
+    }
+
+    .hero__title {
+      font-size: clamp(4rem, 6.4vw, 5.75rem);
+    }
+
+    .hero__description {
+      margin-top: var(--space-6);
+    }
+  }
+
+  @media (max-width: 47.999rem) {
+    .hero__visual {
+      width: min(100%, 30rem);
+      margin-inline: auto;
+    }
+  }
+</style>

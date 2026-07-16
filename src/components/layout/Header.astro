@@ -1,51 +1,114 @@
 ---
-import { SITE } from '@/data/site';
-
+import MobileMenu from '@/components/layout/MobileMenu.astro';
+import BrandWordmark from '@/components/ui/BrandWordmark.astro';
 import Container from '@/components/ui/Container.astro';
+import { PRIMARY_NAVIGATION } from '@/data/navigation';
 ---
 
 <header class="site-header">
   <Container>
     <div class="site-header__inner">
-      <a class="site-header__brand" href="/" aria-label={`${SITE.name}首页`}>
-        {SITE.name}
-      </a>
-      <div class="site-header__content">
-        <slot />
-      </div>
+      <BrandWordmark variant="header" href="/" />
+
+      <nav class="site-header__desktop-nav" aria-label="主导航">
+        <ul class="site-header__nav-list">
+          {
+            PRIMARY_NAVIGATION.map((item) => (
+              <li>
+                <a class="site-header__nav-link" href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <MobileMenu items={PRIMARY_NAVIGATION} />
     </div>
   </Container>
 </header>
 
 <style>
   .site-header {
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: var(--layer-header);
     border-bottom: 1px solid var(--color-border);
-    background: var(--color-page-background);
+    background: var(--color-header-background);
+    backdrop-filter: saturate(140%) blur(1rem);
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity var(--duration-slow) var(--ease-standard),
+      transform var(--duration-slow) var(--ease-emphasized);
   }
 
   .site-header__inner {
     display: flex;
-    min-height: 3.5rem;
+    min-height: var(--header-height);
     align-items: center;
     justify-content: space-between;
     gap: var(--space-5);
   }
 
-  .site-header__brand {
-    flex: none;
-    color: var(--color-text-primary);
-    font-size: 0.9375rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    text-decoration: none;
+  .site-header__desktop-nav {
+    display: none;
   }
 
-  .site-header__content {
+  .site-header__nav-list {
     display: flex;
-    min-width: 0;
     align-items: center;
-    justify-content: flex-end;
+    gap: var(--space-6);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .site-header__nav-link {
+    position: relative;
+    display: inline-flex;
+    min-height: var(--header-height);
+    align-items: center;
+    color: var(--color-text-secondary);
+    font-size: 0.8125rem;
+    font-weight: 520;
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+
+  .site-header__nav-link::after {
+    position: absolute;
+    right: 0;
+    bottom: 0.65rem;
+    left: 0;
+    height: 1px;
+    background: currentColor;
+    content: '';
+    opacity: 0;
+    transform: scaleX(0.6);
+    transition:
+      opacity var(--duration-fast) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .site-header__nav-link:hover {
+    color: var(--color-text-primary);
+  }
+
+  .site-header__nav-link:hover::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  @starting-style {
+    .site-header {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .site-header__desktop-nav {
+      display: block;
+    }
   }
 </style>
