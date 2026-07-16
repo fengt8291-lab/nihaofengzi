@@ -1,0 +1,65 @@
+:root {
+  color-scheme: light;
+
+  /* Color */
+  --color-page-background: #f5f5f7;
+  --color-card-background: #ffffff;
+  --color-text-primary: #1d1d1f;
+  --color-text-secondary: #6e6e73;
+  --color-accent: #0066cc;
+  --color-accent-hover: #0055b3;
+  --color-growth: #789174;
+  --color-dark-background: #0a0a0b;
+  --color-text-on-dark: #f5f5f7;
+  --color-border: rgb(29 29 31 / 10%);
+  --color-border-strong: rgb(29 29 31 / 18%);
+
+  /* Typography and content measure */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --content-width: 80rem;
+  --reading-width: 46rem;
+  --container-gutter: 1.25rem;
+
+  /* 8px-based spacing with half-step support */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 1.75rem;
+  --radius-pill: 999px;
+
+  /* Shadow */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 4%);
+  --shadow-card: 0 12px 36px rgb(0 0 0 / 6%);
+  --shadow-focus: 0 0 0 3px rgb(0 102 204 / 20%);
+
+  /* Motion */
+  --duration-instant: 0ms;
+  --duration-fast: 160ms;
+  --duration-base: 240ms;
+  --duration-slow: 400ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Layering */
+  --layer-header: 20;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --container-gutter: 2rem;
+  }
+}

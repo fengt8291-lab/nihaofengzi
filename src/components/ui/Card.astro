@@ -1,0 +1,78 @@
+---
+interface Props {
+  as?: 'div' | 'article' | 'section' | 'li';
+  tone?: 'plain' | 'surface' | 'dark';
+  padding?: 'none' | 'small' | 'medium' | 'large';
+  id?: string;
+  ariaLabel?: string;
+  class?: string;
+}
+
+const props: Props = Astro.props;
+const {
+  as: Element = 'article',
+  tone = 'surface',
+  padding = 'medium',
+  id,
+  ariaLabel,
+  class: className,
+} = props;
+---
+
+<Element
+  id={id}
+  aria-label={ariaLabel}
+  class:list={['card', `card--${tone}`, `card--padding-${padding}`, className]}
+>
+  <slot />
+</Element>
+
+<style>
+  .card {
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+  }
+
+  .card--plain {
+    background: transparent;
+    color: var(--color-text-primary);
+  }
+
+  .card--surface {
+    border-color: var(--color-border);
+    background: var(--color-card-background);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .card--dark {
+    background: var(--color-dark-background);
+    color: var(--color-text-on-dark);
+  }
+
+  .card--padding-none {
+    padding: 0;
+  }
+
+  .card--padding-small {
+    padding: var(--space-4);
+  }
+
+  .card--padding-medium {
+    padding: var(--space-5);
+  }
+
+  .card--padding-large {
+    padding: var(--space-6);
+  }
+
+  @media (min-width: 48rem) {
+    .card--padding-medium {
+      padding: var(--space-6);
+    }
+
+    .card--padding-large {
+      padding: var(--space-7);
+    }
+  }
+</style>

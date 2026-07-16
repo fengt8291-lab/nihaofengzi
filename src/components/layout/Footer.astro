@@ -1,0 +1,43 @@
+---
+import { SITE } from '@/data/site';
+
+import Container from '@/components/ui/Container.astro';
+---
+
+<footer class="site-footer">
+  <Container>
+    <div class="site-footer__inner">
+      <small class="site-footer__brand">{SITE.name}</small>
+      <div class="site-footer__content">
+        <slot />
+      </div>
+    </div>
+  </Container>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-page-background);
+    color: var(--color-text-secondary);
+  }
+
+  .site-footer__inner {
+    display: flex;
+    min-height: 5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .site-footer__brand {
+    font-size: 0.8125rem;
+  }
+
+  .site-footer__content {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    justify-content: flex-end;
+  }
+</style>

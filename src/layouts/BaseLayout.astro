@@ -1,6 +1,9 @@
 ---
 import '@/styles/global.css';
 
+import Footer from '@/components/layout/Footer.astro';
+import Header from '@/components/layout/Header.astro';
+import SEOHead from '@/components/layout/SEOHead.astro';
 import { SITE } from '@/data/site';
 import type { SeoMetadata } from '@/types/site';
 
@@ -16,30 +19,42 @@ const {
   noIndex = false,
   lang = SITE.language,
 } = Astro.props;
-
-const documentTitle = title === SITE.defaultTitle ? title : `${title} | ${SITE.name}`;
-const canonicalUrl = canonical instanceof URL ? canonical : new URL(canonical, SITE.url);
-const imageUrl = image ? (image instanceof URL ? image : new URL(image, SITE.url)) : undefined;
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{documentTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-    {noIndex && <meta name="robots" content="noindex, nofollow" />}
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={SITE.name} />
-    <meta property="og:title" content={documentTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
-    {imageUrl && <meta property="og:image" content={imageUrl} />}
+    <SEOHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      image={image}
+      noIndex={noIndex}
+    />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+    <Header />
     <slot />
+    <Footer />
   </body>
 </html>
+
+<style is:global>
+  .skip-link {
+    position: fixed;
+    top: var(--space-3);
+    left: var(--space-3);
+    z-index: calc(var(--layer-header) + 1);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-pill);
+    background: var(--color-dark-background);
+    color: var(--color-text-on-dark);
+    text-decoration: none;
+    transform: translateY(calc(-100% - var(--space-5)));
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+</style>

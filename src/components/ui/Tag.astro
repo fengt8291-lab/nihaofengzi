@@ -1,0 +1,60 @@
+---
+interface Props {
+  href?: string;
+  tone?: 'neutral' | 'accent' | 'dark';
+  ariaLabel?: string;
+  class?: string;
+}
+
+const {
+  href,
+  tone = 'neutral',
+  ariaLabel,
+  class: className,
+} = Astro.props;
+
+const classes = ['tag', `tag--${tone}`, className];
+---
+
+{
+  href ? (
+    <a href={href} aria-label={ariaLabel} class:list={classes}>
+      <slot />
+    </a>
+  ) : (
+    <span aria-label={ariaLabel} class:list={classes}>
+      <slot />
+    </span>
+  )
+}
+
+<style>
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.75rem;
+    padding-inline: var(--space-3);
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .tag--neutral {
+    border-color: var(--color-border);
+    background: var(--color-card-background);
+    color: var(--color-text-secondary);
+  }
+
+  .tag--accent {
+    background: rgb(0 102 204 / 8%);
+    color: var(--color-accent);
+  }
+
+  .tag--dark {
+    background: var(--color-dark-background);
+    color: var(--color-text-on-dark);
+  }
+</style>

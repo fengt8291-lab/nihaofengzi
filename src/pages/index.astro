@@ -1,10 +1,21 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+
+import AboutSnapshot from '@/components/home/AboutSnapshot.astro';
+import Contact from '@/components/home/Contact.astro';
+import CurrentlyExploring from '@/components/home/CurrentlyExploring.astro';
+import Hero from '@/components/home/Hero.astro';
+import ResearchPreview from '@/components/home/ResearchPreview.astro';
+import SelectedProjects from '@/components/home/SelectedProjects.astro';
 ---
 
 <BaseLayout>
   <main id="main-content">
-    <h1>你好丰子</h1>
-    <p>Nihao Fengzi</p>
+    <Hero />
+    <CurrentlyExploring />
+    <SelectedProjects />
+    <ResearchPreview />
+    <AboutSnapshot />
+    <Contact />
   </main>
 </BaseLayout>

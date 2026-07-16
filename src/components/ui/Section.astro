@@ -1,0 +1,75 @@
+---
+interface Props {
+  as?: 'section' | 'div' | 'article';
+  tone?: 'default' | 'surface' | 'dark';
+  spacing?: 'compact' | 'default' | 'spacious';
+  id?: string;
+  ariaLabel?: string;
+  class?: string;
+}
+
+const props: Props = Astro.props;
+const {
+  as: Element = 'section',
+  tone = 'default',
+  spacing = 'default',
+  id,
+  ariaLabel,
+  class: className,
+} = props;
+---
+
+<Element
+  id={id}
+  aria-label={ariaLabel}
+  class:list={['section', `section--tone-${tone}`, `section--spacing-${spacing}`, className]}
+>
+  <slot />
+</Element>
+
+<style>
+  .section {
+    position: relative;
+  }
+
+  .section--tone-default {
+    background: var(--color-page-background);
+    color: var(--color-text-primary);
+  }
+
+  .section--tone-surface {
+    background: var(--color-card-background);
+    color: var(--color-text-primary);
+  }
+
+  .section--tone-dark {
+    background: var(--color-dark-background);
+    color: var(--color-text-on-dark);
+  }
+
+  .section--spacing-compact {
+    padding-block: var(--space-7);
+  }
+
+  .section--spacing-default {
+    padding-block: var(--space-8);
+  }
+
+  .section--spacing-spacious {
+    padding-block: var(--space-9);
+  }
+
+  @media (min-width: 48rem) {
+    .section--spacing-compact {
+      padding-block: var(--space-8);
+    }
+
+    .section--spacing-default {
+      padding-block: var(--space-9);
+    }
+
+    .section--spacing-spacious {
+      padding-block: var(--space-10);
+    }
+  }
+</style>

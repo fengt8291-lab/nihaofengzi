@@ -1,0 +1,39 @@
+---
+interface Props {
+  as?: 'div' | 'main' | 'section' | 'article' | 'header' | 'footer' | 'nav';
+  size?: 'default' | 'narrow';
+  id?: string;
+  ariaLabel?: string;
+  class?: string;
+}
+
+const props: Props = Astro.props;
+const {
+  as: Element = 'div',
+  size = 'default',
+  id,
+  ariaLabel,
+  class: className,
+} = props;
+---
+
+<Element
+  id={id}
+  aria-label={ariaLabel}
+  class:list={['container', `container--${size}`, className]}
+>
+  <slot />
+</Element>
+
+<style>
+  .container {
+    width: 100%;
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-inline: var(--container-gutter);
+  }
+
+  .container--narrow {
+    max-width: var(--reading-width);
+  }
+</style>
