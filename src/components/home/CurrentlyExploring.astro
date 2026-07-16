@@ -1,7 +1,116 @@
 ---
+import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import { CURRENT_EXPLORING } from '@/data/home';
+
+const updatedAt = new Intl.DateTimeFormat('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+}).format(new Date(`${CURRENT_EXPLORING.updatedAt}T00:00:00+08:00`));
 ---
 
-<Section id="currently-exploring" ariaLabel="Currently Exploring">
-  <slot />
+<Section id="currently-exploring" ariaLabel="Currently Exploring" tone="surface">
+  <Container>
+    <div class="exploring__heading">
+      <div>
+        <p class="exploring__eyebrow">Now / Currently Exploring</p>
+        <h2 class="exploring__title">现在，我正在关注这些问题。</h2>
+      </div>
+      <p class="exploring__updated">最后更新于 {updatedAt}</p>
+    </div>
+
+    <ol class="exploring__list">
+      {
+        CURRENT_EXPLORING.items.map((item, index) => (
+          <li class="exploring__item">
+            <span class="exploring__index" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Container>
 </Section>
+
+<style>
+  .exploring__heading {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .exploring__eyebrow,
+  .exploring__updated {
+    margin: 0;
+    color: var(--color-growth);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .exploring__title {
+    max-width: 12em;
+    margin: var(--space-3) 0 0;
+    font-size: clamp(2.25rem, 6vw, 4rem);
+    font-weight: 620;
+    letter-spacing: -0.05em;
+    line-height: 1.12;
+  }
+
+  .exploring__updated {
+    align-self: end;
+    color: var(--color-text-tertiary);
+    font-weight: 520;
+    letter-spacing: 0.04em;
+    text-transform: none;
+  }
+
+  .exploring__list {
+    display: grid;
+    gap: var(--space-6);
+    padding: 0;
+    margin: var(--space-8) 0 0;
+    list-style: none;
+  }
+
+  .exploring__item {
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border-strong);
+  }
+
+  .exploring__index {
+    color: var(--color-growth);
+    font-size: 0.6875rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+  }
+
+  .exploring__item h3 {
+    margin: var(--space-5) 0 0;
+    font-size: clamp(1.25rem, 3vw, 1.625rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+  }
+
+  .exploring__item p {
+    margin: var(--space-3) 0 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+
+  @media (min-width: 48rem) {
+    .exploring__heading {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .exploring__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-6);
+    }
+  }
+</style>

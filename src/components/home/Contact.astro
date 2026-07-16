@@ -1,7 +1,80 @@
 ---
+import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import { CONTACT_CONTENT } from '@/data/home';
 ---
 
-<Section id="contact" ariaLabel="Contact" spacing="compact">
-  <slot />
+<Section id="contact" ariaLabel="Contact" spacing="compact" tone="dark">
+  <Container>
+    <div class="contact">
+      <div>
+        <p class="contact__eyebrow">Contact</p>
+        <h2 class="contact__title">{CONTACT_CONTENT.title}</h2>
+      </div>
+
+      <div class="contact__content">
+        <p>{CONTACT_CONTENT.description}</p>
+        <span class="contact__placeholder" aria-label="联系入口暂未开放">
+          {CONTACT_CONTENT.placeholder}
+        </span>
+      </div>
+    </div>
+  </Container>
 </Section>
+
+<style>
+  .contact {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .contact__eyebrow {
+    margin: 0;
+    color: rgb(245 245 247 / 58%);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .contact__title {
+    max-width: 12em;
+    margin: var(--space-3) 0 0;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 600;
+    letter-spacing: -0.055em;
+    line-height: 1.08;
+  }
+
+  .contact__content {
+    align-self: end;
+  }
+
+  .contact__content p {
+    max-width: 34rem;
+    margin: 0;
+    color: rgb(245 245 247 / 68%);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .contact__placeholder {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    margin-top: var(--space-5);
+    padding-inline: var(--space-5);
+    border: 1px solid rgb(245 245 247 / 18%);
+    border-radius: var(--radius-pill);
+    color: rgb(245 245 247 / 55%);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  @media (min-width: 48rem) {
+    .contact {
+      grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.72fr);
+      gap: var(--space-9);
+    }
+  }
+</style>

@@ -1,7 +1,103 @@
 ---
+import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import { RESEARCH_DIRECTIONS } from '@/data/home';
 ---
 
-<Section id="research-preview" ariaLabel="Research Preview">
-  <slot />
+<Section id="research-preview" ariaLabel="Research Preview" tone="surface">
+  <Container>
+    <div class="research__heading">
+      <p class="research__eyebrow">Research & Thinking</p>
+      <h2 class="research__title">从实践出发，也持续理解问题。</h2>
+    </div>
+
+    <div class="research__list">
+      {
+        RESEARCH_DIRECTIONS.map((direction, index) => (
+          <article class="research__item">
+            <span class="research__index" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <h3>{direction.title}</h3>
+            <p>{direction.description}</p>
+            <span class="research__status">持续研究中</span>
+          </article>
+        ))
+      }
+    </div>
+  </Container>
 </Section>
+
+<style>
+  .research__heading {
+    max-width: 48rem;
+  }
+
+  .research__eyebrow {
+    margin: 0;
+    color: var(--color-growth);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .research__title {
+    max-width: 13em;
+    margin: var(--space-3) 0 0;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 620;
+    letter-spacing: -0.055em;
+    line-height: 1.08;
+  }
+
+  .research__list {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+
+  .research__item {
+    display: flex;
+    min-height: 18rem;
+    flex-direction: column;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border-strong);
+  }
+
+  .research__index {
+    color: var(--color-text-tertiary);
+    font-size: 0.6875rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+  }
+
+  .research__item h3 {
+    margin: var(--space-6) 0 0;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.18;
+  }
+
+  .research__item p {
+    margin: var(--space-4) 0 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+
+  .research__status {
+    margin-top: auto;
+    padding-top: var(--space-6);
+    color: var(--color-growth);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  @media (min-width: 48rem) {
+    .research__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>
