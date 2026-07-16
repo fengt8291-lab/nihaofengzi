@@ -1,0 +1,33 @@
+{
+  "name": "nihaofengzi",
+  "version": "0.1.0",
+  "description": "你好丰子个人数字主页（nihaofengzi.top）",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "astro": "astro"
+  },
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=9.6.5"
+  },
+  "dependencies": {
+    "@astrojs/react": "^6.0.1",
+    "@tailwindcss/vite": "^4.3.2",
+    "astro": "^7.0.9",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tailwindcss": "^4.3.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.3"
+  }
+}

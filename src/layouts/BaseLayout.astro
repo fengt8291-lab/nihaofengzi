@@ -1,0 +1,45 @@
+---
+import '@/styles/global.css';
+
+import { SITE } from '@/data/site';
+import type { SeoMetadata } from '@/types/site';
+
+interface Props extends SeoMetadata {
+  lang?: string;
+}
+
+const {
+  title = SITE.defaultTitle,
+  description = SITE.defaultDescription,
+  canonical = new URL(Astro.url.pathname, SITE.url),
+  image,
+  noIndex = false,
+  lang = SITE.language,
+} = Astro.props;
+
+const documentTitle = title === SITE.defaultTitle ? title : `${title} | ${SITE.name}`;
+const canonicalUrl = canonical instanceof URL ? canonical : new URL(canonical, SITE.url);
+const imageUrl = image ? (image instanceof URL ? image : new URL(image, SITE.url)) : undefined;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{documentTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={documentTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    {imageUrl && <meta property="og:image" content={imageUrl} />}
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
