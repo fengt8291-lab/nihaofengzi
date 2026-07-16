@@ -1,13 +1,35 @@
 <div class="hero-visual" aria-hidden="true">
   <div class="hero-visual__field">
-    <span class="hero-visual__path hero-visual__path--vertical"></span>
-    <span class="hero-visual__path hero-visual__path--upper"></span>
-    <span class="hero-visual__path hero-visual__path--middle"></span>
-    <span class="hero-visual__path hero-visual__path--lower"></span>
+    <svg
+      class="hero-visual__traces"
+      viewBox="0 0 560 520"
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <path
+        class="hero-visual__trace hero-visual__trace--main"
+        pathLength="1"
+        d="M304 28 C274 112 322 176 296 252 C270 328 317 393 286 492"
+      />
+      <path
+        class="hero-visual__trace hero-visual__trace--one"
+        pathLength="1"
+        d="M72 142 C151 111 224 154 334 126 C397 110 446 128 492 108"
+      />
+      <path
+        class="hero-visual__trace hero-visual__trace--two"
+        pathLength="1"
+        d="M38 280 C126 248 205 290 287 264 C370 238 420 282 524 250"
+      />
+      <path
+        class="hero-visual__trace hero-visual__trace--three"
+        pathLength="1"
+        d="M118 414 C194 386 246 426 333 399 C397 379 438 402 505 382"
+      />
 
-    <span class="hero-visual__marker hero-visual__marker--one"></span>
-    <span class="hero-visual__marker hero-visual__marker--two"></span>
-    <span class="hero-visual__marker hero-visual__marker--three"></span>
+      <circle class="hero-visual__marker hero-visual__marker--one" cx="164" cy="123" r="3" />
+      <circle class="hero-visual__marker hero-visual__marker--two" cx="434" cy="267" r="3" />
+    </svg>
 
     <span class="hero-visual__hint hero-visual__hint--learning">学习</span>
     <span class="hero-visual__hint hero-visual__hint--research">研究</span>
@@ -31,146 +53,129 @@
     isolation: isolate;
   }
 
-  .hero-visual__path,
-  .hero-visual__marker,
-  .hero-visual__hint {
+  .hero-visual__traces {
     position: absolute;
-    opacity: 1;
-    transition:
-      opacity var(--duration-reveal) var(--ease-standard),
-      transform var(--duration-reveal) var(--ease-emphasized);
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
   }
 
-  .hero-visual__path {
-    display: block;
-    background: var(--color-trajectory);
+  .hero-visual__trace {
+    fill: none;
+    stroke: var(--color-trajectory);
+    stroke-width: 1.15;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    vector-effect: non-scaling-stroke;
+    animation: hero-trace-in var(--duration-trace) var(--ease-emphasized) forwards;
   }
 
-  .hero-visual__path--vertical {
-    top: 8%;
-    left: 52%;
-    width: 1px;
-    height: 82%;
-    transform: scaleY(1);
-    transform-origin: top;
-    transition-delay: 80ms;
+  .hero-visual__trace--main {
+    stroke: var(--color-growth);
+    stroke-opacity: 0.62;
   }
 
-  .hero-visual__path--upper {
-    top: 25%;
-    left: 19%;
-    width: 62%;
-    height: 1px;
-    transform: scaleX(1);
-    transform-origin: left;
-    transition-delay: 160ms;
+  .hero-visual__trace--one {
+    animation-delay: 80ms;
   }
 
-  .hero-visual__path--middle {
-    top: 51%;
-    left: 7%;
-    width: 78%;
-    height: 1px;
-    transform: scaleX(1);
-    transform-origin: right;
-    transition-delay: 240ms;
+  .hero-visual__trace--two {
+    animation-delay: 150ms;
   }
 
-  .hero-visual__path--lower {
-    top: 74%;
-    left: 30%;
-    width: 60%;
-    height: 1px;
-    transform: scaleX(1);
-    transform-origin: left;
-    transition-delay: 320ms;
+  .hero-visual__trace--three {
+    animation-delay: 220ms;
   }
 
   .hero-visual__marker {
-    z-index: 1;
-    display: block;
-    width: 0.4rem;
-    height: 0.4rem;
-    border-radius: 50%;
-    background: var(--color-growth);
-    transform: scale(1);
+    fill: var(--color-text-secondary);
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hero-marker-in var(--duration-reveal) var(--ease-standard) 360ms forwards;
   }
 
   .hero-visual__marker--one {
-    top: calc(25% - 0.2rem);
-    left: calc(52% - 0.2rem);
-    transition-delay: 360ms;
+    fill: var(--color-growth);
   }
 
   .hero-visual__marker--two {
-    top: calc(51% - 0.2rem);
-    left: calc(33% - 0.2rem);
-    background: var(--color-text-secondary);
-    transition-delay: 420ms;
-  }
-
-  .hero-visual__marker--three {
-    top: calc(74% - 0.2rem);
-    left: calc(72% - 0.2rem);
-    background: var(--color-accent);
-    transition-delay: 480ms;
+    fill: var(--color-accent);
   }
 
   .hero-visual__hint {
+    position: absolute;
     color: var(--color-text-tertiary);
     font-size: 0.6875rem;
     font-weight: 520;
     letter-spacing: 0.16em;
-    transition-delay: 420ms;
+    opacity: 0;
+    transform: translateY(0.35rem);
+    animation: hero-hint-in var(--duration-reveal) var(--ease-standard) 320ms forwards;
   }
 
   .hero-visual__hint--learning {
     top: 31%;
-    left: 7%;
+    left: 5%;
   }
 
   .hero-visual__hint--research {
-    top: 11%;
+    top: 9%;
     right: 7%;
   }
 
   .hero-visual__hint--create {
-    top: 62%;
-    right: 13%;
+    top: 61%;
+    right: 6%;
   }
 
   .hero-visual__hint--practice {
-    bottom: 5%;
-    left: 20%;
+    bottom: 3%;
+    left: 24%;
   }
 
-  @starting-style {
-    .hero-visual__path--vertical {
+  @keyframes hero-trace-in {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes hero-marker-in {
+    from {
       opacity: 0;
-      transform: scaleY(0.25);
+      transform: scale(0.6);
     }
 
-    .hero-visual__path--upper,
-    .hero-visual__path--middle,
-    .hero-visual__path--lower {
-      opacity: 0;
-      transform: scaleX(0.25);
+    to {
+      opacity: 1;
+      transform: scale(1);
     }
+  }
 
-    .hero-visual__marker {
-      opacity: 0;
-      transform: scale(0.5);
-    }
-
-    .hero-visual__hint {
-      opacity: 0;
-      transform: translateY(0.35rem);
+  @keyframes hero-hint-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
   @media (min-width: 48rem) {
     .hero-visual__field {
       min-height: clamp(27rem, 42vw, 34rem);
+    }
+  }
+
+  @media (max-width: 47.999rem) {
+    .hero-visual__trace {
+      animation-duration: var(--duration-slow);
+    }
+
+    .hero-visual__hint,
+    .hero-visual__marker {
+      animation-delay: 120ms;
     }
   }
 </style>

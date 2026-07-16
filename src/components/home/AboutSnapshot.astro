@@ -1,6 +1,7 @@
 ---
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { ABOUT_SNAPSHOT } from '@/data/home';
 ---
 
@@ -12,13 +13,11 @@ import { ABOUT_SNAPSHOT } from '@/data/home';
         role="img"
         aria-label="个人照片占位，待添加经本人确认的真实照片"
       >
-        <span class="about__portrait-line"></span>
         <span class="about__portrait-label">Portrait / 待补充</span>
       </div>
 
       <div class="about__content">
-        <p class="about__eyebrow">About</p>
-        <h2 class="about__title">{ABOUT_SNAPSHOT.title}</h2>
+        <SectionHeading eyebrow="About" title={ABOUT_SNAPSHOT.title} />
         <p class="about__description">{ABOUT_SNAPSHOT.description}</p>
         <p class="about__note">{ABOUT_SNAPSHOT.note}</p>
       </div>
@@ -36,48 +35,16 @@ import { ABOUT_SNAPSHOT } from '@/data/home';
   .about__portrait {
     position: relative;
     display: flex;
-    min-height: 25rem;
+    width: 100%;
+    aspect-ratio: 4 / 5;
     align-items: flex-end;
     overflow: hidden;
     padding: var(--space-5);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    background: var(--color-card-background);
-  }
-
-  .about__portrait::before,
-  .about__portrait::after {
-    position: absolute;
-    background: var(--color-trajectory);
-    content: '';
-  }
-
-  .about__portrait::before {
-    top: 16%;
-    bottom: 18%;
-    left: 47%;
-    width: 1px;
-  }
-
-  .about__portrait::after {
-    top: 43%;
-    right: 12%;
-    left: 18%;
-    height: 1px;
-  }
-
-  .about__portrait-line {
-    position: absolute;
-    top: 65%;
-    right: 24%;
-    left: 8%;
-    height: 1px;
-    background: var(--color-trajectory);
+    border-radius: var(--radius-md);
+    background: var(--color-portrait-background);
   }
 
   .about__portrait-label {
-    position: relative;
-    z-index: 1;
     color: var(--color-text-tertiary);
     font-size: 0.6875rem;
     font-weight: 600;
@@ -86,24 +53,7 @@ import { ABOUT_SNAPSHOT } from '@/data/home';
   }
 
   .about__content {
-    max-width: 40rem;
-  }
-
-  .about__eyebrow {
-    margin: 0;
-    color: var(--color-accent);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .about__title {
-    margin: var(--space-3) 0 0;
-    font-size: clamp(2.5rem, 6vw, 4.25rem);
-    font-weight: 620;
-    letter-spacing: -0.055em;
-    line-height: 1.1;
+    max-width: 42rem;
   }
 
   .about__description {
@@ -125,12 +75,8 @@ import { ABOUT_SNAPSHOT } from '@/data/home';
 
   @media (min-width: 48rem) {
     .about {
-      grid-template-columns: minmax(18rem, 0.82fr) minmax(0, 1.18fr);
+      grid-template-columns: minmax(18rem, 0.78fr) minmax(0, 1.22fr);
       gap: clamp(var(--space-8), 8vw, var(--space-10));
-    }
-
-    .about__portrait {
-      min-height: 36rem;
     }
   }
 </style>

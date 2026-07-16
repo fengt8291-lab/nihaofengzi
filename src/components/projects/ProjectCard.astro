@@ -2,49 +2,61 @@
 import type { CollectionEntry } from 'astro:content';
 
 import Card from '@/components/ui/Card.astro';
-import Tag from '@/components/ui/Tag.astro';
 
 interface Props {
   project: CollectionEntry<'projects'>['data'];
   index: number;
+  featured?: boolean;
 }
 
-const { project, index } = Astro.props;
+const { project, index, featured = false } = Astro.props;
 ---
 
-<Card as="article" padding="large" ariaLabel={project.title}>
-  <div class="project-card">
+<Card as="article" padding="medium" ariaLabel={project.title} class="project-card-shell">
+  <div class:list={['project-card', { 'project-card--featured': featured }]}>
     <header class="project-card__header">
       <span class="project-card__index" aria-hidden="true">{String(index).padStart(2, '0')}</span>
-      <Tag tone="accent">{project.status}</Tag>
+      <span class="project-card__status">
+        <span class="project-card__status-mark" aria-hidden="true"></span>
+        {project.status}
+      </span>
     </header>
 
     <div class="project-card__body">
-      <p class="project-card__category">{project.category}</p>
-      <h3 class="project-card__title">{project.title}</h3>
+      <div class="project-card__identity">
+        <p class="project-card__category">{project.category}</p>
+        <h3 class="project-card__title">{project.title}</h3>
+      </div>
       <p class="project-card__summary">{project.summary}</p>
     </div>
 
-    <dl class="project-card__meta">
-      <div>
-        <dt>我的角色</dt>
-        <dd>{project.role}</dd>
-      </div>
-    </dl>
+    <div class="project-card__footer">
+      <dl class="project-card__meta">
+        <div>
+          <dt>我的角色</dt>
+          <dd>{project.role}</dd>
+        </div>
+      </dl>
 
-    <details class="project-card__details">
-      <summary>
-        <span>查看详情</span>
-        <span class="project-card__details-icon" aria-hidden="true">＋</span>
-      </summary>
-      <div class="project-card__details-content">
-        <slot />
-      </div>
-    </details>
+      <details class="project-card__details">
+        <summary>
+          <span>查看详情</span>
+          <span class="project-card__details-icon" aria-hidden="true">＋</span>
+        </summary>
+        <div class="project-card__details-content">
+          <slot />
+        </div>
+      </details>
+    </div>
   </div>
 </Card>
 
 <style>
+  :global(.project-card-shell) {
+    border-radius: var(--radius-md);
+    box-shadow: none;
+  }
+
   .project-card {
     display: flex;
     min-height: 100%;
@@ -58,15 +70,31 @@ const { project, index } = Astro.props;
     gap: var(--space-4);
   }
 
-  .project-card__index {
+  .project-card__index,
+  .project-card__status {
     color: var(--color-text-tertiary);
     font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.12em;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  .project-card__status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .project-card__status-mark {
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: var(--color-growth);
   }
 
   .project-card__body {
-    margin-top: var(--space-7);
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-6);
   }
 
   .project-card__category {
@@ -87,21 +115,25 @@ const { project, index } = Astro.props;
 
   .project-card__summary {
     max-width: 42rem;
-    margin: var(--space-4) 0 0;
+    margin: 0;
     color: var(--color-text-secondary);
     font-size: 1rem;
     line-height: 1.75;
   }
 
-  .project-card__meta {
+  .project-card__footer {
+    margin-top: auto;
     padding-top: var(--space-6);
-    margin: auto 0 0;
+  }
+
+  .project-card__meta {
+    margin: 0;
   }
 
   .project-card__meta div {
     display: grid;
     gap: var(--space-1);
-    padding-top: var(--space-4);
+    padding-block: var(--space-4);
     border-top: 1px solid var(--color-border);
   }
 
@@ -117,7 +149,6 @@ const { project, index } = Astro.props;
   }
 
   .project-card__details {
-    margin-top: var(--space-5);
     border-top: 1px solid var(--color-border);
   }
 
@@ -150,7 +181,7 @@ const { project, index } = Astro.props;
   }
 
   .project-card__details-content {
-    padding: 0 0 var(--space-2);
+    padding: 0 0 var(--space-3);
     color: var(--color-text-secondary);
     font-size: 0.9375rem;
     line-height: 1.75;
@@ -158,5 +189,17 @@ const { project, index } = Astro.props;
 
   .project-card__details-content :global(p) {
     margin: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .project-card--featured .project-card__body {
+      grid-template-columns: minmax(14rem, 0.72fr) minmax(20rem, 1.28fr);
+      align-items: end;
+      gap: var(--space-8);
+    }
+
+    .project-card--featured .project-card__title {
+      font-size: clamp(2.75rem, 5vw, 4rem);
+    }
   }
 </style>

@@ -1,15 +1,16 @@
 ---
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { RESEARCH_DIRECTIONS } from '@/data/home';
 ---
 
 <Section id="research-preview" ariaLabel="Research Preview" tone="surface">
   <Container>
-    <div class="research__heading">
-      <p class="research__eyebrow">Research & Thinking</p>
-      <h2 class="research__title">从实践出发，也持续理解问题。</h2>
-    </div>
+    <SectionHeading
+      eyebrow="Research & Thinking"
+      title="从实践出发，也持续理解问题。"
+    />
 
     <div class="research__list">
       {
@@ -20,7 +21,10 @@ import { RESEARCH_DIRECTIONS } from '@/data/home';
             </span>
             <h3>{direction.title}</h3>
             <p>{direction.description}</p>
-            <span class="research__status">持续研究中</span>
+            <span class="research__status">
+              <span aria-hidden="true"></span>
+              持续研究中
+            </span>
           </article>
         ))
       }
@@ -29,39 +33,15 @@ import { RESEARCH_DIRECTIONS } from '@/data/home';
 </Section>
 
 <style>
-  .research__heading {
-    max-width: 48rem;
-  }
-
-  .research__eyebrow {
-    margin: 0;
-    color: var(--color-growth);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .research__title {
-    max-width: 13em;
-    margin: var(--space-3) 0 0;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 620;
-    letter-spacing: -0.055em;
-    line-height: 1.08;
-  }
-
   .research__list {
-    display: grid;
-    gap: var(--space-6);
     margin-top: var(--space-8);
+    border-bottom: 1px solid var(--color-border-strong);
   }
 
   .research__item {
-    display: flex;
-    min-height: 18rem;
-    flex-direction: column;
-    padding-top: var(--space-5);
+    display: grid;
+    gap: var(--space-3);
+    padding-block: var(--space-6);
     border-top: 1px solid var(--color-border-strong);
   }
 
@@ -73,7 +53,7 @@ import { RESEARCH_DIRECTIONS } from '@/data/home';
   }
 
   .research__item h3 {
-    margin: var(--space-6) 0 0;
+    margin: 0;
     font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: 600;
     letter-spacing: -0.035em;
@@ -81,23 +61,39 @@ import { RESEARCH_DIRECTIONS } from '@/data/home';
   }
 
   .research__item p {
-    margin: var(--space-4) 0 0;
+    margin: 0;
     color: var(--color-text-secondary);
     font-size: 0.9375rem;
     line-height: 1.75;
   }
 
   .research__status {
-    margin-top: auto;
-    padding-top: var(--space-6);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
     color: var(--color-growth);
     font-size: 0.75rem;
     font-weight: 600;
   }
 
-  @media (min-width: 48rem) {
-    .research__list {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+  .research__status span {
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  @media (min-width: 64rem) {
+    .research__item {
+      grid-template-columns: 2.5rem minmax(15rem, 0.8fr) minmax(22rem, 1.2fr) auto;
+      gap: var(--space-5);
+      align-items: start;
+      padding-block: var(--space-7);
+    }
+
+    .research__status {
+      justify-self: end;
+      padding-top: 0.45rem;
     }
   }
 </style>

@@ -1,0 +1,96 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description?: string;
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  tone = 'light',
+  class: className,
+} = Astro.props;
+
+const hasMeta = Astro.slots.has('meta');
+---
+
+<div class:list={['section-heading', `section-heading--${tone}`, className]}>
+  <div class="section-heading__main">
+    <p class="section-heading__eyebrow">{eyebrow}</p>
+    <h2 class="section-heading__title">{title}</h2>
+    {description && <p class="section-heading__description">{description}</p>}
+  </div>
+
+  {
+    hasMeta && (
+      <div class="section-heading__meta">
+        <slot name="meta" />
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .section-heading {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .section-heading__main {
+    max-width: 52rem;
+  }
+
+  .section-heading__eyebrow {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .section-heading__title {
+    max-width: 15ch;
+    margin: var(--space-3) 0 0;
+    font-size: clamp(2.375rem, 5.4vw, 4.25rem);
+    font-weight: 620;
+    letter-spacing: -0.055em;
+    line-height: 1.1;
+    text-wrap: pretty;
+  }
+
+  .section-heading__description {
+    max-width: 39rem;
+    margin: var(--space-5) 0 0;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.75;
+    text-wrap: pretty;
+  }
+
+  .section-heading__meta {
+    align-self: end;
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .section-heading--dark .section-heading__eyebrow {
+    color: rgb(245 245 247 / 58%);
+  }
+
+  .section-heading--dark .section-heading__title {
+    color: var(--color-text-on-dark);
+  }
+
+  .section-heading--dark .section-heading__description,
+  .section-heading--dark .section-heading__meta {
+    color: rgb(245 245 247 / 66%);
+  }
+
+</style>

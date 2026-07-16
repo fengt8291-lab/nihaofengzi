@@ -1,6 +1,7 @@
 ---
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { CURRENT_EXPLORING } from '@/data/home';
 
 const updatedAt = new Intl.DateTimeFormat('zh-CN', {
@@ -11,73 +12,47 @@ const updatedAt = new Intl.DateTimeFormat('zh-CN', {
 
 <Section id="currently-exploring" ariaLabel="Currently Exploring" tone="surface">
   <Container>
-    <div class="exploring__heading">
-      <div>
-        <p class="exploring__eyebrow">Now / Currently Exploring</p>
-        <h2 class="exploring__title">现在，我正在关注这些问题。</h2>
-      </div>
-      <p class="exploring__updated">最后更新于 {updatedAt}</p>
-    </div>
+    <div class="exploring">
+      <SectionHeading
+        eyebrow="Now / Currently Exploring"
+        title="现在，我正在关注这些问题。"
+      >
+        <span slot="meta">最后更新于 {updatedAt}</span>
+      </SectionHeading>
 
-    <ol class="exploring__list">
-      {
-        CURRENT_EXPLORING.items.map((item, index) => (
-          <li class="exploring__item">
-            <span class="exploring__index" aria-hidden="true">
-              {String(index + 1).padStart(2, '0')}
-            </span>
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-          </li>
-        ))
-      }
-    </ol>
+      <ol class="exploring__list">
+        {
+          CURRENT_EXPLORING.items.map((item, index) => (
+            <li class="exploring__item">
+              <span class="exploring__index" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
   </Container>
 </Section>
 
 <style>
-  .exploring__heading {
+  .exploring {
     display: grid;
-    gap: var(--space-5);
-  }
-
-  .exploring__eyebrow,
-  .exploring__updated {
-    margin: 0;
-    color: var(--color-growth);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .exploring__title {
-    max-width: 12em;
-    margin: var(--space-3) 0 0;
-    font-size: clamp(2.25rem, 6vw, 4rem);
-    font-weight: 620;
-    letter-spacing: -0.05em;
-    line-height: 1.12;
-  }
-
-  .exploring__updated {
-    align-self: end;
-    color: var(--color-text-tertiary);
-    font-weight: 520;
-    letter-spacing: 0.04em;
-    text-transform: none;
+    gap: var(--space-8);
   }
 
   .exploring__list {
-    display: grid;
-    gap: var(--space-6);
     padding: 0;
-    margin: var(--space-8) 0 0;
+    margin: 0;
     list-style: none;
   }
 
   .exploring__item {
-    padding-top: var(--space-5);
+    display: grid;
+    gap: var(--space-3);
+    padding-block: var(--space-5);
     border-top: 1px solid var(--color-border-strong);
   }
 
@@ -89,7 +64,7 @@ const updatedAt = new Intl.DateTimeFormat('zh-CN', {
   }
 
   .exploring__item h3 {
-    margin: var(--space-5) 0 0;
+    margin: 0;
     font-size: clamp(1.25rem, 3vw, 1.625rem);
     font-weight: 600;
     letter-spacing: -0.03em;
@@ -97,20 +72,23 @@ const updatedAt = new Intl.DateTimeFormat('zh-CN', {
   }
 
   .exploring__item p {
-    margin: var(--space-3) 0 0;
+    margin: 0;
     color: var(--color-text-secondary);
     font-size: 0.9375rem;
     line-height: 1.75;
   }
 
-  @media (min-width: 48rem) {
-    .exploring__heading {
-      grid-template-columns: minmax(0, 1fr) auto;
+  @media (min-width: 64rem) {
+    .exploring {
+      grid-template-columns: minmax(18rem, 0.78fr) minmax(0, 1.22fr);
+      gap: clamp(var(--space-8), 8vw, var(--space-10));
     }
 
-    .exploring__list {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-6);
+    .exploring__item {
+      grid-template-columns: 2.5rem minmax(13rem, 0.82fr) minmax(16rem, 1.18fr);
+      gap: var(--space-5);
+      align-items: start;
+      padding-block: var(--space-6);
     }
   }
 </style>
