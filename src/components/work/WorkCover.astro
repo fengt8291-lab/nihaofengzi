@@ -1,0 +1,178 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+type WorkData = CollectionEntry<'work'>['data'];
+
+interface Props {
+  coverImage?: WorkData['coverImage'];
+  coverAlt?: string;
+  coverVariant?: WorkData['coverVariant'];
+  priority?: boolean;
+}
+
+const { coverImage, coverAlt, coverVariant, priority = false } = Astro.props;
+---
+
+{
+  coverImage && coverAlt ? (
+    <div class="work-cover work-cover--image">
+      <Image
+        src={coverImage}
+        alt={coverAlt}
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 64rem) 36rem, (min-width: 48rem) 50vw, 100vw"
+        loading={priority ? 'eager' : 'lazy'}
+      />
+    </div>
+  ) : coverVariant ? (
+    <div
+      class:list={['work-cover', 'work-cover--abstract', `work-cover--${coverVariant}`]}
+      aria-hidden="true"
+    >
+      <span class="work-cover__line work-cover__line--one"></span>
+      <span class="work-cover__line work-cover__line--two"></span>
+      <span class="work-cover__line work-cover__line--three"></span>
+      <span class="work-cover__mark work-cover__mark--one"></span>
+      <span class="work-cover__mark work-cover__mark--two"></span>
+    </div>
+  ) : null
+}
+
+<style>
+  .work-cover {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: var(--color-page-background);
+  }
+
+  .work-cover--image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .work-cover--abstract {
+    border: 1px solid var(--color-border);
+  }
+
+  .work-cover__line,
+  .work-cover__mark {
+    position: absolute;
+    display: block;
+  }
+
+  .work-cover__line {
+    height: 1px;
+    background: var(--color-trajectory);
+  }
+
+  .work-cover__mark {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--color-growth);
+  }
+
+  .work-cover--task-path .work-cover__line--one {
+    top: 29%;
+    left: 12%;
+    width: 48%;
+    transform: rotate(-4deg);
+  }
+
+  .work-cover--task-path .work-cover__line--two {
+    top: 51%;
+    left: 29%;
+    width: 58%;
+    transform: rotate(3deg);
+  }
+
+  .work-cover--task-path .work-cover__line--three {
+    top: 72%;
+    left: 16%;
+    width: 45%;
+    transform: rotate(-2deg);
+  }
+
+  .work-cover--task-path .work-cover__mark--one {
+    top: calc(29% - 0.2rem);
+    left: 34%;
+  }
+
+  .work-cover--task-path .work-cover__mark--two {
+    top: calc(51% - 0.2rem);
+    right: 28%;
+    background: var(--color-accent);
+  }
+
+  .work-cover--shore-line .work-cover__line--one {
+    top: 42%;
+    left: 8%;
+    width: 31%;
+  }
+
+  .work-cover--shore-line .work-cover__line--two {
+    top: 42%;
+    right: 8%;
+    width: 44%;
+  }
+
+  .work-cover--shore-line .work-cover__line--three {
+    top: 64%;
+    right: 18%;
+    width: 57%;
+    background: var(--color-growth);
+    opacity: 0.55;
+    transform: rotate(-3deg);
+  }
+
+  .work-cover--shore-line .work-cover__mark--one {
+    top: calc(42% - 0.2rem);
+    left: 38%;
+  }
+
+  .work-cover--shore-line .work-cover__mark--two {
+    right: 31%;
+    bottom: calc(36% - 0.2rem);
+    background: var(--color-text-secondary);
+  }
+
+  .work-cover--recovery-rhythm .work-cover__line--one,
+  .work-cover--recovery-rhythm .work-cover__line--two,
+  .work-cover--recovery-rhythm .work-cover__line--three {
+    left: 12%;
+    transform-origin: left;
+  }
+
+  .work-cover--recovery-rhythm .work-cover__line--one {
+    top: 32%;
+    width: 26%;
+  }
+
+  .work-cover--recovery-rhythm .work-cover__line--two {
+    top: 51%;
+    width: 52%;
+    background: var(--color-growth);
+    opacity: 0.62;
+  }
+
+  .work-cover--recovery-rhythm .work-cover__line--three {
+    top: 69%;
+    width: 74%;
+  }
+
+  .work-cover--recovery-rhythm .work-cover__mark--one {
+    top: calc(51% - 0.2rem);
+    left: 49%;
+  }
+
+  .work-cover--recovery-rhythm .work-cover__mark--two {
+    top: calc(69% - 0.2rem);
+    right: 14%;
+    background: var(--color-accent);
+  }
+</style>

@@ -1,0 +1,145 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import WorkCard from '@/components/work/WorkCard.astro';
+import { SITE } from '@/data/site';
+import { WORK_CATEGORIES } from '@/data/work';
+import { normalizePathname } from '@/lib/paths';
+import { getPublicWork } from '@/lib/work';
+
+const work = await getPublicWork();
+const groups = WORK_CATEGORIES.map((category) => ({
+  ...category,
+  entries: work.filter((entry) => entry.data.category === category.id),
+})).filter((group) => group.entries.length > 0);
+
+const canonical = new URL(normalizePathname(Astro.url.pathname), SITE.url);
+---
+
+<BaseLayout
+  title="作品与实践"
+  description="这里收录田丰在产品、用户研究、数字工具、课程研究和内容表达中的阶段性实践。"
+  canonical={canonical}
+>
+  <main id="main-content">
+    <Section spacing="spacious">
+      <Container>
+        <header class="work-index__intro">
+          <p>Work / 作品</p>
+          <h1>作品与实践</h1>
+          <div class="work-index__description">
+            <p>
+              这里收录我在产品、用户研究、数字工具、课程研究和内容表达中的一些实践。它们处在不同阶段：有些已经形成可以访问的网页，有些仍是早期原型或课程成果。
+            </p>
+            <p>
+              相比把它们包装成成熟产品，我更希望清楚说明自己做了什么、作出了哪些判断，以及还有什么没有完成。
+            </p>
+          </div>
+        </header>
+      </Container>
+    </Section>
+
+    {
+      groups.map((group, groupIndex) => (
+        <Section tone={groupIndex % 2 === 0 ? 'surface' : 'default'}>
+          <Container>
+            <header class="work-group__heading">
+              <p>{String(groupIndex + 1).padStart(2, '0')}</p>
+              <div>
+                <h2>{group.label}</h2>
+                <p>{group.description}</p>
+              </div>
+            </header>
+
+            <div class="work-group__grid">
+              {group.entries.map((entry, entryIndex) => (
+                <WorkCard entry={entry} priority={groupIndex === 0 && entryIndex === 0} />
+              ))}
+            </div>
+          </Container>
+        </Section>
+      ))
+    }
+  </main>
+</BaseLayout>
+
+<style>
+  .work-index__intro {
+    max-width: 56rem;
+  }
+
+  .work-index__intro > p,
+  .work-group__heading > p {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .work-index__intro h1 {
+    max-width: 10ch;
+    margin: var(--space-4) 0 0;
+    font-size: clamp(3.25rem, 9vw, 6.5rem);
+    font-weight: 650;
+    letter-spacing: -0.065em;
+    line-height: 1;
+  }
+
+  .work-index__description {
+    max-width: 43rem;
+    margin-top: var(--space-7);
+    color: var(--color-text-secondary);
+    font-size: clamp(1.0625rem, 2.5vw, 1.25rem);
+    line-height: 1.75;
+  }
+
+  .work-index__description p {
+    margin: 0;
+  }
+
+  .work-index__description p + p {
+    margin-top: var(--space-4);
+  }
+
+  .work-group__heading {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .work-group__heading h2 {
+    margin: 0;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    font-weight: 620;
+    letter-spacing: -0.055em;
+    line-height: 1.08;
+  }
+
+  .work-group__heading div > p {
+    max-width: 36rem;
+    margin: var(--space-3) 0 0;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .work-group__grid {
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+
+  @media (min-width: 48rem) {
+    .work-group__heading {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      gap: var(--space-6);
+    }
+
+    .work-group__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-6);
+    }
+  }
+</style>

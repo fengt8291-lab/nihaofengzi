@@ -1,0 +1,61 @@
+---
+import type { WorkEntry } from '@/lib/work';
+
+interface Props {
+  entry: WorkEntry;
+}
+
+const { entry } = Astro.props;
+const time = entry.data.period ?? (entry.data.year ? String(entry.data.year) : undefined);
+const items = [
+  time ? { label: '时间', value: time } : undefined,
+  { label: '类型', value: entry.data.type },
+  entry.data.role ? { label: '我的角色', value: entry.data.role } : undefined,
+  { label: '状态', value: entry.data.status },
+].filter((item): item is { label: string; value: string } => Boolean(item));
+---
+
+<dl class="work-meta">
+  {
+    items.map((item) => (
+      <div>
+        <dt>{item.label}</dt>
+        <dd>{item.value}</dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .work-meta {
+    display: grid;
+    gap: var(--space-5);
+    padding-block: var(--space-6);
+    margin: var(--space-7) 0 0;
+    border-block: 1px solid var(--color-border-strong);
+  }
+
+  .work-meta div {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .work-meta dt {
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .work-meta dd {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+
+  @media (min-width: 48rem) {
+    .work-meta {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

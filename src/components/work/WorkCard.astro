@@ -1,0 +1,204 @@
+---
+import Card from '@/components/ui/Card.astro';
+import WorkCover from '@/components/work/WorkCover.astro';
+import { getWorkHref, type WorkEntry } from '@/lib/work';
+
+interface Props {
+  entry: WorkEntry;
+  priority?: boolean;
+}
+
+const { entry, priority = false } = Astro.props;
+const href = getWorkHref(entry);
+const isExternal = entry.data.detailMode === 'external';
+const isArchive = entry.data.detailMode === 'archive';
+const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
+---
+
+<Card
+  as="article"
+  padding="medium"
+  ariaLabel={entry.data.title}
+  class:list={['work-card-shell', { 'work-card-shell--archive': isArchive }]}
+>
+  <div class:list={['work-card', { 'work-card--has-cover': hasCover }]}>
+    {
+      hasCover && (
+        <WorkCover
+          coverImage={entry.data.coverImage}
+          coverAlt={entry.data.coverAlt}
+          coverVariant={entry.data.coverVariant}
+          priority={priority}
+        />
+      )
+    }
+
+    <div class="work-card__header">
+      <p class="work-card__type">{entry.data.type}</p>
+      <span class="work-card__status">
+        <span aria-hidden="true"></span>
+        {entry.data.status}
+      </span>
+    </div>
+
+    <div class="work-card__content">
+      <h3 class="work-card__title">{entry.data.title}</h3>
+      <p class="work-card__summary">{entry.data.summary}</p>
+    </div>
+
+    {
+      entry.data.role && (
+        <dl class="work-card__meta">
+          <div>
+            <dt>我的角色</dt>
+            <dd>{entry.data.role}</dd>
+          </div>
+        </dl>
+      )
+    }
+
+    {
+      href && (
+        <a
+          class="work-card__link"
+          href={href}
+          target={isExternal ? '_blank' : undefined}
+          rel={isExternal ? 'noreferrer' : undefined}
+        >
+          {isExternal ? '访问项目' : '查看项目'}
+          <span aria-hidden="true">{isExternal ? '↗' : '→'}</span>
+        </a>
+      )
+    }
+  </div>
+</Card>
+
+<style>
+  :global(.work-card-shell) {
+    height: 100%;
+    border-radius: var(--radius-md);
+    box-shadow: none;
+  }
+
+  :global(.work-card-shell--archive) {
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .work-card {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+  }
+
+  .work-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: 0;
+  }
+
+  .work-card--has-cover .work-card__header {
+    margin-top: var(--space-5);
+  }
+
+  .work-card__type {
+    max-width: 22rem;
+    margin: 0;
+    color: var(--color-growth);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    line-height: 1.55;
+  }
+
+  .work-card__status {
+    display: inline-flex;
+    max-width: 16rem;
+    align-items: baseline;
+    gap: var(--space-2);
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+    line-height: 1.55;
+    text-align: right;
+  }
+
+  .work-card__status span {
+    flex: 0 0 auto;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: var(--color-growth);
+  }
+
+  .work-card__content {
+    margin-top: var(--space-6);
+  }
+
+  .work-card__title {
+    margin: 0;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 620;
+    letter-spacing: -0.045em;
+    line-height: 1.1;
+  }
+
+  .work-card__summary {
+    margin: var(--space-4) 0 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+
+  .work-card__meta {
+    margin: auto 0 0;
+    padding-top: var(--space-6);
+  }
+
+  .work-card__meta div {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .work-card__meta dt {
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+  }
+
+  .work-card__meta dd {
+    margin: var(--space-1) 0 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .work-card__link {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-5);
+    color: var(--color-accent);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .work-card__link span {
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .work-card__link:hover span {
+    transform: translateX(0.2rem);
+  }
+
+  @media (max-width: 35rem) {
+    .work-card__header {
+      display: grid;
+    }
+
+    .work-card__status {
+      text-align: left;
+    }
+  }
+</style>

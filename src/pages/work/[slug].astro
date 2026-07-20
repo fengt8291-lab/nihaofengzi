@@ -1,0 +1,209 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import WorkCover from '@/components/work/WorkCover.astro';
+import WorkMeta from '@/components/work/WorkMeta.astro';
+import { SITE } from '@/data/site';
+import { normalizePathname } from '@/lib/paths';
+import { getDetailWork, type WorkEntry } from '@/lib/work';
+
+export const getStaticPaths = (async () => {
+  const entries = await getDetailWork();
+
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  entry: WorkEntry;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const canonical = new URL(normalizePathname(Astro.url.pathname), SITE.url);
+const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
+const links = [
+  entry.data.externalUrl
+    ? { label: '访问项目', href: entry.data.externalUrl, external: true }
+    : undefined,
+  entry.data.repositoryUrl
+    ? { label: '查看 GitHub', href: entry.data.repositoryUrl, external: true }
+    : undefined,
+  entry.data.reportUrl
+    ? { label: '查看报告', href: entry.data.reportUrl, external: true }
+    : undefined,
+].filter(
+  (link): link is { label: string; href: string; external: boolean } => Boolean(link),
+);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.summary} canonical={canonical}>
+  <main id="main-content">
+    <Section spacing="spacious">
+      <Container>
+        <div class="work-detail__hero">
+          <div class="work-detail__intro">
+            <a class="work-detail__back" href="/work/">← 返回作品与实践</a>
+            <p class="work-detail__type">{entry.data.type}</p>
+            <h1>{entry.data.title}</h1>
+            <p class="work-detail__summary">{entry.data.summary}</p>
+          </div>
+
+          {
+            hasCover && (
+              <WorkCover
+                coverImage={entry.data.coverImage}
+                coverAlt={entry.data.coverAlt}
+                coverVariant={entry.data.coverVariant}
+                priority
+              />
+            )
+          }
+        </div>
+
+        <WorkMeta entry={entry} />
+      </Container>
+    </Section>
+
+    <Section tone="surface">
+      <Container size="narrow">
+        <article class="work-detail__body">
+          <Content />
+        </article>
+
+        {
+          links.length > 0 && (
+            <aside class="work-detail__links" aria-label="项目外部链接">
+              <h2>相关链接</h2>
+              <ul>
+                {links.map((link) => (
+                  <li>
+                    <a href={link.href} target="_blank" rel="noreferrer">
+                      {link.label} <span aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          )
+        }
+      </Container>
+    </Section>
+  </main>
+</BaseLayout>
+
+<style>
+  .work-detail__hero {
+    display: grid;
+    gap: var(--space-8);
+    align-items: end;
+  }
+
+  .work-detail__intro {
+    max-width: 50rem;
+  }
+
+  .work-detail__back {
+    display: inline-flex;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+
+  .work-detail__back:hover {
+    color: var(--color-accent);
+  }
+
+  .work-detail__type {
+    margin: var(--space-8) 0 0;
+    color: var(--color-growth);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+  }
+
+  .work-detail__intro h1 {
+    margin: var(--space-4) 0 0;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 650;
+    letter-spacing: -0.065em;
+    line-height: 1;
+  }
+
+  .work-detail__summary {
+    max-width: 43rem;
+    margin: var(--space-6) 0 0;
+    color: var(--color-text-secondary);
+    font-size: clamp(1.0625rem, 2.5vw, 1.25rem);
+    line-height: 1.75;
+  }
+
+  .work-detail__body {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+
+  .work-detail__body :global(h2) {
+    margin: var(--space-8) 0 var(--space-4);
+    color: var(--color-text-primary);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 620;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+  }
+
+  .work-detail__body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .work-detail__body :global(p),
+  .work-detail__body :global(ul) {
+    margin-block: var(--space-4);
+  }
+
+  .work-detail__body :global(li + li) {
+    margin-top: var(--space-2);
+  }
+
+  .work-detail__links {
+    padding-top: var(--space-7);
+    margin-top: var(--space-8);
+    border-top: 1px solid var(--color-border-strong);
+  }
+
+  .work-detail__links h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .work-detail__links ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding: 0;
+    margin: var(--space-5) 0 0;
+    list-style: none;
+  }
+
+  .work-detail__links a {
+    display: inline-flex;
+    gap: var(--space-2);
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media (min-width: 64rem) {
+    .work-detail__hero {
+      grid-template-columns: minmax(0, 1.05fr) minmax(24rem, 0.75fr);
+    }
+  }
+</style>
