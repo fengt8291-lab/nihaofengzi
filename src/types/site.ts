@@ -20,15 +20,3 @@ export interface NavigationItem {
   href: string;
   match?: 'exact' | 'prefix' | 'none';
 }
-
-export interface SocialLink {
-  label: string;
-  href: string;
-}
-
-export interface CurrentExploration {
-  title: string;
-  description: string;
-  updatedAt: string;
-  link?: string;
-}
