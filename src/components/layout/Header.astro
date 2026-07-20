@@ -3,6 +3,16 @@ import MobileMenu from '@/components/layout/MobileMenu.astro';
 import BrandWordmark from '@/components/ui/BrandWordmark.astro';
 import Container from '@/components/ui/Container.astro';
 import { PRIMARY_NAVIGATION } from '@/data/navigation';
+import { matchesPathname, normalizePathname } from '@/lib/paths';
+
+const currentPathname = normalizePathname(Astro.url.pathname);
+const navigationItems = PRIMARY_NAVIGATION.map((item) => ({
+  ...item,
+  isCurrent:
+    item.match === 'none'
+      ? false
+      : matchesPathname(currentPathname, item.href, item.match),
+}));
 ---
 
 <header class="site-header">
@@ -13,16 +23,22 @@ import { PRIMARY_NAVIGATION } from '@/data/navigation';
       <nav class="site-header__desktop-nav" aria-label="主导航">
         <ul class="site-header__nav-list">
           {
-            PRIMARY_NAVIGATION.map((item) => (
+            navigationItems.map((item) => (
               <li>
-                <a class="site-header__nav-link" href={item.href}>{item.label}</a>
+                <a
+                  class:list={['site-header__nav-link', { 'site-header__nav-link--current': item.isCurrent }]}
+                  href={item.href}
+                  aria-current={item.isCurrent ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
               </li>
             ))
           }
         </ul>
       </nav>
 
-      <MobileMenu items={PRIMARY_NAVIGATION} />
+      <MobileMenu items={navigationItems} />
     </div>
   </Container>
 </header>
@@ -94,9 +110,14 @@ import { PRIMARY_NAVIGATION } from '@/data/navigation';
     color: var(--color-text-primary);
   }
 
-  .site-header__nav-link:hover::after {
+  .site-header__nav-link:hover::after,
+  .site-header__nav-link--current::after {
     opacity: 1;
     transform: scaleX(1);
+  }
+
+  .site-header__nav-link--current {
+    color: var(--color-text-primary);
   }
 
   @starting-style {

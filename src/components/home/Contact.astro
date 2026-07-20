@@ -2,20 +2,41 @@
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
-import { CONTACT_CONTENT } from '@/data/home';
+import { HOME_SECTIONS } from '@/data/home';
+import { PROFILE } from '@/data/profile';
 ---
 
 <Section id="contact" ariaLabel="Contact" spacing="compact" tone="dark">
   <Container>
     <div class="contact">
-      <SectionHeading eyebrow="Contact" title={CONTACT_CONTENT.title} tone="dark" />
+      <SectionHeading
+        eyebrow={HOME_SECTIONS.contact.eyebrow}
+        title={HOME_SECTIONS.contact.title}
+        tone="dark"
+      />
 
       <div class="contact__content">
-        <p>{CONTACT_CONTENT.description}</p>
-        <p class="contact__status" aria-label="联系入口暂未开放">
-          <span aria-hidden="true"></span>
-          {CONTACT_CONTENT.placeholder}
-        </p>
+        <p>{HOME_SECTIONS.contact.description}</p>
+        <ul class="contact__links">
+          <li>
+            <a href={`mailto:${PROFILE.contact.email}`}>
+              <span>Email</span>
+              <strong>{PROFILE.contact.email}</strong>
+            </a>
+          </li>
+          <li>
+            <a href={PROFILE.contact.github.url} target="_blank" rel="noreferrer">
+              <span>GitHub</span>
+              <strong>{PROFILE.contact.github.username} ↗</strong>
+            </a>
+          </li>
+          <li>
+            <a href="/resume/">
+              <span>Resume</span>
+              <strong>查看网页版简历 →</strong>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </Container>
@@ -39,20 +60,41 @@ import { CONTACT_CONTENT } from '@/data/home';
     line-height: 1.75;
   }
 
-  .contact__status {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-3);
-    margin: var(--space-5) 0 0;
-    color: rgb(245 245 247 / 48%);
-    font-size: 0.8125rem;
-    font-weight: 600;
+  .contact__links {
+    display: grid;
+    padding: 0;
+    margin: var(--space-6) 0 0;
+    border-top: 1px solid rgb(245 245 247 / 16%);
+    list-style: none;
   }
 
-  .contact__status span {
-    width: 1.75rem;
-    height: 1px;
-    background: rgb(245 245 247 / 28%);
+  .contact__links li {
+    border-bottom: 1px solid rgb(245 245 247 / 16%);
+  }
+
+  .contact__links a {
+    display: flex;
+    min-height: 3.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    color: var(--color-text-on-dark);
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+
+  .contact__links span {
+    color: rgb(245 245 247 / 48%);
+  }
+
+  .contact__links strong {
+    overflow-wrap: anywhere;
+    font-weight: 560;
+    text-align: right;
+  }
+
+  .contact__links a:hover strong {
+    color: rgb(245 245 247 / 72%);
   }
 
   @media (min-width: 48rem) {

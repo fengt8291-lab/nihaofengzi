@@ -4,7 +4,7 @@ import BrandWordmark from '@/components/ui/BrandWordmark.astro';
 import Button from '@/components/ui/Button.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
-import { HERO_CONTENT } from '@/data/home';
+import { HOME_HERO } from '@/data/home';
 ---
 
 <Section id="hero" ariaLabel="Hero" spacing="spacious">
@@ -13,27 +13,23 @@ import { HERO_CONTENT } from '@/data/home';
       <div class="hero__content">
         <BrandWordmark
           variant="hero"
-          english={HERO_CONTENT.brand.english}
-          chinese={HERO_CONTENT.brand.chinese}
+          english={HOME_HERO.eyebrow.english}
+          chinese={HOME_HERO.eyebrow.chinese}
+          order="chinese-first"
         />
 
-        <h1 class="hero__title">{HERO_CONTENT.title}</h1>
-        <p class="hero__description">{HERO_CONTENT.description}</p>
+        <h1 class="hero__title">{HOME_HERO.title}</h1>
+        <p class="hero__supporting-title">{HOME_HERO.supportingTitle}</p>
+        <p class="hero__description">{HOME_HERO.introduction}</p>
 
         <div class="hero__actions" aria-label="首屏操作">
-          <Button href={HERO_CONTENT.primaryAction.href} variant="primary">
-            {HERO_CONTENT.primaryAction.label}
+          <Button href={HOME_HERO.actions[0].href} variant="primary">
+            {HOME_HERO.actions[0].label}
           </Button>
-          <Button href={HERO_CONTENT.secondaryAction.href} variant="secondary">
-            {HERO_CONTENT.secondaryAction.label}
+          <Button href={HOME_HERO.actions[1].href} variant="secondary">
+            {HOME_HERO.actions[1].label}
           </Button>
         </div>
-
-        <a class="hero__current-link" href={HERO_CONTENT.currentExploration.href}>
-          <span class="hero__current-mark" aria-hidden="true"></span>
-          {HERO_CONTENT.currentExploration.label}
-          <span class="hero__current-arrow" aria-hidden="true">↘</span>
-        </a>
       </div>
 
       <div class="hero__visual">
@@ -58,14 +54,26 @@ import { HERO_CONTENT } from '@/data/home';
   }
 
   .hero__title,
+  .hero__supporting-title,
   .hero__description,
-  .hero__actions,
-  .hero__current-link {
+  .hero__actions {
     opacity: 1;
     transform: translateY(0);
     transition:
       opacity var(--duration-reveal) var(--ease-standard),
       transform var(--duration-reveal) var(--ease-emphasized);
+  }
+
+  .hero__supporting-title {
+    max-width: 25rem;
+    margin: var(--space-5) 0 0;
+    color: var(--color-text-primary);
+    font-size: clamp(1.25rem, 3.8vw, 1.625rem);
+    font-weight: 560;
+    letter-spacing: -0.025em;
+    line-height: 1.45;
+    text-wrap: pretty;
+    transition-delay: 70ms;
   }
 
   .hero__title {
@@ -87,7 +95,7 @@ import { HERO_CONTENT } from '@/data/home';
     letter-spacing: -0.018em;
     line-height: 1.72;
     text-wrap: pretty;
-    transition-delay: 80ms;
+    transition-delay: 100ms;
   }
 
   .hero__actions {
@@ -95,50 +103,7 @@ import { HERO_CONTENT } from '@/data/home';
     flex-wrap: wrap;
     gap: var(--space-3);
     margin-top: var(--space-6);
-    transition-delay: 120ms;
-  }
-
-  .hero__current-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-top: var(--space-6);
-    color: var(--color-text-secondary);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition:
-      color var(--duration-fast) var(--ease-standard),
-      opacity var(--duration-reveal) var(--ease-standard),
-      transform var(--duration-reveal) var(--ease-emphasized);
-    transition-delay: 150ms;
-  }
-
-  .hero__current-mark {
-    width: 1.75rem;
-    height: 1px;
-    background: var(--color-growth);
-    transition: transform var(--duration-fast) var(--ease-standard);
-    transform-origin: left;
-  }
-
-  .hero__current-arrow {
-    color: var(--color-growth);
-    transition: transform var(--duration-fast) var(--ease-standard);
-  }
-
-  .hero__current-link:hover {
-    color: var(--color-text-primary);
-  }
-
-  .hero__current-link:hover .hero__current-mark {
-    transform: scaleX(1.15);
-  }
-
-  .hero__current-link:hover .hero__current-arrow {
-    transform: translate(0.125rem, 0.125rem);
+    transition-delay: 140ms;
   }
 
   .hero__visual {
@@ -147,9 +112,9 @@ import { HERO_CONTENT } from '@/data/home';
 
   @starting-style {
     .hero__title,
+    .hero__supporting-title,
     .hero__description,
-    .hero__actions,
-    .hero__current-link {
+    .hero__actions {
       opacity: 0;
       transform: translateY(0.75rem);
     }

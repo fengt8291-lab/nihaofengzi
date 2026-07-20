@@ -1,0 +1,69 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description?: string;
+}
+
+const { eyebrow, title, description } = Astro.props;
+---
+
+<header class="page-intro">
+  <p class="page-intro__eyebrow">{eyebrow}</p>
+  <h1>{title}</h1>
+  {description && <p class="page-intro__description">{description}</p>}
+  <div class="page-intro__content">
+    <slot />
+  </div>
+</header>
+
+<style>
+  .page-intro {
+    max-width: 52rem;
+  }
+
+  .page-intro__eyebrow {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .page-intro h1 {
+    margin: var(--space-4) 0 0;
+    font-size: clamp(3.25rem, 9vw, 6.5rem);
+    font-weight: 650;
+    letter-spacing: -0.065em;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .page-intro__description {
+    max-width: 44rem;
+    margin: var(--space-6) 0 0;
+    color: var(--color-text-secondary);
+    font-size: clamp(1.0625rem, 2.5vw, 1.25rem);
+    line-height: 1.75;
+    text-wrap: pretty;
+  }
+
+  .page-intro__content {
+    display: grid;
+    max-width: 44rem;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+
+  .page-intro__content:empty {
+    display: none;
+  }
+
+  .page-intro__content :global(p) {
+    margin: 0;
+  }
+</style>

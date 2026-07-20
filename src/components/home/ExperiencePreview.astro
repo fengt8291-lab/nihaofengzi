@@ -1,0 +1,112 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { HOME_EXPERIENCE_IDS, HOME_SECTIONS } from '@/data/home';
+import { getProfileExperiences } from '@/data/profile';
+
+const experiences = getProfileExperiences(HOME_EXPERIENCE_IDS);
+---
+
+<Section id="experience-preview" ariaLabel="经历摘要" tone="surface">
+  <Container>
+    <SectionHeading
+      eyebrow={HOME_SECTIONS.experience.eyebrow}
+      title={HOME_SECTIONS.experience.title}
+      description={HOME_SECTIONS.experience.description}
+    />
+
+    <ol class="experience-preview">
+      {
+        experiences.map((experience, index) => (
+          <li>
+            <article>
+              <div class="experience-preview__number" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              <div class="experience-preview__identity">
+                <h3>{experience.title}</h3>
+                <p>{experience.role} · {experience.period}</p>
+              </div>
+              <div class="experience-preview__description">
+                <p>{experience.summary}</p>
+                {experience.boundary && <p class="experience-preview__boundary">{experience.boundary}</p>}
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="experience-preview__action">
+      <Button href="/experience/" variant="secondary">查看完整经历</Button>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .experience-preview {
+    padding: 0;
+    margin: var(--space-8) 0 0;
+    border-top: 1px solid var(--color-border-strong);
+    list-style: none;
+  }
+
+  .experience-preview > li {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .experience-preview article {
+    display: grid;
+    gap: var(--space-4);
+    padding-block: var(--space-6);
+  }
+
+  .experience-preview__number {
+    color: var(--color-growth);
+    font-size: 0.75rem;
+    font-weight: 650;
+  }
+
+  .experience-preview h3,
+  .experience-preview p {
+    margin: 0;
+  }
+
+  .experience-preview h3 {
+    font-size: clamp(1.25rem, 3vw, 1.625rem);
+    font-weight: 620;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+  }
+
+  .experience-preview__identity p {
+    margin-top: var(--space-2);
+    color: var(--color-text-tertiary);
+    font-size: 0.8125rem;
+  }
+
+  .experience-preview__description {
+    display: grid;
+    gap: var(--space-3);
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  .experience-preview__boundary {
+    color: var(--color-text-tertiary);
+    font-size: 0.8125rem;
+  }
+
+  .experience-preview__action {
+    margin-top: var(--space-6);
+  }
+
+  @media (min-width: 64rem) {
+    .experience-preview article {
+      grid-template-columns: 3rem minmax(14rem, 0.75fr) minmax(20rem, 1.25fr);
+      gap: var(--space-6);
+    }
+  }
+</style>

@@ -18,6 +18,7 @@ export interface SeoMetadata {
 export interface NavigationItem {
   label: string;
   href: string;
+  match?: 'exact' | 'prefix' | 'none';
 }
 
 export interface SocialLink {

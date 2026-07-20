@@ -1,21 +1,29 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-import AboutSnapshot from '@/components/home/AboutSnapshot.astro';
+import AboutIntro from '@/components/home/AboutIntro.astro';
 import Contact from '@/components/home/Contact.astro';
-import CurrentlyExploring from '@/components/home/CurrentlyExploring.astro';
+import ExperiencePreview from '@/components/home/ExperiencePreview.astro';
 import Hero from '@/components/home/Hero.astro';
-import ResearchPreview from '@/components/home/ResearchPreview.astro';
-import SelectedProjects from '@/components/home/SelectedProjects.astro';
+import NowSection from '@/components/home/NowSection.astro';
+import SelectedWork from '@/components/home/SelectedWork.astro';
+import { SITE } from '@/data/site';
+import { getCanonicalUrl } from '@/lib/paths';
+
+const canonical = getCanonicalUrl(Astro.url.pathname, SITE.url);
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={SITE.defaultTitle}
+  description="田丰的个人数字主页，记录教育与校园经历、作品实践，以及仍在形成的想法。"
+  canonical={canonical}
+>
   <main id="main-content">
     <Hero />
-    <CurrentlyExploring />
-    <SelectedProjects />
-    <ResearchPreview />
-    <AboutSnapshot />
+    <AboutIntro />
+    <NowSection />
+    <ExperiencePreview />
+    <SelectedWork />
     <Contact />
   </main>
 </BaseLayout>

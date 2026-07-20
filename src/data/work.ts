@@ -10,13 +10,13 @@ export type WorkCategoryId = (typeof WORK_CATEGORY_IDS)[number];
 export const WORK_CATEGORIES = [
   {
     id: 'product-digital',
-    label: '产品与数字实践',
-    description: '从真实问题出发形成的产品、网站与数字实践。',
+    label: '产品、网站与数字实践',
+    description: '从个人观察和真实问题出发形成的产品原型、网站与数字实践。',
   },
   {
     id: 'research-content',
-    label: '研究与内容作品',
-    description: '课程研究、用户洞察与内容表达形成的阶段性成果。',
+    label: '用户研究与内容作品',
+    description: '由用户洞察、课程研究和内容表达形成的阶段性作品。',
   },
   {
     id: 'learning-tools',

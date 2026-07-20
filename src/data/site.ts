@@ -6,5 +6,5 @@ export const SITE: SiteConfig = {
   url: 'https://nihaofengzi.top',
   language: 'zh-CN',
   defaultTitle: '你好丰子 / Nihao Fengzi',
-  defaultDescription: '探索 AI 时代的个人创造力、人机协作和 AI 产品实践。',
+  defaultDescription: '田丰的个人数字主页，记录教育与校园经历、作品实践，以及仍在形成的想法。',
 };

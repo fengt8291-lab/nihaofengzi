@@ -2,7 +2,7 @@
 import type { NavigationItem } from '@/types/site';
 
 interface Props {
-  items: readonly NavigationItem[];
+  items: readonly (NavigationItem & { isCurrent?: boolean })[];
 }
 
 const { items } = Astro.props;
@@ -34,7 +34,12 @@ const menuId = 'mobile-primary-navigation';
       {
         items.map((item) => (
           <li>
-            <a class="mobile-menu__link" href={item.href} data-mobile-menu-link>
+            <a
+              class:list={['mobile-menu__link', { 'mobile-menu__link--current': item.isCurrent }]}
+              href={item.href}
+              aria-current={item.isCurrent ? 'page' : undefined}
+              data-mobile-menu-link
+            >
               {item.label}
             </a>
           </li>
@@ -204,6 +209,11 @@ const menuId = 'mobile-primary-navigation';
   }
 
   .mobile-menu__link:hover {
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+  }
+
+  .mobile-menu__link--current {
     background: var(--color-accent-soft);
     color: var(--color-accent);
   }

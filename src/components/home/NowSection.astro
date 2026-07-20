@@ -1,0 +1,90 @@
+---
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { HOME_NOW, HOME_SECTIONS } from '@/data/home';
+
+const updatedLabel = new Intl.DateTimeFormat('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+}).format(new Date(`${HOME_NOW.updatedAt}T00:00:00+08:00`));
+---
+
+<Section id="now" ariaLabel="此刻">
+  <Container>
+    <SectionHeading
+      eyebrow={HOME_SECTIONS.now.eyebrow}
+      title={HOME_SECTIONS.now.title}
+      description={HOME_SECTIONS.now.description}
+    >
+      <time slot="meta" datetime={HOME_NOW.updatedAt}>更新于 {updatedLabel}</time>
+    </SectionHeading>
+
+    <ol class="now-list">
+      {
+        HOME_NOW.items.map((item, index) => (
+          <li>
+            <article>
+              <div class="now-list__index" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              <h3>{item.label}</h3>
+              <p>{item.description}</p>
+            </article>
+          </li>
+        ))
+      }
+    </ol>
+  </Container>
+</Section>
+
+<style>
+  .now-list {
+    display: grid;
+    padding: 0;
+    margin: var(--space-8) 0 0;
+    border-top: 1px solid var(--color-border-strong);
+    list-style: none;
+  }
+
+  .now-list li {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .now-list article {
+    display: grid;
+    gap: var(--space-3);
+    padding-block: var(--space-6);
+  }
+
+  .now-list__index {
+    color: var(--color-growth);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+  }
+
+  .now-list h3,
+  .now-list p {
+    margin: 0;
+  }
+
+  .now-list h3 {
+    font-size: 1.125rem;
+    font-weight: 620;
+  }
+
+  .now-list p {
+    max-width: 43rem;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  @media (min-width: 48rem) {
+    .now-list article {
+      grid-template-columns: 3rem minmax(7rem, 0.45fr) minmax(0, 1.55fr);
+      align-items: baseline;
+      gap: var(--space-5);
+    }
+  }
+</style>

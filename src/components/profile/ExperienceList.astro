@@ -1,0 +1,119 @@
+---
+import type { ProfileExperience } from '@/data/profile';
+
+interface Props {
+  experiences: readonly ProfileExperience[];
+  compact?: boolean;
+}
+
+const { experiences, compact = false } = Astro.props;
+---
+
+<ol class:list={['experience-list', { 'experience-list--compact': compact }]}> 
+  {
+    experiences.map((experience) => (
+      <li>
+        <article class="experience-item">
+          <header>
+            <div>
+              <h3>{experience.title}</h3>
+              <p>{experience.role}</p>
+            </div>
+            <p class="experience-item__period">{experience.period}</p>
+          </header>
+
+          <p class="experience-item__summary">{experience.summary}</p>
+
+          {!compact && (
+            <ul class="experience-item__responsibilities">
+              {experience.responsibilities.map((responsibility) => (
+                <li>{responsibility}</li>
+              ))}
+            </ul>
+          )}
+
+          {experience.boundary && <p class="experience-item__boundary">{experience.boundary}</p>}
+        </article>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .experience-list {
+    display: grid;
+    gap: var(--space-5);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .experience-item {
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card-background);
+  }
+
+  .experience-item header {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .experience-item h3,
+  .experience-item header p {
+    margin: 0;
+  }
+
+  .experience-item h3 {
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    font-weight: 620;
+    letter-spacing: -0.035em;
+    line-height: 1.2;
+  }
+
+  .experience-item header div > p,
+  .experience-item__period {
+    margin-top: var(--space-2) !important;
+    color: var(--color-text-tertiary);
+    font-size: 0.8125rem;
+  }
+
+  .experience-item__summary {
+    margin: var(--space-5) 0 0;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  .experience-item__responsibilities {
+    padding-left: 1.15rem;
+    margin: var(--space-5) 0 0;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  .experience-item__responsibilities li + li {
+    margin-top: var(--space-2);
+  }
+
+  .experience-item__boundary {
+    padding-top: var(--space-4);
+    margin: var(--space-5) 0 0;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-tertiary);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+  }
+
+  @media (min-width: 48rem) {
+    .experience-item header {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+    }
+
+    .experience-item__period {
+      margin-top: 0 !important;
+      text-align: right;
+    }
+  }
+</style>

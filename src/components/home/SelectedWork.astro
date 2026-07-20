@@ -1,0 +1,47 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import WorkCard from '@/components/work/WorkCard.astro';
+import { HOME_SECTIONS } from '@/data/home';
+import { getFeaturedWork } from '@/lib/work';
+
+const featuredWork = await getFeaturedWork();
+---
+
+<Section id="selected-work" ariaLabel="精选作品">
+  <Container>
+    <SectionHeading
+      eyebrow={HOME_SECTIONS.work.eyebrow}
+      title={HOME_SECTIONS.work.title}
+      description={HOME_SECTIONS.work.description}
+    />
+
+    <div class="selected-work__grid">
+      {featuredWork.map((entry, index) => <WorkCard entry={entry} priority={index === 0} />)}
+    </div>
+
+    <div class="selected-work__action">
+      <Button href="/work/" variant="secondary">查看全部作品</Button>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .selected-work__grid {
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+
+  .selected-work__action {
+    margin-top: var(--space-6);
+  }
+
+  @media (min-width: 64rem) {
+    .selected-work__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

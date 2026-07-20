@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer.astro';
 import Header from '@/components/layout/Header.astro';
 import SEOHead from '@/components/layout/SEOHead.astro';
 import { SITE } from '@/data/site';
+import { getCanonicalUrl } from '@/lib/paths';
 import type { SeoMetadata } from '@/types/site';
 
 interface Props extends SeoMetadata {
@@ -14,7 +15,7 @@ interface Props extends SeoMetadata {
 const {
   title = SITE.defaultTitle,
   description = SITE.defaultDescription,
-  canonical = new URL(Astro.url.pathname, SITE.url),
+  canonical = getCanonicalUrl(Astro.url.pathname, SITE.url),
   image,
   noIndex = false,
   lang = SITE.language,

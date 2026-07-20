@@ -23,3 +23,10 @@ export const matchesPathname = (
 
   return current === target || current.startsWith(target);
 };
+
+export const getCanonicalUrl = (pathname: string, baseUrl: string | URL): URL => {
+  const canonical = new URL(normalizePathname(pathname), baseUrl);
+  canonical.search = '';
+  canonical.hash = '';
+  return canonical;
+};

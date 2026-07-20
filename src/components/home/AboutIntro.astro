@@ -1,0 +1,73 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import { HOME_ABOUT } from '@/data/home';
+---
+
+<Section id="about-intro" ariaLabel="关于我" tone="surface">
+  <Container>
+    <div class="about-intro">
+      <header>
+        <p>About / 关于</p>
+        <h2>{HOME_ABOUT.title}</h2>
+      </header>
+
+      <div class="about-intro__content">
+        {HOME_ABOUT.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        <Button href={HOME_ABOUT.action.href} variant="text" size="small">
+          {HOME_ABOUT.action.label} <span aria-hidden="true">→</span>
+        </Button>
+      </div>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .about-intro {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .about-intro header > p {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .about-intro h2 {
+    margin: var(--space-3) 0 0;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 620;
+    letter-spacing: -0.055em;
+    line-height: 1.08;
+  }
+
+  .about-intro__content {
+    display: grid;
+    max-width: 44rem;
+    gap: var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.85;
+  }
+
+  .about-intro__content p {
+    margin: 0;
+  }
+
+  .about-intro__content :global(.button) {
+    width: fit-content;
+    margin: var(--space-2) 0 0 calc(var(--space-2) * -1);
+  }
+
+  @media (min-width: 64rem) {
+    .about-intro {
+      grid-template-columns: minmax(14rem, 0.72fr) minmax(0, 1.28fr);
+      gap: var(--space-9);
+    }
+  }
+</style>

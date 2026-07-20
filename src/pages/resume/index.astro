@@ -1,0 +1,270 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+import EducationSummary from '@/components/profile/EducationSummary.astro';
+import ExperienceList from '@/components/profile/ExperienceList.astro';
+import Button from '@/components/ui/Button.astro';
+import Container from '@/components/ui/Container.astro';
+import PageIntro from '@/components/ui/PageIntro.astro';
+import Section from '@/components/ui/Section.astro';
+import { PROFILE } from '@/data/profile';
+import { SITE } from '@/data/site';
+import { getCanonicalUrl } from '@/lib/paths';
+import { getFeaturedWork, getWorkHref } from '@/lib/work';
+
+const canonical = getCanonicalUrl(Astro.url.pathname, SITE.url);
+const experiences = PROFILE.experiences.filter((entry) => entry.resume);
+const featuredWork = await getFeaturedWork();
+---
+
+<BaseLayout
+  title="田丰的简历"
+  description="田丰的公开网页版简历，包括教育背景、代表经历、精选作品、能力摘要和联系方式。"
+  canonical={canonical}
+>
+  <main id="main-content" class="resume-page">
+    <Section spacing="spacious">
+      <Container>
+        <PageIntro eyebrow="Resume / 简历" title={PROFILE.name.chinese} description={PROFILE.summary} />
+        <div class="resume-page__identity">
+          <span>{PROFILE.name.english}</span>
+          <span>{PROFILE.location}</span>
+          <a href={`mailto:${PROFILE.contact.email}`}>{PROFILE.contact.email}</a>
+          <a href={PROFILE.contact.github.url} target="_blank" rel="noreferrer">
+            GitHub · {PROFILE.contact.github.username}<span class="sr-only">（在新窗口打开）</span>
+          </a>
+        </div>
+      </Container>
+    </Section>
+
+    <Section tone="surface">
+      <Container>
+        <div class="resume-page__section">
+          <h2>教育</h2>
+          <EducationSummary />
+        </div>
+      </Container>
+    </Section>
+
+    <Section>
+      <Container>
+        <div class="resume-page__section">
+          <h2>代表经历</h2>
+          <ExperienceList experiences={experiences} compact />
+        </div>
+      </Container>
+    </Section>
+
+    <Section tone="surface">
+      <Container>
+        <div class="resume-page__section">
+          <h2>精选作品</h2>
+          <ol class="resume-page__work">
+            {
+              featuredWork.map((entry) => (
+                <li>
+                  <article>
+                    <div>
+                      <p>{entry.data.type}</p>
+                      <h3>{entry.data.title}</h3>
+                    </div>
+                    <p>{entry.data.summary}</p>
+                    <dl>
+                      <div>
+                        <dt>我的角色</dt>
+                        <dd>{entry.data.role}</dd>
+                      </div>
+                      <div>
+                        <dt>状态</dt>
+                        <dd>{entry.data.status}</dd>
+                      </div>
+                    </dl>
+                    {getWorkHref(entry) && <a href={getWorkHref(entry)}>查看项目 →</a>}
+                  </article>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </Container>
+    </Section>
+
+    <Section>
+      <Container>
+        <div class="resume-page__section">
+          <h2>能力摘要</h2>
+          <ul class="resume-page__capabilities">
+            {
+              PROFILE.capabilities.map((capability) => (
+                <li>
+                  <h3>{capability.title}</h3>
+                  <p>{capability.description}</p>
+                  <p class="resume-page__evidence">相关证据：{capability.evidence.join('、')}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </Container>
+    </Section>
+
+    <Section spacing="compact" tone="dark">
+      <Container>
+        <div class="resume-page__contact">
+          <div>
+            <p>Contact / 联系</p>
+            <h2>保持联系</h2>
+          </div>
+          <div>
+            <Button href={`mailto:${PROFILE.contact.email}`} variant="secondary">发送邮件</Button>
+            <Button href={PROFILE.contact.github.url} target="_blank" rel="noreferrer" variant="text">
+              查看 GitHub ↗
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </Section>
+  </main>
+</BaseLayout>
+
+<style>
+  .resume-page__identity {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-5);
+    margin-top: var(--space-6);
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .resume-page__identity a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .resume-page__section {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  .resume-page__section > h2,
+  .resume-page__contact h2 {
+    margin: 0;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 620;
+    letter-spacing: -0.05em;
+  }
+
+  .resume-page__work,
+  .resume-page__capabilities {
+    display: grid;
+    gap: var(--space-5);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .resume-page__work article,
+  .resume-page__capabilities li {
+    height: 100%;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card-background);
+  }
+
+  .resume-page__work article > div:first-child > p {
+    margin: 0;
+    color: var(--color-growth);
+    font-size: 0.75rem;
+    font-weight: 650;
+  }
+
+  .resume-page__work h3,
+  .resume-page__capabilities h3 {
+    margin: var(--space-3) 0 0;
+    font-size: 1.375rem;
+    font-weight: 620;
+    letter-spacing: -0.03em;
+  }
+
+  .resume-page__work article > p,
+  .resume-page__capabilities p {
+    margin: var(--space-4) 0 0;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  .resume-page__work dl {
+    display: grid;
+    gap: var(--space-3);
+    padding-top: var(--space-5);
+    margin: var(--space-5) 0 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .resume-page__work dt {
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+  }
+
+  .resume-page__work dd {
+    margin: var(--space-1) 0 0;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  .resume-page__work a {
+    display: inline-flex;
+    margin-top: var(--space-5);
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .resume-page__evidence {
+    color: var(--color-text-tertiary) !important;
+    font-size: 0.8125rem;
+  }
+
+  .resume-page__contact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .resume-page__contact > div:first-child > p {
+    margin: 0 0 var(--space-3);
+    color: rgb(245 245 247 / 58%);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .resume-page__contact h2 {
+    color: var(--color-text-on-dark);
+  }
+
+  .resume-page__contact > div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 48rem) {
+    .resume-page__work,
+    .resume-page__capabilities {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .resume-page__work {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

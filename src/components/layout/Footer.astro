@@ -1,5 +1,6 @@
 ---
 import { SITE } from '@/data/site';
+import { PROFILE } from '@/data/profile';
 
 import Container from '@/components/ui/Container.astro';
 ---
@@ -7,8 +8,9 @@ import Container from '@/components/ui/Container.astro';
 <footer class="site-footer">
   <Container>
     <div class="site-footer__inner">
-      <small class="site-footer__brand">{SITE.name}</small>
+      <small class="site-footer__brand">{PROFILE.name.chinese} · {SITE.name}</small>
       <div class="site-footer__content">
+        <small>© {new Date().getFullYear()} · 持续更新的个人数字主页</small>
         <slot />
       </div>
     </div>
@@ -39,5 +41,24 @@ import Container from '@/components/ui/Container.astro';
     min-width: 0;
     align-items: center;
     justify-content: flex-end;
+    text-align: right;
+  }
+
+  .site-footer__content small {
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 30rem) {
+    .site-footer__inner {
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: var(--space-5);
+    }
+
+    .site-footer__content {
+      justify-content: flex-start;
+      text-align: left;
+    }
   }
 </style>

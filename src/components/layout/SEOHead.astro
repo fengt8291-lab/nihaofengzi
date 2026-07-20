@@ -1,17 +1,24 @@
 ---
 import { SITE } from '@/data/site';
+import { getCanonicalUrl } from '@/lib/paths';
 import type { SeoMetadata } from '@/types/site';
 
 const {
   title = SITE.defaultTitle,
   description = SITE.defaultDescription,
-  canonical = new URL(Astro.url.pathname, SITE.url),
+  canonical = getCanonicalUrl(Astro.url.pathname, SITE.url),
   image,
   noIndex = false,
 } = Astro.props as SeoMetadata;
 
-const documentTitle = title === SITE.defaultTitle ? title : `${title} | ${SITE.name}`;
-const canonicalUrl = canonical instanceof URL ? canonical : new URL(canonical, SITE.url);
+const documentTitle =
+  title === SITE.defaultTitle
+    ? title
+    : title === SITE.name
+      ? `${title}：个人数字主页`
+      : `${title} | ${SITE.name}`;
+const rawCanonical = canonical instanceof URL ? canonical : new URL(canonical, SITE.url);
+const canonicalUrl = getCanonicalUrl(rawCanonical.pathname, rawCanonical.origin);
 const imageUrl = image ? (image instanceof URL ? image : new URL(image, SITE.url)) : undefined;
 ---
 

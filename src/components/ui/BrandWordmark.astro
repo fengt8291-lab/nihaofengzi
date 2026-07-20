@@ -6,6 +6,7 @@ interface Props {
   href?: string;
   english?: string;
   chinese?: string;
+  order?: 'chinese-first' | 'english-first';
   class?: string;
 }
 
@@ -14,6 +15,7 @@ const {
   href,
   english = SITE.englishName.toUpperCase(),
   chinese = SITE.name,
+  order = href ? 'chinese-first' : 'english-first',
   class: className,
 } = Astro.props;
 
@@ -23,15 +25,35 @@ const classes = ['brand-wordmark', `brand-wordmark--${variant}`, className];
 {
   href ? (
     <a class:list={classes} href={href} aria-label={`${chinese}首页`}>
-      <span class="brand-wordmark__chinese">{chinese}</span>
-      <span class="brand-wordmark__divider" aria-hidden="true">/</span>
-      <span class="brand-wordmark__english">{english}</span>
+      {order === 'chinese-first' ? (
+        <>
+          <span class="brand-wordmark__chinese">{chinese}</span>
+          <span class="brand-wordmark__divider" aria-hidden="true">/</span>
+          <span class="brand-wordmark__english">{english}</span>
+        </>
+      ) : (
+        <>
+          <span class="brand-wordmark__english">{english}</span>
+          <span class="brand-wordmark__divider" aria-hidden="true">/</span>
+          <span class="brand-wordmark__chinese">{chinese}</span>
+        </>
+      )}
     </a>
   ) : (
     <p class:list={classes}>
-      <span class="brand-wordmark__english">{english}</span>
-      <span class="brand-wordmark__divider" aria-hidden="true">/</span>
-      <span class="brand-wordmark__chinese">{chinese}</span>
+      {order === 'chinese-first' ? (
+        <>
+          <span class="brand-wordmark__chinese">{chinese}</span>
+          <span class="brand-wordmark__divider" aria-hidden="true">/</span>
+          <span class="brand-wordmark__english">{english}</span>
+        </>
+      ) : (
+        <>
+          <span class="brand-wordmark__english">{english}</span>
+          <span class="brand-wordmark__divider" aria-hidden="true">/</span>
+          <span class="brand-wordmark__chinese">{chinese}</span>
+        </>
+      )}
     </p>
   )
 }
