@@ -2,21 +2,23 @@
 import Button from '@/components/ui/Button.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
-import { HOME_ABOUT } from '@/data/home';
+import { getSiteContent } from '@/lib/site-content';
+
+const { about } = (await getSiteContent()).home;
 ---
 
 <Section id="about-intro" ariaLabel="关于我" tone="surface">
   <Container>
     <div class="about-intro">
       <header>
-        <p>About / 关于</p>
-        <h2>{HOME_ABOUT.title}</h2>
+        <p>{about.eyebrow}</p>
+        <h2>{about.title}</h2>
       </header>
 
       <div class="about-intro__content">
-        {HOME_ABOUT.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-        <Button href={HOME_ABOUT.action.href} variant="text" size="small">
-          {HOME_ABOUT.action.label} <span aria-hidden="true">→</span>
+        {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        <Button href={about.action.href} variant="text" size="small">
+          {about.action.label} <span aria-hidden="true">→</span>
         </Button>
       </div>
     </div>

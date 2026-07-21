@@ -1,3 +1,9 @@
+---
+import { getSiteContent } from '@/lib/site-content';
+
+const [learning, research, create, practice] = (await getSiteContent()).home.hero.visualHints;
+---
+
 <div class="hero-visual" aria-hidden="true">
   <div class="hero-visual__field">
     <svg
@@ -31,10 +37,10 @@
       <circle class="hero-visual__marker hero-visual__marker--two" cx="434" cy="267" r="3" />
     </svg>
 
-    <span class="hero-visual__hint hero-visual__hint--learning">学习</span>
-    <span class="hero-visual__hint hero-visual__hint--research">研究</span>
-    <span class="hero-visual__hint hero-visual__hint--create">创造</span>
-    <span class="hero-visual__hint hero-visual__hint--practice">实践</span>
+    <span class="hero-visual__hint hero-visual__hint--learning">{learning}</span>
+    <span class="hero-visual__hint hero-visual__hint--research">{research}</span>
+    <span class="hero-visual__hint hero-visual__hint--create">{create}</span>
+    <span class="hero-visual__hint hero-visual__hint--practice">{practice}</span>
   </div>
 </div>
 

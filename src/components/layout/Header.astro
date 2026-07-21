@@ -2,11 +2,13 @@
 import MobileMenu from '@/components/layout/MobileMenu.astro';
 import BrandWordmark from '@/components/ui/BrandWordmark.astro';
 import Container from '@/components/ui/Container.astro';
-import { PRIMARY_NAVIGATION } from '@/data/navigation';
+import { getPrimaryNavigation } from '@/data/navigation';
 import { matchesPathname, normalizePathname } from '@/lib/paths';
+import { getSiteContent } from '@/lib/site-content';
 
+const siteContent = await getSiteContent();
 const currentPathname = normalizePathname(Astro.url.pathname);
-const navigationItems = PRIMARY_NAVIGATION.map((item) => ({
+const navigationItems = getPrimaryNavigation(siteContent.navigation).map((item) => ({
   ...item,
   isCurrent:
     item.match === 'none'

@@ -2,27 +2,28 @@
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
-import { HOME_NOW, HOME_SECTIONS } from '@/data/home';
+import { getSiteContent } from '@/lib/site-content';
 
+const home = (await getSiteContent()).home;
 const updatedLabel = new Intl.DateTimeFormat('zh-CN', {
   year: 'numeric',
   month: 'long',
-}).format(new Date(`${HOME_NOW.updatedAt}T00:00:00+08:00`));
+}).format(new Date(`${home.now.updatedAt}T00:00:00+08:00`));
 ---
 
 <Section id="now" ariaLabel="此刻">
   <Container>
     <SectionHeading
-      eyebrow={HOME_SECTIONS.now.eyebrow}
-      title={HOME_SECTIONS.now.title}
-      description={HOME_SECTIONS.now.description}
+      eyebrow={home.sections.now.eyebrow}
+      title={home.sections.now.title}
+      description={home.sections.now.description}
     >
-      <time slot="meta" datetime={HOME_NOW.updatedAt}>更新于 {updatedLabel}</time>
+      <time slot="meta" datetime={home.now.updatedAt}>更新于 {updatedLabel}</time>
     </SectionHeading>
 
     <ol class="now-list">
       {
-        HOME_NOW.items.map((item, index) => (
+        home.now.items.map((item, index) => (
           <li>
             <article>
               <div class="now-list__index" aria-hidden="true">

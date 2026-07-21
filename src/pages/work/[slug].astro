@@ -8,8 +8,8 @@ import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
 import WorkCover from '@/components/work/WorkCover.astro';
 import WorkMeta from '@/components/work/WorkMeta.astro';
-import { SITE } from '@/data/site';
 import { normalizePathname } from '@/lib/paths';
+import { getSiteContent } from '@/lib/site-content';
 import { getDetailWork, type WorkEntry } from '@/lib/work';
 
 export const getStaticPaths = (async () => {
@@ -26,8 +26,9 @@ interface Props {
 }
 
 const { entry } = Astro.props;
+const siteContent = await getSiteContent();
 const { Content } = await render(entry);
-const canonical = new URL(normalizePathname(Astro.url.pathname), SITE.url);
+const canonical = new URL(normalizePathname(Astro.url.pathname), siteContent.global.url);
 const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
 const links = [
   entry.data.externalUrl

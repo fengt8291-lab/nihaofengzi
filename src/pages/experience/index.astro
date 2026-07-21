@@ -6,52 +6,35 @@ import Button from '@/components/ui/Button.astro';
 import Container from '@/components/ui/Container.astro';
 import PageIntro from '@/components/ui/PageIntro.astro';
 import Section from '@/components/ui/Section.astro';
-import { PROFILE, type ExperienceCategory } from '@/data/profile';
-import { SITE } from '@/data/site';
 import { getCanonicalUrl } from '@/lib/paths';
+import { getSiteContent } from '@/lib/site-content';
 
-const canonical = getCanonicalUrl(Astro.url.pathname, SITE.url);
-const groups: readonly { category: ExperienceCategory; eyebrow: string; title: string; description: string }[] = [
-  {
-    category: 'campus',
-    eyebrow: 'Campus / 校园',
-    title: '校园组织与公共事务',
-    description: '在长期的信息协调、活动支持和公共事务中，练习准确、回应与协作。',
-  },
-  {
-    category: 'work',
-    eyebrow: 'Work / 工作',
-    title: '门店与现实工作',
-    description: '在顾客、商品、陈列和日常流程中理解稳定执行的价值。',
-  },
-  {
-    category: 'research',
-    eyebrow: 'Research support / 资料整理',
-    title: '研究与资料整理',
-    description: '通过公开材料检索、数据摘录和文字校对，建立对准确性的具体认识。',
-  },
-];
+const siteContent = await getSiteContent();
+const page = siteContent.pages.experience;
+const canonical = getCanonicalUrl(Astro.url.pathname, siteContent.global.url);
 ---
 
 <BaseLayout
-  title="经历"
-  description="田丰在校园组织、班级公共事务、无印良品门店工作和 ESG 报告资料整理中的真实经历。"
+  title={page.seo.title}
+  description={page.seo.description}
   canonical={canonical}
 >
   <main id="main-content">
     <Section spacing="spacious">
       <Container>
         <PageIntro
-          eyebrow="Experience / 经历"
-          title="经历"
-          description="我的能力不只来自个人项目，也来自校园组织、公共事务、研究整理和真实工作流程。"
+          eyebrow={page.intro.eyebrow}
+          title={page.intro.title}
+          description={page.intro.description}
         />
       </Container>
     </Section>
 
     {
-      groups.map((group, index) => {
-        const experiences = PROFILE.experiences.filter((entry) => entry.category === group.category);
+      page.groups.map((group, index) => {
+        const experiences = siteContent.profile.experiences.filter(
+          (entry) => entry.category === group.category,
+        );
 
         return (
           <Section tone={index % 2 === 0 ? 'surface' : 'default'}>
@@ -73,10 +56,14 @@ const groups: readonly { category: ExperienceCategory; eyebrow: string; title: s
     <Section spacing="compact">
       <Container>
         <div class="experience-page__next">
-          <p>这些经历与作品共同构成我当前的能力证据。</p>
+          <p>{page.footer.description}</p>
           <div>
-            <Button href="/work/" variant="secondary">查看作品</Button>
-            <Button href="/resume/" variant="text">查看简历</Button>
+            <Button href={page.footer.actions[0].href} variant="secondary">
+              {page.footer.actions[0].label}
+            </Button>
+            <Button href={page.footer.actions[1].href} variant="text">
+              {page.footer.actions[1].label}
+            </Button>
           </div>
         </div>
       </Container>

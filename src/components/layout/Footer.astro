@@ -1,16 +1,17 @@
 ---
-import { SITE } from '@/data/site';
-import { PROFILE } from '@/data/profile';
-
 import Container from '@/components/ui/Container.astro';
+import { getSiteContent } from '@/lib/site-content';
+
+const siteContent = await getSiteContent();
+const { identity, global } = siteContent;
 ---
 
 <footer class="site-footer">
   <Container>
     <div class="site-footer__inner">
-      <small class="site-footer__brand">{PROFILE.name.chinese} · {SITE.name}</small>
+      <small class="site-footer__brand">{identity.name.chinese} · {identity.brand.chinese}</small>
       <div class="site-footer__content">
-        <small>© {new Date().getFullYear()} · 持续更新的个人数字主页</small>
+        <small>© {new Date().getFullYear()} · {global.footer.description}</small>
         <slot />
       </div>
     </div>

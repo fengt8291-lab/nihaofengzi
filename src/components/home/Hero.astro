@@ -4,7 +4,9 @@ import BrandWordmark from '@/components/ui/BrandWordmark.astro';
 import Button from '@/components/ui/Button.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
-import { HOME_HERO } from '@/data/home';
+import { getSiteContent } from '@/lib/site-content';
+
+const hero = (await getSiteContent()).home.hero;
 ---
 
 <Section id="hero" ariaLabel="Hero" spacing="spacious">
@@ -13,21 +15,21 @@ import { HOME_HERO } from '@/data/home';
       <div class="hero__content">
         <BrandWordmark
           variant="hero"
-          english={HOME_HERO.eyebrow.english}
-          chinese={HOME_HERO.eyebrow.chinese}
+          english={hero.eyebrow.english}
+          chinese={hero.eyebrow.chinese}
           order="chinese-first"
         />
 
-        <h1 class="hero__title">{HOME_HERO.title}</h1>
-        <p class="hero__supporting-title">{HOME_HERO.supportingTitle}</p>
-        <p class="hero__description">{HOME_HERO.introduction}</p>
+        <h1 class="hero__title">{hero.title}</h1>
+        <p class="hero__supporting-title">{hero.supportingTitle}</p>
+        <p class="hero__description">{hero.introduction}</p>
 
         <div class="hero__actions" aria-label="首屏操作">
-          <Button href={HOME_HERO.actions[0].href} variant="primary">
-            {HOME_HERO.actions[0].label}
+          <Button href={hero.actions[0].href} variant="primary">
+            {hero.actions[0].label}
           </Button>
-          <Button href={HOME_HERO.actions[1].href} variant="secondary">
-            {HOME_HERO.actions[1].label}
+          <Button href={hero.actions[1].href} variant="secondary">
+            {hero.actions[1].label}
           </Button>
         </div>
       </div>

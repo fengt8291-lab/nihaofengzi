@@ -7,31 +7,33 @@ import Button from '@/components/ui/Button.astro';
 import Container from '@/components/ui/Container.astro';
 import PageIntro from '@/components/ui/PageIntro.astro';
 import Section from '@/components/ui/Section.astro';
-import { PROFILE } from '@/data/profile';
-import { SITE } from '@/data/site';
 import { getCanonicalUrl } from '@/lib/paths';
+import { getSiteContent } from '@/lib/site-content';
 import { getFeaturedWork, getWorkHref } from '@/lib/work';
 
-const canonical = getCanonicalUrl(Astro.url.pathname, SITE.url);
-const experiences = PROFILE.experiences.filter((entry) => entry.resume);
+const siteContent = await getSiteContent();
+const page = siteContent.pages.resume;
+const identity = siteContent.identity;
+const canonical = getCanonicalUrl(Astro.url.pathname, siteContent.global.url);
+const experiences = siteContent.profile.experiences.filter((entry) => entry.resume);
 const featuredWork = await getFeaturedWork();
 ---
 
 <BaseLayout
-  title="田丰的简历"
-  description="田丰的公开网页版简历，包括教育背景、代表经历、精选作品、能力摘要和联系方式。"
+  title={page.seo.title}
+  description={page.seo.description}
   canonical={canonical}
 >
   <main id="main-content" class="resume-page">
     <Section spacing="spacious">
       <Container>
-        <PageIntro eyebrow="Resume / 简历" title={PROFILE.name.chinese} description={PROFILE.summary} />
+        <PageIntro eyebrow={page.intro.eyebrow} title={identity.name.chinese} description={identity.summary} />
         <div class="resume-page__identity">
-          <span>{PROFILE.name.english}</span>
-          <span>{PROFILE.location}</span>
-          <a href={`mailto:${PROFILE.contact.email}`}>{PROFILE.contact.email}</a>
-          <a href={PROFILE.contact.github.url} target="_blank" rel="noreferrer">
-            GitHub · {PROFILE.contact.github.username}<span class="sr-only">（在新窗口打开）</span>
+          <span>{identity.name.english}</span>
+          <span>{identity.location}</span>
+          <a href={`mailto:${identity.contact.email}`}>{identity.contact.email}</a>
+          <a href={identity.contact.github.url} target="_blank" rel="noreferrer">
+            GitHub · {identity.contact.github.username}<span class="sr-only">（在新窗口打开）</span>
           </a>
         </div>
       </Container>
@@ -40,7 +42,7 @@ const featuredWork = await getFeaturedWork();
     <Section tone="surface">
       <Container>
         <div class="resume-page__section">
-          <h2>教育</h2>
+          <h2>{page.sections.education}</h2>
           <EducationSummary />
         </div>
       </Container>
@@ -49,7 +51,7 @@ const featuredWork = await getFeaturedWork();
     <Section>
       <Container>
         <div class="resume-page__section">
-          <h2>代表经历</h2>
+          <h2>{page.sections.experience}</h2>
           <ExperienceList experiences={experiences} compact />
         </div>
       </Container>
@@ -58,7 +60,7 @@ const featuredWork = await getFeaturedWork();
     <Section tone="surface">
       <Container>
         <div class="resume-page__section">
-          <h2>精选作品</h2>
+          <h2>{page.sections.work}</h2>
           <ol class="resume-page__work">
             {
               featuredWork.map((entry) => (
@@ -92,10 +94,10 @@ const featuredWork = await getFeaturedWork();
     <Section>
       <Container>
         <div class="resume-page__section">
-          <h2>能力摘要</h2>
+          <h2>{page.sections.capabilities}</h2>
           <ul class="resume-page__capabilities">
             {
-              PROFILE.capabilities.map((capability) => (
+              siteContent.profile.capabilities.map((capability) => (
                 <li>
                   <h3>{capability.title}</h3>
                   <p>{capability.description}</p>
@@ -112,13 +114,15 @@ const featuredWork = await getFeaturedWork();
       <Container>
         <div class="resume-page__contact">
           <div>
-            <p>Contact / 联系</p>
-            <h2>保持联系</h2>
+            <p>{page.contact.eyebrow}</p>
+            <h2>{page.contact.title}</h2>
           </div>
           <div>
-            <Button href={`mailto:${PROFILE.contact.email}`} variant="secondary">发送邮件</Button>
-            <Button href={PROFILE.contact.github.url} target="_blank" rel="noreferrer" variant="text">
-              查看 GitHub ↗
+            <Button href={`mailto:${identity.contact.email}`} variant="secondary">
+              {page.contact.emailActionLabel}
+            </Button>
+            <Button href={identity.contact.github.url} target="_blank" rel="noreferrer" variant="text">
+              {page.contact.githubActionLabel}
             </Button>
           </div>
         </div>

@@ -4,21 +4,23 @@ import '@/styles/global.css';
 import Footer from '@/components/layout/Footer.astro';
 import Header from '@/components/layout/Header.astro';
 import SEOHead from '@/components/layout/SEOHead.astro';
-import { SITE } from '@/data/site';
 import { getCanonicalUrl } from '@/lib/paths';
+import { getSiteContent } from '@/lib/site-content';
 import type { SeoMetadata } from '@/types/site';
 
 interface Props extends SeoMetadata {
   lang?: string;
 }
 
+const siteContent = await getSiteContent();
+const site = siteContent.global;
 const {
-  title = SITE.defaultTitle,
-  description = SITE.defaultDescription,
-  canonical = getCanonicalUrl(Astro.url.pathname, SITE.url),
+  title = site.defaultTitle,
+  description = site.defaultDescription,
+  canonical = getCanonicalUrl(Astro.url.pathname, site.url),
   image,
   noIndex = false,
-  lang = SITE.language,
+  lang = site.language,
 } = Astro.props;
 ---
 

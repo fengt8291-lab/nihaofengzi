@@ -1,25 +1,28 @@
 ---
-import { SITE } from '@/data/site';
 import { getCanonicalUrl } from '@/lib/paths';
+import { getSiteContent } from '@/lib/site-content';
 import type { SeoMetadata } from '@/types/site';
 
+const siteContent = await getSiteContent();
+const site = siteContent.global;
+const siteName = siteContent.identity.brand.chinese;
 const {
-  title = SITE.defaultTitle,
-  description = SITE.defaultDescription,
-  canonical = getCanonicalUrl(Astro.url.pathname, SITE.url),
+  title = site.defaultTitle,
+  description = site.defaultDescription,
+  canonical = getCanonicalUrl(Astro.url.pathname, site.url),
   image,
   noIndex = false,
 } = Astro.props as SeoMetadata;
 
 const documentTitle =
-  title === SITE.defaultTitle
+  title === site.defaultTitle
     ? title
-    : title === SITE.name
+    : title === siteName
       ? `${title}：个人数字主页`
-      : `${title} | ${SITE.name}`;
-const rawCanonical = canonical instanceof URL ? canonical : new URL(canonical, SITE.url);
+      : `${title} | ${siteName}`;
+const rawCanonical = canonical instanceof URL ? canonical : new URL(canonical, site.url);
 const canonicalUrl = getCanonicalUrl(rawCanonical.pathname, rawCanonical.origin);
-const imageUrl = image ? (image instanceof URL ? image : new URL(image, SITE.url)) : undefined;
+const imageUrl = image ? (image instanceof URL ? image : new URL(image, site.url)) : undefined;
 ---
 
 <meta charset="UTF-8" />
@@ -30,7 +33,7 @@ const imageUrl = image ? (image instanceof URL ? image : new URL(image, SITE.url
 <link rel="canonical" href={canonicalUrl} />
 {noIndex && <meta name="robots" content="noindex, nofollow" />}
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content={SITE.name} />
+<meta property="og:site_name" content={siteName} />
 <meta property="og:title" content={documentTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalUrl} />

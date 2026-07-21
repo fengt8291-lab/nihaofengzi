@@ -4,18 +4,19 @@ import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import WorkCard from '@/components/work/WorkCard.astro';
-import { HOME_SECTIONS } from '@/data/home';
+import { getSiteContent } from '@/lib/site-content';
 import { getFeaturedWork } from '@/lib/work';
 
+const section = (await getSiteContent()).home.sections.work;
 const featuredWork = await getFeaturedWork();
 ---
 
 <Section id="selected-work" ariaLabel="精选作品">
   <Container>
     <SectionHeading
-      eyebrow={HOME_SECTIONS.work.eyebrow}
-      title={HOME_SECTIONS.work.title}
-      description={HOME_SECTIONS.work.description}
+      eyebrow={section.eyebrow}
+      title={section.title}
+      description={section.description}
     />
 
     <div class="selected-work__grid">
@@ -23,7 +24,7 @@ const featuredWork = await getFeaturedWork();
     </div>
 
     <div class="selected-work__action">
-      <Button href="/work/" variant="secondary">查看全部作品</Button>
+      <Button href={section.action.href} variant="secondary">{section.action.label}</Button>
     </div>
   </Container>
 </Section>

@@ -1,11 +1,5 @@
-export interface SiteConfig {
-  name: string;
-  englishName: string;
-  url: string;
-  language: string;
-  defaultTitle: string;
-  defaultDescription: string;
-}
+export const EXPERIENCE_CATEGORY_IDS = ['campus', 'work', 'research'] as const;
+export type ExperienceCategory = (typeof EXPERIENCE_CATEGORY_IDS)[number];
 
 export interface SeoMetadata {
   title?: string;
@@ -16,7 +10,8 @@ export interface SeoMetadata {
 }
 
 export interface NavigationItem {
+  id: string;
   label: string;
   href: string;
-  match?: 'exact' | 'prefix' | 'none';
+  match: 'exact' | 'prefix' | 'none';
 }

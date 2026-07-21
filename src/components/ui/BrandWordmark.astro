@@ -1,5 +1,5 @@
 ---
-import { SITE } from '@/data/site';
+import { getSiteContent } from '@/lib/site-content';
 
 interface Props {
   variant?: 'header' | 'hero';
@@ -10,11 +10,12 @@ interface Props {
   class?: string;
 }
 
+const siteContent = await getSiteContent();
 const {
   variant = 'header',
   href,
-  english = SITE.englishName.toUpperCase(),
-  chinese = SITE.name,
+  english = siteContent.identity.brand.english.toUpperCase(),
+  chinese = siteContent.identity.brand.chinese,
   order = href ? 'chinese-first' : 'english-first',
   class: className,
 } = Astro.props;

@@ -1,0 +1,331 @@
+site:
+  identity:
+    name:
+      chinese: '田丰'
+      english: 'Tian Feng'
+      username: 'Typhooooon'
+    brand:
+      chinese: '你好丰子'
+      english: 'Nihao Fengzi'
+    location: '北京'
+    education:
+      school: '首都经济贸易大学'
+      college: '工商管理学院'
+      major: '工商管理（数智管理实验班）'
+      stage: '本科在读'
+      period: '2024.09—预计 2028'
+    summary: '我学习工商管理与数智管理，也在校园组织、研究整理、门店兼职、产品实践和内容创作中积累经验。'
+    contact:
+      email: 'nihaofengzi@yeah.net'
+      github:
+        username: 'fengt8291-lab'
+        url: 'https://github.com/fengt8291-lab'
+
+  global:
+    url: 'https://nihaofengzi.top'
+    language: 'zh-CN'
+    defaultTitle: '你好丰子 / Nihao Fengzi'
+    defaultDescription: '田丰的个人数字主页，记录教育与校园经历、作品实践，以及仍在形成的想法。'
+    footer:
+      description: '持续更新的个人数字主页'
+
+  navigation:
+    - id: 'about'
+      label: '关于'
+      href: '/about/'
+    - id: 'experience'
+      label: '经历'
+      href: '/experience/'
+    - id: 'work'
+      label: '作品'
+      href: '/work/'
+    - id: 'resume'
+      label: '简历'
+      href: '/resume/'
+    - id: 'contact'
+      label: '联系'
+      href: '/#contact'
+
+  home:
+    hero:
+      eyebrow:
+        chinese: '你好丰子'
+        english: 'Nihao Fengzi'
+      title: '你好，我是田丰。'
+      supportingTitle: '我在管理、技术与真实生活之间持续学习和实践。'
+      introduction: '我是首都经济贸易大学工商管理（数智管理实验班）本科生。这里记录我的校园经历、研究与作品，以及生活中仍在形成的想法。'
+      actions:
+        - label: '了解我'
+          href: '/about/'
+        - label: '查看作品'
+          href: '/work/'
+      visualHints:
+        - '学习'
+        - '研究'
+        - '创造'
+        - '实践'
+    about:
+      eyebrow: 'About / 关于'
+      title: '关于我'
+      paragraphs:
+        - '我不是单纯以某个职业标签定义自己的人。大学阶段，我在专业方向、组织角色、研究主题和个人项目之间不断尝试，也逐渐学会通过具体行动，而不是只靠想象，判断自己真正适合什么。'
+        - '我学习工商管理与数智管理，也在学生组织、班级事务、研究整理、门店兼职、产品实践和内容创作中积累经验。我希望把管理知识、数字工具和对真实生活的观察连接起来，做出能够被看见、被使用，也经得起复盘的东西。'
+      action:
+        label: '了解更多'
+        href: '/about/'
+    now:
+      updatedAt: '2026-07-01'
+      items:
+        - label: '正在学习'
+          description: '工商管理与数智化管理相关课程，以及 AI 协作工作流、产品设计、网站开发和内容表达。'
+        - label: '正在制作'
+          description: '个人主页“你好丰子”、DailyTasks、今夜补救，以及已有项目和作品的系统整理。'
+        - label: '正在思考'
+          description: '如何建立更清晰的能力结构与职业方向；如何在升学、就业和独立创造之间作出长期选择；如何在追求线上产出的同时维持现实生活、健康和稳定节奏。'
+        - label: '正在生活'
+          description: '在游泳、健身、旅行、拍摄和日常阅读中寻找稳定节奏。'
+    experienceIds:
+      - 'student-union'
+      - 'muji'
+      - 'esg-report'
+    sections:
+      now:
+        eyebrow: 'Now / 此刻'
+        title: '此刻'
+        description: '记录我在当前阶段学习、制作、思考与生活的重心。'
+      experience:
+        eyebrow: 'Experience / 经历'
+        title: '在具体角色中学习承担责任。'
+        description: '我的能力不只来自个人项目，也来自校园组织、公共事务、研究整理和真实工作流程。'
+        action:
+          label: '查看完整经历'
+          href: '/experience/'
+      work:
+        eyebrow: 'Selected Work / 精选作品'
+        title: '把判断变成可以复盘的作品。'
+        description: '以下是我在产品、用户研究与数字实践中的一些尝试。它们仍在形成，但每个项目都留下了具体的判断、过程和可验证成果。'
+        action:
+          label: '查看全部作品'
+          href: '/work/'
+      contact:
+        eyebrow: 'Contact / 联系'
+        title: '保持联系'
+        description: '如果你对我的经历、项目、研究或内容感兴趣，欢迎通过邮箱或 GitHub 与我联系。'
+        resumeAction:
+          label: '查看网页版简历 →'
+          href: '/resume/'
+
+  pages:
+    about:
+      seo:
+        title: '关于田丰'
+        description: '了解田丰的教育背景、大学阶段的方向调整，以及他如何在管理、技术与真实生活之间持续学习和实践。'
+      intro:
+        eyebrow: 'About / 关于'
+        title: '关于田丰'
+      education:
+        eyebrow: 'Education / 教育'
+        title: '当前的学习背景'
+      why:
+        eyebrow: 'Why / 为什么'
+        title: '把管理、技术与真实生活连接起来。'
+      path:
+        eyebrow: 'Path / 经历变化'
+        title: '在尝试中修正方向。'
+      current:
+        eyebrow: 'Current / 当前'
+        title: '仍在建立自己的能力结构。'
+      actions:
+        - label: '查看经历'
+          href: '/experience/'
+        - label: '查看作品'
+          href: '/work/'
+        - label: '查看简历'
+          href: '/resume/'
+    experience:
+      seo:
+        title: '经历'
+        description: '田丰在校园组织、班级公共事务、无印良品门店工作和 ESG 报告资料整理中的真实经历。'
+      intro:
+        eyebrow: 'Experience / 经历'
+        title: '经历'
+        description: '我的能力不只来自个人项目，也来自校园组织、公共事务、研究整理和真实工作流程。'
+      groups:
+        - category: 'campus'
+          eyebrow: 'Campus / 校园'
+          title: '校园组织与公共事务'
+          description: '在长期的信息协调、活动支持和公共事务中，练习准确、回应与协作。'
+        - category: 'work'
+          eyebrow: 'Work / 工作'
+          title: '门店与现实工作'
+          description: '在顾客、商品、陈列和日常流程中理解稳定执行的价值。'
+        - category: 'research'
+          eyebrow: 'Research support / 资料整理'
+          title: '研究与资料整理'
+          description: '通过公开材料检索、数据摘录和文字校对，建立对准确性的具体认识。'
+      footer:
+        description: '这些经历与作品共同构成我当前的能力证据。'
+        actions:
+          - label: '查看作品'
+            href: '/work/'
+          - label: '查看简历'
+            href: '/resume/'
+    resume:
+      seo:
+        title: '田丰的简历'
+        description: '田丰的公开网页版简历，包括教育背景、代表经历、精选作品、能力摘要和联系方式。'
+      intro:
+        eyebrow: 'Resume / 简历'
+      sections:
+        education: '教育'
+        experience: '代表经历'
+        work: '精选作品'
+        capabilities: '能力摘要'
+      contact:
+        eyebrow: 'Contact / 联系'
+        title: '保持联系'
+        emailActionLabel: '发送邮件'
+        githubActionLabel: '查看 GitHub ↗'
+    work:
+      seo:
+        title: '作品与实践'
+        description: '这里收录田丰在产品、用户研究、数字工具、课程研究和内容表达中的阶段性实践。'
+      intro:
+        eyebrow: 'Work / 作品'
+        title: '作品与实践'
+        paragraphs:
+          - '这里收录我在产品、用户研究、数字工具、课程研究和内容表达中的一些实践。它们处在不同阶段：有些已经形成可以访问的网页，有些仍是早期原型或课程成果。'
+          - '相比把它们包装成成熟产品，我更希望清楚说明自己做了什么、作出了哪些判断，以及还有什么没有完成。'
+      categories:
+        - id: 'product-digital'
+          label: '产品、网站与数字实践'
+          description: '从个人观察和真实问题出发形成的产品原型、网站与数字实践。'
+        - id: 'research-content'
+          label: '用户研究与内容作品'
+          description: '由用户洞察、课程研究和内容表达形成的阶段性作品。'
+        - id: 'learning-tools'
+          label: '学习工具实验'
+          description: '围绕真实学习需求进行的知识结构化与工具实验。'
+        - id: 'creative-life'
+          label: '影像与个人创作'
+          description: '通过影像与个人创作保存具体生活和阶段变化。'
+
+  profile:
+    about:
+      introduction:
+        - '我在北京出生和成长，目前就读于首都经济贸易大学工商管理学院。我的大学经历并不是一条完全固定的路线：专业、班级、宿舍和个人方向都经历过变化。我也在这些变化中重新判断自己适合什么、真正想做什么。'
+        - '与其把大学生活理解为沿着一条预设路线前进，我更愿意把它看作一个持续认识自己、修正方向并建立能力结构的过程。'
+      focus:
+        - '我学习工商管理和数智管理，但不希望管理知识只停留在概念、考试和报告中。我更希望看到它如何进入真实的组织、产品和个人工作流程。'
+        - '我长期使用 ChatGPT、Codex、OpenClaw 等 AI 工具。使用得越多，我越意识到，真正困难的不是让 AI 生成内容，而是定义问题、组织上下文、判断结果、承担责任和持续迭代。'
+        - '我持续关注的也不只是 AI，而是人在变化的技术和环境中，如何保持判断、行动能力和对现实生活的连接。'
+      turningPoints:
+        - title: '大学阶段多次调整方向'
+          period: '大一至大二上学期'
+          description: '专业、班级、宿舍和发展方向都经历过变化。我也反复比较过保研、考研、出国、就业和独立创造等路径。这个过程让我更重视可验证的能力、可持续的生活节奏和自主选择，也逐渐不再希望只依赖一个身份标签获得安全感。'
+        - title: '开始独立推进数字产品和网站'
+          period: '2026 年 1 月至今'
+          description: '我开始更系统地使用 AI 工具，从想法出发推进 DailyTasks、今夜补救、OrgGamify 和你好丰子等网页或产品原型。在这个过程中，我逐渐意识到，“会不会手写所有代码”并不是唯一关键能力；问题定义、内容结构、验收标准、调试、取舍和复盘同样重要。做出网页原型也不等于完成产品，真实用户反馈和持续运营仍然是下一步。'
+        - title: '进入真实组织、工作和研究流程'
+          description: '学生会、班级事务、青马班、无印良品兼职和 ESG 报告项目，让我看到很多能力无法被个人项目代替：按流程协作、面对他人需求、处理重复细节、保证准确，以及在具体角色中承担责任。'
+      current:
+        - '我现在最重要的身份仍然是一名本科生。我正在建立更清晰的能力结构和职业方向，也在整理个人经历、项目、研究成果和作品。'
+        - '“你好丰子”会成为一个长期维护的个人数字空间。它既服务于阶段性的求职和展示，也会继续记录我的观点、生活和变化，而不被某一种职业身份永久限制。'
+    experiences:
+      - id: 'student-union'
+        category: 'campus'
+        title: '首都经济贸易大学校学生会'
+        role: '办公室部长'
+        period: '2025.09—2026.06'
+        summary: '参与校级活动、学生公共事务、对外交流以及公众号内容工作。'
+        responsibilities:
+          - '参与校级大型活动的前期筹备、现场执行和宣传记录。'
+          - '参与学生代表大会、研究生代表大会、相关会议和校园歌手大赛等活动支持。'
+          - '参与北京多所高校交流、参访和研讨活动。'
+          - '参与学生会公众号内容排版与文稿工作。'
+        featured: true
+        resume: true
+      - id: 'class-monitor'
+        category: 'campus'
+        title: '班级公共事务'
+        role: '班长'
+        period: '2024.09—至今'
+        summary: '长期处理班级信息沟通、师生协调和部分日常公共事务。'
+        responsibilities:
+          - '传达和整理班级通知。'
+          - '协调同学与老师之间的信息。'
+          - '处理部分班级日常事务。'
+        featured: false
+        resume: true
+      - id: 'qingma'
+        category: 'campus'
+        title: '第五期“青马工程”大学生骨干培训班'
+        role: '组长'
+        period: '2025.11—至今'
+        summary: '参与培训活动组织、现场教学、内容整理与新闻稿写作。'
+        responsibilities:
+          - '参与走进北京市政务服务中心和“北京 12345”红色教育现场教学。'
+          - '旁听热线、观看《您的声音》片段并与优秀接线员交流。'
+          - '参与活动内容整理和新闻稿写作。'
+        featured: false
+        resume: true
+      - id: 'muji'
+        category: 'work'
+        title: '无印良品学生兼职'
+        organization: '无印良品 MUJI'
+        role: '学生兼职'
+        period: '2025.08—2025.10'
+        summary: '在门店现场参与顾客服务、商品与陈列维护以及日常运营支持。'
+        responsibilities:
+          - '顾客接待与基础咨询。'
+          - '商品整理、补货和上架。'
+          - '陈列维护与卖场秩序整理。'
+          - '开闭店和临时门店工作支持。'
+        featured: true
+        resume: true
+      - id: 'esg-report'
+        category: 'research'
+        title: '中国 ESG 研究院报告项目'
+        organization: '首都经济贸易大学中国 ESG 研究院'
+        role: '数据整理与文字校对'
+        period: '2024'
+        summary: '参与《中国上市公司 ESG 评价报告（2024）》项目，依据企业年报、ESG 报告或可持续发展报告等公开材料，完成信息检索、摘录、整理、规范录入与指定章节文字校对。'
+        responsibilities:
+          - '根据企业年报、ESG 报告或可持续发展报告等公开材料检索披露内容。'
+          - '摘录、整理企业数据并录入指定统计网站。'
+          - '对报告第 10.2.2—19.4.3 节进行文字校对。'
+          - '使用 Excel、PDF 阅读检索工具和在线录入平台完成资料整理。'
+        featured: true
+        resume: true
+        boundary: '本人没有独立撰写报告章节，也不将完整报告成果归为个人成果。'
+    capabilities:
+      - title: '产品问题定义与用户洞察'
+        description: '从具体生活场景中定义问题、确定最小闭环，并判断哪些功能不应该加入。'
+        evidence:
+          - 'DailyTasks'
+          - '今夜补救'
+          - '回岸'
+      - title: '研究与信息整理'
+        description: '检索、筛选、摘录和组织学术文献、年报、ESG 报告和长篇材料。'
+        evidence:
+          - 'ESG 报告项目'
+          - '工作场所设计文献综述'
+      - title: '写作、演示与视觉信息整理'
+        description: '完成新闻稿、课程论文、项目文档、汇报稿、演示文稿和结构化长文。'
+        evidence:
+          - '青马班新闻稿'
+          - '课程报告与演示'
+          - '学生会公众号排版'
+      - title: '组织与团队协作'
+        description: '在既有流程和多人分工中完成工作，并处理信息协调、活动支持和临时任务。'
+        evidence:
+          - '校学生会办公室'
+          - '班级公共事务'
+          - '无印良品兼职'
+      - title: 'AI 协作与数字原型'
+        description: '使用 ChatGPT、Codex、OpenClaw、GitHub 及前端工具组织上下文、推进网页原型，并进行验收和复盘。'
+        evidence:
+          - 'DailyTasks'
+          - '今夜补救'
+          - 'OrgGamify'
+          - '你好丰子'

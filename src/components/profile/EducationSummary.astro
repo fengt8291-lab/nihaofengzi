@@ -1,30 +1,31 @@
 ---
-import { PROFILE } from '@/data/profile';
+import { getSiteContent } from '@/lib/site-content';
 
 interface Props {
   compact?: boolean;
 }
 
 const { compact = false } = Astro.props;
+const education = (await getSiteContent()).identity.education;
 ---
 
 <div class:list={['education-summary', { 'education-summary--compact': compact }]}> 
   <div>
-    <p class="education-summary__school">{PROFILE.education.school}</p>
-    <p>{PROFILE.education.college}</p>
+    <p class="education-summary__school">{education.school}</p>
+    <p>{education.college}</p>
   </div>
   <dl>
     <div>
       <dt>专业</dt>
-      <dd>{PROFILE.education.major}</dd>
+      <dd>{education.major}</dd>
     </div>
     <div>
       <dt>阶段</dt>
-      <dd>{PROFILE.education.stage}</dd>
+      <dd>{education.stage}</dd>
     </div>
     <div>
       <dt>时间</dt>
-      <dd>{PROFILE.education.period}</dd>
+      <dd>{education.period}</dd>
     </div>
   </dl>
 </div>

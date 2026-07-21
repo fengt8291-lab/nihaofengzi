@@ -3,18 +3,19 @@ import Button from '@/components/ui/Button.astro';
 import Container from '@/components/ui/Container.astro';
 import Section from '@/components/ui/Section.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
-import { HOME_EXPERIENCE_IDS, HOME_SECTIONS } from '@/data/home';
-import { getProfileExperiences } from '@/data/profile';
+import { getProfileExperiences, getSiteContent } from '@/lib/site-content';
 
-const experiences = getProfileExperiences(HOME_EXPERIENCE_IDS);
+const siteContent = await getSiteContent();
+const section = siteContent.home.sections.experience;
+const experiences = getProfileExperiences(siteContent, siteContent.home.experienceIds);
 ---
 
 <Section id="experience-preview" ariaLabel="经历摘要" tone="surface">
   <Container>
     <SectionHeading
-      eyebrow={HOME_SECTIONS.experience.eyebrow}
-      title={HOME_SECTIONS.experience.title}
-      description={HOME_SECTIONS.experience.description}
+      eyebrow={section.eyebrow}
+      title={section.title}
+      description={section.description}
     />
 
     <ol class="experience-preview">
@@ -40,7 +41,7 @@ const experiences = getProfileExperiences(HOME_EXPERIENCE_IDS);
     </ol>
 
     <div class="experience-preview__action">
-      <Button href="/experience/" variant="secondary">查看完整经历</Button>
+      <Button href={section.action.href} variant="secondary">{section.action.label}</Button>
     </div>
   </Container>
 </Section>

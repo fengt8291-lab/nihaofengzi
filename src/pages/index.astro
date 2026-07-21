@@ -7,15 +7,16 @@ import ExperiencePreview from '@/components/home/ExperiencePreview.astro';
 import Hero from '@/components/home/Hero.astro';
 import NowSection from '@/components/home/NowSection.astro';
 import SelectedWork from '@/components/home/SelectedWork.astro';
-import { SITE } from '@/data/site';
 import { getCanonicalUrl } from '@/lib/paths';
+import { getSiteContent } from '@/lib/site-content';
 
-const canonical = getCanonicalUrl(Astro.url.pathname, SITE.url);
+const site = (await getSiteContent()).global;
+const canonical = getCanonicalUrl(Astro.url.pathname, site.url);
 ---
 
 <BaseLayout
-  title={SITE.defaultTitle}
-  description="田丰的个人数字主页，记录教育与校园经历、作品实践，以及仍在形成的想法。"
+  title={site.defaultTitle}
+  description={site.defaultDescription}
   canonical={canonical}
 >
   <main id="main-content">

@@ -1,5 +1,7 @@
 # WORK_CATALOG.md
 
+> 权威状态说明：本文件保存 Work 规划、边界和历史目录；当前运行时项目事实和正文以 `src/content/work/*.md` 为准，技术枚举和校验以 `src/data/work.ts` 与 `src/content.config.ts` 为准。
+>
 > 你好丰子项目与作品目录  
 > 版本：2026-07 内容纠偏版  
 > 本文件是 `/work/`、首页精选作品和项目详情页的正式内容源
