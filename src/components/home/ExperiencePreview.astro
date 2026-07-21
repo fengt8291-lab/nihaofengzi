@@ -66,8 +66,9 @@ const experiences = getProfileExperiences(siteContent, siteContent.home.experien
 
   .experience-preview__number {
     color: var(--color-growth);
-    font-size: 0.75rem;
-    font-weight: 650;
+    font-size: var(--type-caption-size);
+    font-weight: var(--type-caption-weight);
+    line-height: var(--type-caption-leading);
   }
 
   .experience-preview h3,
@@ -76,28 +77,41 @@ const experiences = getProfileExperiences(siteContent, siteContent.home.experien
   }
 
   .experience-preview h3 {
-    font-size: clamp(1.25rem, 3vw, 1.625rem);
-    font-weight: 620;
-    letter-spacing: -0.03em;
-    line-height: 1.25;
+    font-size: var(--type-card-title-size);
+    font-weight: var(--type-card-title-weight);
+    letter-spacing: var(--type-card-title-tracking);
+    line-height: var(--type-card-title-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .experience-preview__identity p {
     margin-top: var(--space-2);
     color: var(--color-text-tertiary);
-    font-size: 0.8125rem;
+    font-size: var(--type-meta-size);
+    font-weight: var(--type-meta-weight);
+    letter-spacing: var(--type-meta-tracking);
+    line-height: var(--type-meta-leading);
   }
 
   .experience-preview__description {
     display: grid;
     gap: var(--space-3);
     color: var(--color-text-secondary);
-    line-height: 1.75;
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    letter-spacing: var(--type-body-tracking);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .experience-preview__boundary {
     color: var(--color-text-tertiary);
-    font-size: 0.8125rem;
+    font-size: var(--type-meta-size);
+    font-weight: var(--type-meta-weight);
+    letter-spacing: var(--type-meta-tracking);
+    line-height: var(--type-meta-leading);
   }
 
   .experience-preview__action {

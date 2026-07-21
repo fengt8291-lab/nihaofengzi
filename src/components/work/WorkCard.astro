@@ -37,7 +37,7 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
       <p class="work-card__type">{entry.data.type}</p>
       <span class="work-card__status">
         <span aria-hidden="true"></span>
-        {entry.data.status}
+        {entry.data.cardStatus ?? entry.data.status}
       </span>
     </div>
 
@@ -107,10 +107,10 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
     max-width: 22rem;
     margin: 0;
     color: var(--color-growth);
-    font-size: 0.75rem;
-    font-weight: 650;
+    font-size: var(--type-caption-size);
+    font-weight: var(--type-caption-weight);
     letter-spacing: 0.06em;
-    line-height: 1.55;
+    line-height: var(--type-caption-leading);
   }
 
   .work-card__status {
@@ -119,8 +119,9 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
     align-items: baseline;
     gap: var(--space-2);
     color: var(--color-text-tertiary);
-    font-size: 0.75rem;
-    line-height: 1.55;
+    font-size: var(--type-caption-size);
+    font-weight: var(--type-caption-weight);
+    line-height: var(--type-caption-leading);
     text-align: right;
   }
 
@@ -138,17 +139,23 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
 
   .work-card__title {
     margin: 0;
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    font-weight: 620;
-    letter-spacing: -0.045em;
-    line-height: 1.1;
+    font-size: var(--type-card-title-size);
+    font-weight: var(--type-card-title-weight);
+    letter-spacing: var(--type-card-title-tracking);
+    line-height: var(--type-card-title-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .work-card__summary {
     margin: var(--space-4) 0 0;
     color: var(--color-text-secondary);
-    font-size: 0.9375rem;
-    line-height: 1.75;
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    letter-spacing: var(--type-body-tracking);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .work-card__meta {
@@ -163,13 +170,20 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
 
   .work-card__meta dt {
     color: var(--color-text-tertiary);
-    font-size: 0.75rem;
+    font-size: var(--type-caption-size);
+    font-weight: var(--type-caption-weight);
+    letter-spacing: var(--type-caption-tracking);
+    line-height: var(--type-caption-leading);
   }
 
   .work-card__meta dd {
     margin: var(--space-1) 0 0;
-    font-size: 0.875rem;
-    line-height: 1.6;
+    font-size: var(--type-meta-size);
+    font-weight: var(--type-meta-weight);
+    letter-spacing: var(--type-meta-tracking);
+    line-height: var(--type-meta-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .work-card__link {
@@ -179,7 +193,8 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
     gap: var(--space-2);
     margin-top: var(--space-5);
     color: var(--color-accent);
-    font-size: 0.875rem;
+    font-size: var(--type-meta-size);
+    line-height: var(--type-meta-leading);
     font-weight: 600;
     text-decoration: none;
   }

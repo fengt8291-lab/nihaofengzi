@@ -60,9 +60,10 @@ const updatedLabel = new Intl.DateTimeFormat('zh-CN', {
 
   .now-list__index {
     color: var(--color-growth);
-    font-size: 0.75rem;
-    font-weight: 650;
+    font-size: var(--type-caption-size);
+    font-weight: var(--type-caption-weight);
     letter-spacing: 0.08em;
+    line-height: var(--type-caption-leading);
   }
 
   .now-list h3,
@@ -71,14 +72,23 @@ const updatedLabel = new Intl.DateTimeFormat('zh-CN', {
   }
 
   .now-list h3 {
-    font-size: 1.125rem;
-    font-weight: 620;
+    font-size: var(--type-card-title-size);
+    font-weight: var(--type-card-title-weight);
+    letter-spacing: var(--type-card-title-tracking);
+    line-height: var(--type-card-title-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .now-list p {
     max-width: 43rem;
     color: var(--color-text-secondary);
-    line-height: 1.75;
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    letter-spacing: var(--type-body-tracking);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   @media (min-width: 48rem) {

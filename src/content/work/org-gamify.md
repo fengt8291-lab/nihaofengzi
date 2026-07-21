@@ -7,6 +7,7 @@ visibility: public
 featured: false
 detailMode: hybrid
 status: 已部署，内容引用和视觉细节待进一步审核
+cardStatus: 已上线
 year: 2026
 order: 30
 role: 研究整理、信息架构、网站制作、汇报表达

@@ -8,6 +8,7 @@ featured: true
 featuredOrder: 3
 detailMode: internal
 status: 已形成第一版产品逻辑和网页原型，仍需依据、安全边界和用户验证
+cardStatus: 网页原型
 year: 2026
 order: 20
 role: 问题提出、产品逻辑、文案体验、AI 协作开发

@@ -398,6 +398,7 @@ const work = defineCollection({
         featuredOrder: z.number().int().positive().optional(),
         detailMode: z.enum(WORK_DETAIL_MODES),
         status: z.string().min(1),
+        cardStatus: z.string().min(1).optional(),
         year: z.number().int().optional(),
         period: z.string().min(1).optional(),
         order: z.number().int().nonnegative().default(999),
@@ -412,6 +413,14 @@ const work = defineCollection({
         relatedSlugs: z.array(z.string().min(1)).default([]),
       })
       .superRefine((data, context) => {
+        if (data.visibility === 'public' && !data.cardStatus) {
+          context.addIssue({
+            code: 'custom',
+            path: ['cardStatus'],
+            message: 'Public work requires cardStatus.',
+          });
+        }
+
         if (data.featured && data.visibility !== 'public') {
           context.addIssue({
             code: 'custom',

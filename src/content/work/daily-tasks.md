@@ -8,6 +8,7 @@ featured: true
 featuredOrder: 1
 detailMode: internal
 status: 本地 MVP 已完成，尚未完成公开用户验证
+cardStatus: 本地 MVP
 year: 2026
 order: 10
 role: 产品发起、用户问题研究、内容设计、AI 协作开发与验收

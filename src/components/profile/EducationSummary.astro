@@ -47,9 +47,12 @@ const education = (await getSiteContent()).identity.education;
 
   .education-summary__school {
     color: var(--color-text-primary) !important;
-    font-size: 1.375rem;
-    font-weight: 620;
-    letter-spacing: -0.025em;
+    font-size: var(--type-card-title-size);
+    font-weight: var(--type-card-title-weight);
+    letter-spacing: var(--type-card-title-tracking);
+    line-height: var(--type-card-title-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .education-summary dl {
@@ -65,13 +68,20 @@ const education = (await getSiteContent()).identity.education;
 
   .education-summary dt {
     color: var(--color-text-tertiary);
-    font-size: 0.75rem;
+    font-size: var(--type-caption-size);
+    font-weight: var(--type-caption-weight);
+    letter-spacing: var(--type-caption-tracking);
+    line-height: var(--type-caption-leading);
   }
 
   .education-summary dd {
     margin: 0;
     color: var(--color-text-primary);
-    line-height: 1.65;
+    font-size: var(--type-meta-size);
+    font-weight: var(--type-meta-weight);
+    letter-spacing: var(--type-meta-tracking);
+    line-height: var(--type-meta-leading);
+    overflow-wrap: anywhere;
   }
 
   @media (min-width: 48rem) {

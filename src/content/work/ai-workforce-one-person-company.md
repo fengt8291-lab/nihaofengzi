@@ -7,6 +7,7 @@ visibility: public
 featured: false
 detailMode: archive
 status: 课程阶段成果完成，真实长期验证不足
+cardStatus: 课程研究
 year: 2026
 order: 20
 topics:

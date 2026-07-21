@@ -21,7 +21,10 @@ body {
   min-height: 100vh;
   margin: 0;
   background: var(--color-page-background);
-  line-height: 1.5;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  letter-spacing: var(--type-body-tracking);
+  line-height: var(--type-body-leading);
 }
 
 main > section[id] {

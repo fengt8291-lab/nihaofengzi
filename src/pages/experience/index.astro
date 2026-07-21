@@ -80,25 +80,33 @@ const canonical = getCanonicalUrl(Astro.url.pathname, siteContent.global.url);
   .experience-page__group > header > p:first-child {
     margin: 0;
     color: var(--color-accent);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.12em;
+    font-size: var(--type-eyebrow-size);
+    font-weight: var(--type-eyebrow-weight);
+    letter-spacing: var(--type-eyebrow-tracking);
+    line-height: var(--type-eyebrow-leading);
     text-transform: uppercase;
   }
 
   .experience-page__group h2 {
     margin: var(--space-3) 0 0;
-    font-size: clamp(2.25rem, 5vw, 4rem);
-    font-weight: 620;
-    letter-spacing: -0.05em;
-    line-height: 1.12;
+    font-size: var(--type-section-title-size);
+    font-weight: var(--type-section-title-weight);
+    letter-spacing: var(--type-section-title-tracking);
+    line-height: var(--type-section-title-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .experience-page__description {
     max-width: 34rem;
     margin: var(--space-4) 0 0;
     color: var(--color-text-secondary);
-    line-height: 1.75;
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    letter-spacing: var(--type-body-tracking);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .experience-page__next {
@@ -112,6 +120,10 @@ const canonical = getCanonicalUrl(Astro.url.pathname, siteContent.global.url);
   .experience-page__next p {
     margin: 0;
     color: var(--color-text-secondary);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .experience-page__next > div {

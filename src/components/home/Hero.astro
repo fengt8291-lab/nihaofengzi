@@ -70,21 +70,21 @@ const hero = (await getSiteContent()).home.hero;
     max-width: 25rem;
     margin: var(--space-5) 0 0;
     color: var(--color-text-primary);
-    font-size: clamp(1.25rem, 3.8vw, 1.625rem);
-    font-weight: 560;
-    letter-spacing: -0.025em;
-    line-height: 1.45;
+    font-size: var(--type-subtitle-size);
+    font-weight: var(--type-subtitle-weight);
+    letter-spacing: var(--type-subtitle-tracking);
+    line-height: var(--type-subtitle-leading);
     text-wrap: pretty;
     transition-delay: 70ms;
   }
 
   .hero__title {
-    max-width: 10em;
+    max-width: var(--measure-display);
     margin: var(--space-5) 0 0;
-    font-size: clamp(2.875rem, 12vw, 4.5rem);
-    font-weight: 650;
-    letter-spacing: -0.065em;
-    line-height: 1.04;
+    font-size: var(--type-display-size);
+    font-weight: var(--type-display-weight);
+    letter-spacing: var(--type-display-tracking);
+    line-height: var(--type-display-leading);
     text-wrap: balance;
     transition-delay: 40ms;
   }
@@ -93,9 +93,10 @@ const hero = (await getSiteContent()).home.hero;
     max-width: 37rem;
     margin: var(--space-5) 0 0;
     color: var(--color-text-secondary);
-    font-size: clamp(1.0625rem, 3.6vw, 1.25rem);
-    letter-spacing: -0.018em;
-    line-height: 1.72;
+    font-size: var(--type-body-large-size);
+    font-weight: var(--type-body-large-weight);
+    letter-spacing: var(--type-body-large-tracking);
+    line-height: var(--type-body-large-leading);
     text-wrap: pretty;
     transition-delay: 100ms;
   }
@@ -127,10 +128,6 @@ const hero = (await getSiteContent()).home.hero;
       grid-template-columns: minmax(0, 1.08fr) minmax(21rem, 0.92fr);
       gap: clamp(var(--space-7), 6vw, var(--space-9));
       min-height: calc(100svh - var(--header-height) - (var(--space-10) * 2));
-    }
-
-    .hero__title {
-      font-size: clamp(4rem, 6.4vw, 5.75rem);
     }
 
     .hero__description {

@@ -47,37 +47,43 @@ const hasMeta = Astro.slots.has('meta');
   .section-heading__eyebrow {
     margin: 0;
     color: var(--color-accent);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.12em;
-    line-height: 1.2;
+    font-size: var(--type-eyebrow-size);
+    font-weight: var(--type-eyebrow-weight);
+    letter-spacing: var(--type-eyebrow-tracking);
+    line-height: var(--type-eyebrow-leading);
     text-transform: uppercase;
   }
 
   .section-heading__title {
-    max-width: 15ch;
+    max-width: var(--measure-section-title);
     margin: var(--space-3) 0 0;
-    font-size: clamp(2.375rem, 5.4vw, 4.25rem);
-    font-weight: 620;
-    letter-spacing: -0.055em;
-    line-height: 1.1;
+    font-size: var(--type-section-title-size);
+    font-weight: var(--type-section-title-weight);
+    letter-spacing: var(--type-section-title-tracking);
+    line-height: var(--type-section-title-leading);
+    line-break: strict;
     text-wrap: pretty;
   }
 
   .section-heading__description {
-    max-width: 39rem;
+    max-width: var(--measure-body-compact);
     margin: var(--space-5) 0 0;
     color: var(--color-text-secondary);
-    font-size: 1rem;
-    line-height: 1.75;
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    letter-spacing: var(--type-body-tracking);
+    line-height: var(--type-body-leading);
+    line-break: strict;
     text-wrap: pretty;
   }
 
   .section-heading__meta {
     align-self: end;
     color: var(--color-text-tertiary);
-    font-size: 0.75rem;
-    line-height: 1.5;
+    font-size: var(--type-caption-size);
+    font-weight: var(--type-caption-weight);
+    letter-spacing: var(--type-caption-tracking);
+    line-height: var(--type-caption-leading);
   }
 
   .section-heading--dark .section-heading__eyebrow {

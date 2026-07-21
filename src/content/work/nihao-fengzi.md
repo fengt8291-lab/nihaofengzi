@@ -6,7 +6,8 @@ category: product-digital
 visibility: public
 featured: false
 detailMode: internal
-status: 首页视觉体系已完成，正在进行内容与信息架构纠偏
+status: 核心页面与内容管理体系已建立，持续整理作品案例与长期内容
+cardStatus: 持续迭代
 year: 2026
 order: 40
 role: 内容所有者、品牌和信息架构决策、AI 协作开发与视觉验收
@@ -33,12 +34,10 @@ relatedSlugs: []
 
 ## 已完成成果
 
-- 首页视觉系统；
-- HeroVisual 与 SectionHeading；
-- 响应式布局；
-- Astro 静态构建；
-- 内容源与作品目录整理。
+- 完成个人主页视觉系统；
+- 建立 About、Experience、Work、Resume 页面；
+- 建立个人内容管理体系。
 
 ## 限制与未完成
 
-About、Experience、Notes、Resume 等页面仍待建立，真实照片和更多作品材料尚未整理。
+部分项目案例仍需补充过程材料，真实照片与长期更新内容尚未整理；网站仍需持续维护内容时效与公开边界。

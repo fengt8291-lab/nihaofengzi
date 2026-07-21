@@ -66,30 +66,41 @@ const { experiences, compact = false } = Astro.props;
   }
 
   .experience-item h3 {
-    font-size: clamp(1.35rem, 3vw, 1.75rem);
-    font-weight: 620;
-    letter-spacing: -0.035em;
-    line-height: 1.2;
+    font-size: var(--type-card-title-size);
+    font-weight: var(--type-card-title-weight);
+    letter-spacing: var(--type-card-title-tracking);
+    line-height: var(--type-card-title-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .experience-item header div > p,
   .experience-item__period {
     margin-top: var(--space-2) !important;
     color: var(--color-text-tertiary);
-    font-size: 0.8125rem;
+    font-size: var(--type-meta-size);
+    font-weight: var(--type-meta-weight);
+    letter-spacing: var(--type-meta-tracking);
+    line-height: var(--type-meta-leading);
   }
 
   .experience-item__summary {
     margin: var(--space-5) 0 0;
     color: var(--color-text-secondary);
-    line-height: 1.75;
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .experience-item__responsibilities {
     padding-left: 1.15rem;
     margin: var(--space-5) 0 0;
     color: var(--color-text-secondary);
-    line-height: 1.75;
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .experience-item__responsibilities li + li {
@@ -101,8 +112,12 @@ const { experiences, compact = false } = Astro.props;
     margin: var(--space-5) 0 0;
     border-top: 1px solid var(--color-border);
     color: var(--color-text-tertiary);
-    font-size: 0.8125rem;
-    line-height: 1.7;
+    font-size: var(--type-meta-size);
+    font-weight: var(--type-meta-weight);
+    letter-spacing: var(--type-meta-tracking);
+    line-height: var(--type-meta-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   @media (min-width: 48rem) {

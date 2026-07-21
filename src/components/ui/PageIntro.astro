@@ -25,38 +25,47 @@ const { eyebrow, title, description } = Astro.props;
   .page-intro__eyebrow {
     margin: 0;
     color: var(--color-accent);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.12em;
+    font-size: var(--type-eyebrow-size);
+    font-weight: var(--type-eyebrow-weight);
+    letter-spacing: var(--type-eyebrow-tracking);
+    line-height: var(--type-eyebrow-leading);
     text-transform: uppercase;
   }
 
   .page-intro h1 {
     margin: var(--space-4) 0 0;
-    font-size: clamp(3.25rem, 9vw, 6.5rem);
-    font-weight: 650;
-    letter-spacing: -0.065em;
-    line-height: 1;
+    font-size: var(--type-page-title-size);
+    font-weight: var(--type-page-title-weight);
+    letter-spacing: var(--type-page-title-tracking);
+    line-height: var(--type-page-title-leading);
+    line-break: strict;
     text-wrap: balance;
   }
 
   .page-intro__description {
-    max-width: 44rem;
+    max-width: var(--measure-body);
     margin: var(--space-6) 0 0;
     color: var(--color-text-secondary);
-    font-size: clamp(1.0625rem, 2.5vw, 1.25rem);
-    line-height: 1.75;
+    font-size: var(--type-body-large-size);
+    font-weight: var(--type-body-large-weight);
+    letter-spacing: var(--type-body-large-tracking);
+    line-height: var(--type-body-large-leading);
+    line-break: strict;
     text-wrap: pretty;
   }
 
   .page-intro__content {
     display: grid;
-    max-width: 44rem;
+    max-width: var(--measure-body);
     gap: var(--space-4);
     margin-top: var(--space-6);
     color: var(--color-text-secondary);
-    font-size: 1rem;
-    line-height: 1.85;
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    letter-spacing: var(--type-body-tracking);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .page-intro__content:empty {

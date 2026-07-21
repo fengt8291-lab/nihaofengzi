@@ -8,6 +8,7 @@ featured: true
 featuredOrder: 2
 detailMode: internal
 status: 课程报告已完成，可整理为完整案例
+cardStatus: 课程成果
 year: 2026
 order: 10
 role: 用户洞察、消费者画像、品牌定位、报告与视觉呈现

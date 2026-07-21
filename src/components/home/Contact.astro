@@ -59,8 +59,12 @@ const profileContact = siteContent.identity.contact;
     max-width: 34rem;
     margin: 0;
     color: rgb(245 245 247 / 68%);
-    font-size: 1rem;
-    line-height: 1.75;
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    letter-spacing: var(--type-body-tracking);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .contact__links {
@@ -82,7 +86,10 @@ const profileContact = siteContent.identity.contact;
     justify-content: space-between;
     gap: var(--space-4);
     color: var(--color-text-on-dark);
-    font-size: 0.875rem;
+    font-size: var(--type-meta-size);
+    font-weight: var(--type-meta-weight);
+    letter-spacing: var(--type-meta-tracking);
+    line-height: var(--type-meta-leading);
     text-decoration: none;
   }
 

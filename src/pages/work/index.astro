@@ -70,27 +70,34 @@ const canonical = new URL(normalizePathname(Astro.url.pathname), siteContent.glo
   .work-group__heading > p {
     margin: 0;
     color: var(--color-accent);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.12em;
+    font-size: var(--type-eyebrow-size);
+    font-weight: var(--type-eyebrow-weight);
+    letter-spacing: var(--type-eyebrow-tracking);
+    line-height: var(--type-eyebrow-leading);
     text-transform: uppercase;
   }
 
   .work-index__intro h1 {
-    max-width: 10ch;
+    max-width: var(--measure-page-title);
     margin: var(--space-4) 0 0;
-    font-size: clamp(3.25rem, 9vw, 6.5rem);
-    font-weight: 650;
-    letter-spacing: -0.065em;
-    line-height: 1;
+    font-size: var(--type-page-title-size);
+    font-weight: var(--type-page-title-weight);
+    letter-spacing: var(--type-page-title-tracking);
+    line-height: var(--type-page-title-leading);
+    line-break: strict;
+    text-wrap: balance;
   }
 
   .work-index__description {
     max-width: 43rem;
     margin-top: var(--space-7);
     color: var(--color-text-secondary);
-    font-size: clamp(1.0625rem, 2.5vw, 1.25rem);
-    line-height: 1.75;
+    font-size: var(--type-body-large-size);
+    font-weight: var(--type-body-large-weight);
+    letter-spacing: var(--type-body-large-tracking);
+    line-height: var(--type-body-large-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .work-index__description p {
@@ -108,17 +115,22 @@ const canonical = new URL(normalizePathname(Astro.url.pathname), siteContent.glo
 
   .work-group__heading h2 {
     margin: 0;
-    font-size: clamp(2.25rem, 5vw, 4rem);
-    font-weight: 620;
-    letter-spacing: -0.055em;
-    line-height: 1.08;
+    font-size: var(--type-section-title-size);
+    font-weight: var(--type-section-title-weight);
+    letter-spacing: var(--type-section-title-tracking);
+    line-height: var(--type-section-title-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .work-group__heading div > p {
     max-width: 36rem;
     margin: var(--space-3) 0 0;
     color: var(--color-text-secondary);
-    line-height: 1.7;
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .work-group__grid {

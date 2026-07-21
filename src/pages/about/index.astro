@@ -112,9 +112,10 @@ const canonical = getCanonicalUrl(Astro.url.pathname, siteContent.global.url);
   .about-page__editorial > header > p {
     margin: 0;
     color: var(--color-accent);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.12em;
+    font-size: var(--type-eyebrow-size);
+    font-weight: var(--type-eyebrow-weight);
+    letter-spacing: var(--type-eyebrow-tracking);
+    line-height: var(--type-eyebrow-leading);
     text-transform: uppercase;
   }
 
@@ -122,10 +123,12 @@ const canonical = getCanonicalUrl(Astro.url.pathname, siteContent.global.url);
   .about-page__editorial h2 {
     max-width: 14ch;
     margin: var(--space-3) 0 0;
-    font-size: clamp(2.25rem, 5vw, 4rem);
-    font-weight: 620;
-    letter-spacing: -0.05em;
-    line-height: 1.12;
+    font-size: var(--type-section-title-size);
+    font-weight: var(--type-section-title-weight);
+    letter-spacing: var(--type-section-title-tracking);
+    line-height: var(--type-section-title-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .about-page__prose {
@@ -133,7 +136,12 @@ const canonical = getCanonicalUrl(Astro.url.pathname, siteContent.global.url);
     max-width: 44rem;
     gap: var(--space-4);
     color: var(--color-text-secondary);
-    line-height: 1.85;
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    letter-spacing: var(--type-body-tracking);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .about-page__prose p {
@@ -158,22 +166,30 @@ const canonical = getCanonicalUrl(Astro.url.pathname, siteContent.global.url);
 
   .about-page__turning-points h3 {
     margin: var(--space-5) 0 0;
-    font-size: 1.5rem;
-    font-weight: 620;
-    letter-spacing: -0.035em;
+    font-size: var(--type-card-title-size);
+    font-weight: var(--type-card-title-weight);
+    letter-spacing: var(--type-card-title-tracking);
+    line-height: var(--type-card-title-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .about-page__turning-points article > p:last-child {
     margin: var(--space-5) 0 0;
     color: var(--color-text-secondary);
-    line-height: 1.8;
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .about-page__index,
   .about-page__period {
     margin: 0;
     color: var(--color-text-tertiary);
-    font-size: 0.75rem;
+    font-size: var(--type-caption-size);
+    font-weight: var(--type-caption-weight);
+    line-height: var(--type-caption-leading);
   }
 
   .about-page__period {

@@ -138,11 +138,15 @@ const featuredWork = await getFeaturedWork();
     gap: var(--space-3) var(--space-5);
     margin-top: var(--space-6);
     color: var(--color-text-secondary);
-    font-size: 0.875rem;
+    font-size: var(--type-meta-size);
+    font-weight: var(--type-meta-weight);
+    letter-spacing: var(--type-meta-tracking);
+    line-height: var(--type-meta-leading);
   }
 
   .resume-page__identity a {
     color: var(--color-accent);
+    overflow-wrap: anywhere;
     text-decoration: none;
   }
 
@@ -154,9 +158,12 @@ const featuredWork = await getFeaturedWork();
   .resume-page__section > h2,
   .resume-page__contact h2 {
     margin: 0;
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
-    font-weight: 620;
-    letter-spacing: -0.05em;
+    font-size: var(--type-section-title-size);
+    font-weight: var(--type-section-title-weight);
+    letter-spacing: var(--type-section-title-tracking);
+    line-height: var(--type-section-title-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .resume-page__work,
@@ -180,23 +187,30 @@ const featuredWork = await getFeaturedWork();
   .resume-page__work article > div:first-child > p {
     margin: 0;
     color: var(--color-growth);
-    font-size: 0.75rem;
-    font-weight: 650;
+    font-size: var(--type-caption-size);
+    font-weight: var(--type-caption-weight);
+    line-height: var(--type-caption-leading);
   }
 
   .resume-page__work h3,
   .resume-page__capabilities h3 {
     margin: var(--space-3) 0 0;
-    font-size: 1.375rem;
-    font-weight: 620;
-    letter-spacing: -0.03em;
+    font-size: var(--type-card-title-size);
+    font-weight: var(--type-card-title-weight);
+    letter-spacing: var(--type-card-title-tracking);
+    line-height: var(--type-card-title-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .resume-page__work article > p,
   .resume-page__capabilities p {
     margin: var(--space-4) 0 0;
     color: var(--color-text-secondary);
-    line-height: 1.75;
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .resume-page__work dl {
@@ -209,14 +223,20 @@ const featuredWork = await getFeaturedWork();
 
   .resume-page__work dt {
     color: var(--color-text-tertiary);
-    font-size: 0.75rem;
+    font-size: var(--type-caption-size);
+    font-weight: var(--type-caption-weight);
+    line-height: var(--type-caption-leading);
   }
 
   .resume-page__work dd {
     margin: var(--space-1) 0 0;
     color: var(--color-text-secondary);
-    font-size: 0.875rem;
-    line-height: 1.65;
+    font-size: var(--type-meta-size);
+    font-weight: var(--type-meta-weight);
+    letter-spacing: var(--type-meta-tracking);
+    line-height: var(--type-meta-leading);
+    line-break: strict;
+    text-wrap: pretty;
   }
 
   .resume-page__work a {
@@ -229,7 +249,8 @@ const featuredWork = await getFeaturedWork();
 
   .resume-page__evidence {
     color: var(--color-text-tertiary) !important;
-    font-size: 0.8125rem;
+    font-size: var(--type-meta-size);
+    line-height: var(--type-meta-leading);
   }
 
   .resume-page__contact {
@@ -243,9 +264,10 @@ const featuredWork = await getFeaturedWork();
   .resume-page__contact > div:first-child > p {
     margin: 0 0 var(--space-3);
     color: rgb(245 245 247 / 58%);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.12em;
+    font-size: var(--type-eyebrow-size);
+    font-weight: var(--type-eyebrow-weight);
+    letter-spacing: var(--type-eyebrow-tracking);
+    line-height: var(--type-eyebrow-leading);
     text-transform: uppercase;
   }
 

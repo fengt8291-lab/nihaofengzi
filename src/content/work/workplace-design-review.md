@@ -6,7 +6,8 @@ category: research-content
 visibility: public
 featured: false
 detailMode: archive
-status: 文献综述已完成，正式题目和公开文件待确认
+status: 课程文献综述已完成，作为阶段性成果归档
+cardStatus: 文献综述
 year: 2026
 order: 30
 topics:
@@ -16,4 +17,4 @@ topics:
 relatedSlugs: []
 ---
 
-这项课程成果用于证明跨语言资料检索、文献筛选、研究问题组织和综述写作能力。正式题目与公开文件尚未确认，因此首版只在作品总览中保留简短归档，不建立详情页。
+这项课程成果用于说明跨语言资料检索、文献筛选、研究问题组织和综述写作过程。首版以简短归档形式展示，不建立详情页。
