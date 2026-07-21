@@ -1,25 +1,30 @@
 ---
-import Card from '@/components/ui/Card.astro';
 import WorkCover from '@/components/work/WorkCover.astro';
 import { getWorkHref, type WorkEntry } from '@/lib/work';
 
 interface Props {
   entry: WorkEntry;
   priority?: boolean;
+  presentation?: 'featured' | 'standard';
 }
 
-const { entry, priority = false } = Astro.props;
+const { entry, priority = false, presentation = 'standard' } = Astro.props;
 const href = getWorkHref(entry);
 const isExternal = entry.data.detailMode === 'external';
 const isArchive = entry.data.detailMode === 'archive';
-const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
+const hasCover = !isArchive && Boolean(entry.data.coverImage || entry.data.coverVariant);
+const metadata = [
+  { label: '状态', value: entry.data.cardStatus ?? entry.data.status },
+  entry.data.role ? { label: '我的角色', value: entry.data.role } : undefined,
+].filter((item): item is { label: string; value: string } => Boolean(item));
 ---
 
-<Card
-  as="article"
-  padding="medium"
-  ariaLabel={entry.data.title}
-  class:list={['work-card-shell', { 'work-card-shell--archive': isArchive }]}
+<article
+  aria-label={entry.data.title}
+  class:list={[
+    'work-card-shell',
+    isArchive ? 'work-card-shell--archive' : `work-card-shell--${presentation}`,
+  ]}
 >
   <div class:list={['work-card', { 'work-card--has-cover': hasCover }]}>
     {
@@ -33,29 +38,23 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
       )
     }
 
-    <div class="work-card__header">
-      <p class="work-card__type">{entry.data.type}</p>
-      <span class="work-card__status">
-        <span aria-hidden="true"></span>
-        {entry.data.cardStatus ?? entry.data.status}
-      </span>
-    </div>
+    <p class="work-card__type">{entry.data.type}</p>
 
     <div class="work-card__content">
       <h3 class="work-card__title">{entry.data.title}</h3>
       <p class="work-card__summary">{entry.data.summary}</p>
     </div>
 
-    {
-      entry.data.role && (
-        <dl class="work-card__meta">
+    <dl class="work-card__meta">
+      {
+        metadata.map((item) => (
           <div>
-            <dt>我的角色</dt>
-            <dd>{entry.data.role}</dd>
+            {item.label === '状态' ? <dt aria-label="状态"></dt> : <dt>{item.label}</dt>}
+            <dd>{item.value}</dd>
           </div>
-        </dl>
-      )
-    }
+        ))
+      }
+    </dl>
 
     {
       href && (
@@ -71,35 +70,42 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
       )
     }
   </div>
-</Card>
+</article>
 
 <style>
-  :global(.work-card-shell) {
-    height: 100%;
-    border-radius: var(--radius-md);
+  .work-card-shell {
+    min-width: 0;
     box-shadow: none;
   }
 
-  :global(.work-card-shell--archive) {
-    border-color: transparent;
+  .work-card-shell--featured {
+    background: transparent;
+  }
+
+  .work-card-shell--standard {
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card-background);
+  }
+
+  .work-card-shell--archive {
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--color-border-strong);
+    border-radius: 0;
     background: transparent;
   }
 
   .work-card {
     display: flex;
-    min-height: 100%;
     flex-direction: column;
   }
 
-  .work-card__header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-4);
-    margin-top: 0;
+  .work-card-shell--featured .work-card {
+    min-height: 100%;
   }
 
-  .work-card--has-cover .work-card__header {
+  .work-card--has-cover .work-card__type {
     margin-top: var(--space-5);
   }
 
@@ -113,28 +119,8 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
     line-height: var(--type-caption-leading);
   }
 
-  .work-card__status {
-    display: inline-flex;
-    max-width: 16rem;
-    align-items: baseline;
-    gap: var(--space-2);
-    color: var(--color-text-tertiary);
-    font-size: var(--type-caption-size);
-    font-weight: var(--type-caption-weight);
-    line-height: var(--type-caption-leading);
-    text-align: right;
-  }
-
-  .work-card__status span {
-    flex: 0 0 auto;
-    width: 0.35rem;
-    height: 0.35rem;
-    border-radius: 50%;
-    background: var(--color-growth);
-  }
-
   .work-card__content {
-    margin-top: var(--space-6);
+    margin-top: var(--space-5);
   }
 
   .work-card__title {
@@ -145,6 +131,14 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
     line-height: var(--type-card-title-leading);
     line-break: strict;
     text-wrap: pretty;
+  }
+
+  .work-card-shell--archive .work-card__title {
+    color: var(--color-text-primary);
+    font-size: var(--type-body-large-size);
+    font-weight: 560;
+    letter-spacing: var(--type-body-large-tracking);
+    line-height: var(--type-body-large-leading);
   }
 
   .work-card__summary {
@@ -159,13 +153,25 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
   }
 
   .work-card__meta {
-    margin: auto 0 0;
-    padding-top: var(--space-6);
+    display: grid;
+    gap: var(--space-4);
+    padding-top: var(--space-5);
+    margin: var(--space-5) 0 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .work-card-shell--featured .work-card__meta {
+    margin-top: auto;
+  }
+
+  .work-card-shell--archive .work-card__meta {
+    padding-top: 0;
+    margin-top: var(--space-4);
+    border-top: 0;
   }
 
   .work-card__meta div {
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--color-border);
+    min-width: 0;
   }
 
   .work-card__meta dt {
@@ -207,13 +213,17 @@ const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
     transform: translateX(0.2rem);
   }
 
-  @media (max-width: 35rem) {
-    .work-card__header {
-      display: grid;
+  @media (min-width: 48rem) {
+    .work-card-shell--standard {
+      padding: var(--space-6);
     }
 
-    .work-card__status {
-      text-align: left;
+    .work-card__meta {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .work-card-shell--archive .work-card__meta {
+      grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
     }
   }
 </style>

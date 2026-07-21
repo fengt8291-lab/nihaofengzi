@@ -105,7 +105,7 @@ const canonical = getCanonicalUrl(Astro.url.pathname, siteContent.global.url);
   .about-page__section,
   .about-page__editorial {
     display: grid;
-    gap: var(--space-7);
+    gap: var(--section-content-gap);
   }
 
   .about-page__section > header > p,
@@ -150,7 +150,7 @@ const canonical = getCanonicalUrl(Astro.url.pathname, siteContent.global.url);
 
   .about-page__turning-points {
     display: grid;
-    gap: var(--space-5);
+    gap: var(--layout-grid-gap);
     padding: 0;
     margin: 0;
     list-style: none;
@@ -158,10 +158,8 @@ const canonical = getCanonicalUrl(Astro.url.pathname, siteContent.global.url);
 
   .about-page__turning-points article {
     height: 100%;
-    padding: var(--space-6);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-card-background);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border-strong);
   }
 
   .about-page__turning-points h3 {

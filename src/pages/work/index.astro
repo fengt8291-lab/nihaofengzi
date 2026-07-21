@@ -38,25 +38,51 @@ const canonical = new URL(normalizePathname(Astro.url.pathname), siteContent.glo
     </Section>
 
     {
-      groups.map((group, groupIndex) => (
-        <Section tone={groupIndex % 2 === 0 ? 'surface' : 'default'}>
-          <Container>
-            <header class="work-group__heading">
-              <p>{String(groupIndex + 1).padStart(2, '0')}</p>
-              <div>
-                <h2>{group.label}</h2>
-                <p>{group.description}</p>
-              </div>
-            </header>
+      groups.map((group, groupIndex) => {
+        const standardEntries = group.entries.filter(
+          (entry) => entry.data.detailMode !== 'archive',
+        );
+        const archiveEntries = group.entries.filter(
+          (entry) => entry.data.detailMode === 'archive',
+        );
 
-            <div class="work-group__grid">
-              {group.entries.map((entry, entryIndex) => (
-                <WorkCard entry={entry} priority={groupIndex === 0 && entryIndex === 0} />
-              ))}
-            </div>
-          </Container>
-        </Section>
-      ))
+        return (
+          <Section tone={groupIndex % 2 === 0 ? 'surface' : 'default'}>
+            <Container>
+              <header class="work-group__heading">
+                <p>{String(groupIndex + 1).padStart(2, '0')}</p>
+                <div>
+                  <h2>{group.label}</h2>
+                  <p>{group.description}</p>
+                </div>
+              </header>
+
+              <div class="work-group__content">
+                {
+                  standardEntries.length > 0 && (
+                    <div class="work-group__grid">
+                      {standardEntries.map((entry, entryIndex) => (
+                        <WorkCard
+                          entry={entry}
+                          priority={groupIndex === 0 && entryIndex === 0}
+                        />
+                      ))}
+                    </div>
+                  )
+                }
+
+                {
+                  archiveEntries.length > 0 && (
+                    <div class="work-group__archive">
+                      {archiveEntries.map((entry) => <WorkCard entry={entry} />)}
+                    </div>
+                  )
+                }
+              </div>
+            </Container>
+          </Section>
+        );
+      })
     }
   </main>
 </BaseLayout>
@@ -133,10 +159,17 @@ const canonical = new URL(normalizePathname(Astro.url.pathname), siteContent.glo
     text-wrap: pretty;
   }
 
-  .work-group__grid {
+  .work-group__content {
     display: grid;
-    gap: var(--space-5);
-    margin-top: var(--space-8);
+    gap: var(--space-7);
+    margin-top: var(--section-content-gap);
+  }
+
+  .work-group__grid,
+  .work-group__archive {
+    display: grid;
+    align-items: start;
+    gap: var(--layout-grid-gap);
   }
 
   @media (min-width: 48rem) {
@@ -147,7 +180,10 @@ const canonical = new URL(normalizePathname(Astro.url.pathname), siteContent.glo
 
     .work-group__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-6);
+    }
+
+    .work-group__archive {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 </style>

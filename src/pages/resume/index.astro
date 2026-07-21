@@ -7,6 +7,7 @@ import Button from '@/components/ui/Button.astro';
 import Container from '@/components/ui/Container.astro';
 import PageIntro from '@/components/ui/PageIntro.astro';
 import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { getCanonicalUrl } from '@/lib/paths';
 import { getSiteContent } from '@/lib/site-content';
 import { getFeaturedWork, getWorkHref } from '@/lib/work';
@@ -42,7 +43,7 @@ const featuredWork = await getFeaturedWork();
     <Section tone="surface">
       <Container>
         <div class="resume-page__section">
-          <h2>{page.sections.education}</h2>
+          <SectionHeading title={page.sections.education} />
           <EducationSummary />
         </div>
       </Container>
@@ -51,7 +52,7 @@ const featuredWork = await getFeaturedWork();
     <Section>
       <Container>
         <div class="resume-page__section">
-          <h2>{page.sections.experience}</h2>
+          <SectionHeading title={page.sections.experience} />
           <ExperienceList experiences={experiences} compact />
         </div>
       </Container>
@@ -60,7 +61,7 @@ const featuredWork = await getFeaturedWork();
     <Section tone="surface">
       <Container>
         <div class="resume-page__section">
-          <h2>{page.sections.work}</h2>
+          <SectionHeading title={page.sections.work} />
           <ol class="resume-page__work">
             {
               featuredWork.map((entry) => (
@@ -94,7 +95,7 @@ const featuredWork = await getFeaturedWork();
     <Section>
       <Container>
         <div class="resume-page__section">
-          <h2>{page.sections.capabilities}</h2>
+          <SectionHeading title={page.sections.capabilities} />
           <ul class="resume-page__capabilities">
             {
               siteContent.profile.capabilities.map((capability) => (
@@ -152,10 +153,9 @@ const featuredWork = await getFeaturedWork();
 
   .resume-page__section {
     display: grid;
-    gap: var(--space-7);
+    gap: var(--section-content-gap);
   }
 
-  .resume-page__section > h2,
   .resume-page__contact h2 {
     margin: 0;
     font-size: var(--type-section-title-size);
@@ -169,7 +169,7 @@ const featuredWork = await getFeaturedWork();
   .resume-page__work,
   .resume-page__capabilities {
     display: grid;
-    gap: var(--space-5);
+    gap: var(--layout-grid-gap);
     padding: 0;
     margin: 0;
     list-style: none;
@@ -178,10 +178,8 @@ const featuredWork = await getFeaturedWork();
   .resume-page__work article,
   .resume-page__capabilities li {
     height: 100%;
-    padding: var(--space-6);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-card-background);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border-strong);
   }
 
   .resume-page__work article > div:first-child > p {

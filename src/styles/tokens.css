@@ -88,6 +88,11 @@
   --measure-body: 44rem;
   --measure-body-compact: 39rem;
 
+  /* Editorial layout */
+  --section-content-gap: var(--space-7);
+  --layout-grid-gap: var(--space-5);
+  --layout-editorial-width: 64rem;
+
   /* 8px-based spacing with half-step support */
   --space-0: 0;
   --space-1: 0.25rem;
@@ -134,5 +139,7 @@
   :root {
     --container-gutter: 2rem;
     --type-display-size: clamp(4rem, 6.4vw, 5.75rem);
+    --section-content-gap: var(--space-8);
+    --layout-grid-gap: var(--space-6);
   }
 }

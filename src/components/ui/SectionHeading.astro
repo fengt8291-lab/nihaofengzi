@@ -1,6 +1,6 @@
 ---
 interface Props {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
   tone?: 'light' | 'dark';
@@ -18,9 +18,9 @@ const {
 const hasMeta = Astro.slots.has('meta');
 ---
 
-<div class:list={['section-heading', `section-heading--${tone}`, className]}>
+<div class:list={['section-heading', `section-heading--${tone}`, { 'section-heading--with-meta': hasMeta }, className]}>
   <div class="section-heading__main">
-    <p class="section-heading__eyebrow">{eyebrow}</p>
+    {eyebrow && <p class="section-heading__eyebrow">{eyebrow}</p>}
     <h2 class="section-heading__title">{title}</h2>
     {description && <p class="section-heading__description">{description}</p>}
   </div>
@@ -65,6 +65,10 @@ const hasMeta = Astro.slots.has('meta');
     text-wrap: pretty;
   }
 
+  .section-heading__main > .section-heading__title:first-child {
+    margin-top: 0;
+  }
+
   .section-heading__description {
     max-width: var(--measure-body-compact);
     margin: var(--space-5) 0 0;
@@ -97,6 +101,13 @@ const hasMeta = Astro.slots.has('meta');
   .section-heading--dark .section-heading__description,
   .section-heading--dark .section-heading__meta {
     color: rgb(245 245 247 / 66%);
+  }
+
+  @media (min-width: 48rem) {
+    .section-heading--with-meta {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+    }
   }
 
 </style>

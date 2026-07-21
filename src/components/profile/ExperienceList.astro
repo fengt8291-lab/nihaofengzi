@@ -42,17 +42,24 @@ const { experiences, compact = false } = Astro.props;
 <style>
   .experience-list {
     display: grid;
-    gap: var(--space-5);
+    gap: 0;
     padding: 0;
     margin: 0;
+    border-top: 1px solid var(--color-border-strong);
     list-style: none;
   }
 
+  .experience-list--compact {
+    width: 100%;
+    max-width: var(--layout-editorial-width);
+  }
+
+  .experience-list > li {
+    border-bottom: 1px solid var(--color-border);
+  }
+
   .experience-item {
-    padding: var(--space-6);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-card-background);
+    padding-block: var(--space-6);
   }
 
   .experience-item header {
@@ -85,6 +92,7 @@ const { experiences, compact = false } = Astro.props;
   }
 
   .experience-item__summary {
+    max-width: var(--measure-body);
     margin: var(--space-5) 0 0;
     color: var(--color-text-secondary);
     font-size: var(--type-body-size);
