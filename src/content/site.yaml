@@ -26,6 +26,7 @@ site:
     language: 'zh-CN'
     defaultTitle: '你好丰子 / Nihao Fengzi'
     defaultDescription: '田丰的个人数字主页，记录教育与校园经历、作品实践，以及仍在形成的想法。'
+    defaultOgImage: '/og-default.png'
     footer:
       description: '持续更新的个人数字主页'
 

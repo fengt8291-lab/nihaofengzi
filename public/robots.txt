@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://nihaofengzi.top/sitemap-index.xml

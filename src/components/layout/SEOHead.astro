@@ -10,7 +10,8 @@ const {
   title = site.defaultTitle,
   description = site.defaultDescription,
   canonical = getCanonicalUrl(Astro.url.pathname, site.url),
-  image,
+  image = site.defaultOgImage,
+  imageAlt = `${siteName}个人数字主页`,
   noIndex = false,
 } = Astro.props as SeoMetadata;
 
@@ -20,9 +21,16 @@ const documentTitle =
     : title === siteName
       ? `${title}：个人数字主页`
       : `${title} | ${siteName}`;
-const rawCanonical = canonical instanceof URL ? canonical : new URL(canonical, site.url);
-const canonicalUrl = getCanonicalUrl(rawCanonical.pathname, rawCanonical.origin);
+const rawCanonical = canonical
+  ? canonical instanceof URL
+    ? canonical
+    : new URL(canonical, site.url)
+  : undefined;
+const canonicalUrl = rawCanonical
+  ? getCanonicalUrl(rawCanonical.pathname, rawCanonical.origin)
+  : undefined;
 const imageUrl = image ? (image instanceof URL ? image : new URL(image, site.url)) : undefined;
+const locale = site.language.replace('-', '_');
 ---
 
 <meta charset="UTF-8" />
@@ -30,11 +38,19 @@ const imageUrl = image ? (image instanceof URL ? image : new URL(image, site.url
 <meta name="generator" content={Astro.generator} />
 <title>{documentTitle}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={canonicalUrl} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 {noIndex && <meta name="robots" content="noindex, nofollow" />}
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={locale} />
 <meta property="og:title" content={documentTitle} />
 <meta property="og:description" content={description} />
-<meta property="og:url" content={canonicalUrl} />
+{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
 {imageUrl && <meta property="og:image" content={imageUrl} />}
+{imageUrl && <meta property="og:image:alt" content={imageAlt} />}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={documentTitle} />
+<meta name="twitter:description" content={description} />
+{imageUrl && <meta name="twitter:image" content={imageUrl} />}

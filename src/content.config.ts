@@ -85,6 +85,7 @@ const siteSchema = z
         language: nonEmptyString,
         defaultTitle: nonEmptyString,
         defaultDescription: nonEmptyString,
+        defaultOgImage: nonEmptyString,
         footer: z
           .object({
             description: nonEmptyString,
