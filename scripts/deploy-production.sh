@@ -241,7 +241,7 @@ print_dry_run() {
 [deploy]   7. Validate files, permissions and www-data readability; run nginx -t.
 [deploy]   8. Rename current dist to: $REMOTE_BACKUP
 [deploy]   9. Rename the validated next directory to: $REMOTE_CURRENT
-[deploy]  10. Verify four cache-busted HTTPS routes, homepage identity and the built asset.
+[deploy]  10. Verify four cache-busted HTTPS routes, homepage identity, the built asset and SEO resources.
 [deploy]  11. Roll back on verification failure; keep the newest $BACKUP_KEEP_COUNT backups.
 [deploy]  12. Release only the deployment lock owned by this run.
 EOF
@@ -441,24 +441,41 @@ verify_production() {
   local homepage_body
   local homepage_url
   local path
+  local sitemap_body
+  local sitemap_url
   local url
   local status
+  local -a curl_options=(
+    --fail
+    --silent
+    --show-error
+    --location
+    --connect-timeout 10
+    --max-time 60
+    --retry 3
+    --retry-delay 2
+  )
   local -a paths=(
     '/'
     '/about/'
     '/work/'
     '/work/daily-tasks/'
   )
+  local -a seo_resource_paths=(
+    '/robots.txt'
+    '/sitemap-index.xml'
+    '/favicon.svg'
+  )
 
   for path in "${paths[@]}"; do
     url="${PRODUCTION_ORIGIN}${path}?deploy=${SHORT_SHA}"
-    status="$(curl -sS -L --connect-timeout 10 --max-time 30 -o /dev/null -w '%{http_code}' -- "$url")"
+    status="$(curl "${curl_options[@]}" --output /dev/null --write-out '%{http_code}' -- "$url")"
     [[ "$status" == '200' ]] || fail "Production verification failed for $url (HTTP $status)."
     log "Verified $url (HTTP $status)"
   done
 
   homepage_url="${PRODUCTION_ORIGIN}/?deploy=${SHORT_SHA}"
-  homepage_body="$(curl -fsS -L --connect-timeout 10 --max-time 30 -- "$homepage_url")"
+  homepage_body="$(curl "${curl_options[@]}" -- "$homepage_url")"
   [[ "$homepage_body" == *'你好丰子'* ]] ||
     fail 'Production homepage does not contain the expected brand text: 你好丰子'
   [[ "$homepage_body" != *'你好疯子个人主页建设中'* ]] ||
@@ -468,10 +485,23 @@ verify_production() {
   [[ "$PRODUCTION_ASSET_PATH" =~ ^/_astro/[A-Za-z0-9][A-Za-z0-9._-]*\.(css|js)$ ]] ||
     fail 'Production asset path was not safely validated before the production request.'
   asset_url="${PRODUCTION_ORIGIN}${PRODUCTION_ASSET_PATH}?deploy=${SHORT_SHA}"
-  asset_status="$(curl -sS -L --connect-timeout 10 --max-time 30 -o /dev/null -w '%{http_code}' -- "$asset_url")"
+  asset_status="$(curl "${curl_options[@]}" --output /dev/null --write-out '%{http_code}' -- "$asset_url")"
   [[ "$asset_status" == '200' ]] ||
     fail "Production asset verification failed for $asset_url (HTTP $asset_status)."
   log "Verified built asset $asset_url (HTTP $asset_status)"
+
+  for path in "${seo_resource_paths[@]}"; do
+    url="${PRODUCTION_ORIGIN}${path}?deploy=${SHORT_SHA}"
+    status="$(curl "${curl_options[@]}" --output /dev/null --write-out '%{http_code}' -- "$url")"
+    [[ "$status" == '200' ]] || fail "Production SEO resource verification failed for $url (HTTP $status)."
+    log "Verified SEO resource $url (HTTP $status)"
+  done
+
+  sitemap_url="${PRODUCTION_ORIGIN}/sitemap-index.xml?deploy=${SHORT_SHA}"
+  sitemap_body="$(curl "${curl_options[@]}" -- "$sitemap_url")"
+  [[ "$sitemap_body" == *'<sitemapindex'* ]] ||
+    fail 'Production sitemap index does not contain the expected sitemap marker.'
+  log 'Verified production sitemap index content marker.'
 }
 
 rollback_remote() {
@@ -704,7 +734,7 @@ main() {
   log "Commit: $FULL_SHA"
   log "Time (UTC): $DEPLOY_TIMESTAMP"
   log "Target: $REMOTE_TARGET:$REMOTE_CURRENT"
-  log "Verification: four pages, homepage identity and $PRODUCTION_ASSET_PATH passed."
+  log "Verification: four pages, homepage identity, $PRODUCTION_ASSET_PATH and SEO resources passed."
 }
 
 trap 'on_error $? $LINENO' ERR
