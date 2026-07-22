@@ -4,8 +4,7 @@ type: 消费者研究 / 品牌设计 / 课程报告
 summary: 围绕高度线上化、现实连接不足和社会比较等问题，设计一个帮助年轻人通过低压力行动重新连接具体生活的疗愈订阅品牌方案。
 category: research-content
 visibility: public
-featured: true
-featuredOrder: 2
+featured: false
 detailMode: internal
 status: 课程报告已完成，可整理为完整案例
 cardStatus: 课程成果

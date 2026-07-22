@@ -27,9 +27,9 @@ export const WORK_COVER_VARIANTS = [
 export type WorkCoverVariant = (typeof WORK_COVER_VARIANTS)[number];
 
 export const EXPECTED_FEATURED_WORK_IDS = [
-  'daily-tasks',
-  'huian',
+  'gap',
   'sleep-recovery',
+  'daily-tasks',
 ] as const;
 
 export const getWorkCategoryOrder = (category: WorkCategoryId) =>
