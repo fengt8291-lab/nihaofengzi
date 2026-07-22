@@ -10,7 +10,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy:prod": "bash scripts/deploy-production.sh",
+    "deploy:prod:dry": "bash scripts/deploy-production.sh --dry-run"
   },
   "engines": {
     "node": ">=22.12.0",
