@@ -12,6 +12,7 @@ const items = [
   { label: '类型', value: entry.data.type },
   entry.data.role ? { label: '我的角色', value: entry.data.role } : undefined,
   { label: '状态', value: entry.data.status },
+  entry.data.accessCode ? { label: '通行码', value: entry.data.accessCode } : undefined,
 ].filter((item): item is { label: string; value: string } => Boolean(item));
 ---
 
@@ -61,7 +62,7 @@ const items = [
 
   @media (min-width: 48rem) {
     .work-meta {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
     }
   }
 </style>

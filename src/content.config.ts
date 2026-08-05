@@ -404,6 +404,7 @@ const work = defineCollection({
         period: z.string().min(1).optional(),
         order: z.number().int().nonnegative().default(999),
         role: z.string().min(1).optional(),
+        accessCode: z.string().min(1).optional(),
         coverImage: image().optional(),
         coverAlt: z.string().min(1).optional(),
         coverVariant: z.enum(WORK_COVER_VARIANTS).optional(),
