@@ -5,7 +5,7 @@ summary: 一个通过互动测试帮助用户重新观察自身关系模式的�
 category: product-digital
 visibility: public
 featured: true
-featuredOrder: 1
+featuredOrder: 2
 detailMode: hybrid
 status: 已完成首版产品并上线运行
 cardStatus: 已上线

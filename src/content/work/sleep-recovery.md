@@ -4,8 +4,7 @@ type: 睡眠恢复辅助网页 / 行为设计产品
 summary: 用户在熬夜或作息失控后输入睡眠和日程信息，得到一份未来几天可执行的恢复时间线。
 category: product-digital
 visibility: public
-featured: true
-featuredOrder: 2
+featured: false
 detailMode: internal
 status: 已形成第一版产品逻辑和网页原型，仍需依据、安全边界和用户验证
 cardStatus: 网页原型

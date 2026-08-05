@@ -303,6 +303,7 @@ site:
       - title: '产品问题定义与用户洞察'
         description: '从具体生活场景中定义问题、确定最小闭环，并判断哪些功能不应该加入。'
         evidence:
+          - 'AIsoul｜灵魂镜像'
           - 'DailyTasks'
           - '今夜补救'
           - '回岸'
@@ -326,6 +327,7 @@ site:
       - title: 'AI 协作与数字原型'
         description: '使用 ChatGPT、Codex、OpenClaw、GitHub 及前端工具组织上下文、推进网页原型，并进行验收和复盘。'
         evidence:
+          - 'AIsoul｜灵魂镜像'
           - 'DailyTasks'
           - '今夜补救'
           - 'OrgGamify'
