@@ -79,14 +79,15 @@ const hero = (await getSiteContent()).home.hero;
   }
 
   .hero__title {
-    max-width: var(--measure-display);
-    margin: var(--space-5) 0 0;
-    font-size: var(--type-display-size);
-    font-weight: var(--type-display-weight);
-    letter-spacing: var(--type-display-tracking);
-    line-height: var(--type-display-leading);
-    text-wrap: balance;
-    transition-delay: 40ms;
+   max-width: var(--measure-display);
+   margin: var(--space-5) 0 0;
+   font-size: var(--type-display-size);
+   font-weight: var(--type-display-weight);
+   letter-spacing: var(--type-display-tracking);
+   line-height: var(--type-display-leading);
+   white-space: pre-line;
+   text-wrap: balance;
+   transition-delay: 40ms;
   }
 
   .hero__description {
