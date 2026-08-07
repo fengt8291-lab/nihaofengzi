@@ -1,7 +1,7 @@
 export const WORK_CATEGORY_IDS = [
+  'learning-tools',
   'product-digital',
   'research-content',
-  'learning-tools',
   'creative-life',
 ] as const;
 
@@ -28,8 +28,8 @@ export type WorkCoverVariant = (typeof WORK_COVER_VARIANTS)[number];
 
 export const EXPECTED_FEATURED_WORK_IDS = [
   'ai-soul',
+  'history-quiz',
   'gap',
-  'daily-tasks',
 ] as const;
 
 export const getWorkCategoryOrder = (category: WorkCategoryId) =>

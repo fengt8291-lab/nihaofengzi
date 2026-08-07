@@ -4,8 +4,7 @@ type: 现实连接型数字产品 / 大学生现实支线任务
 summary: 一个通过轻量现实任务，帮助高度线上化的大学生重新连接身体、环境、熟人和具体生活的产品实验。
 category: product-digital
 visibility: public
-featured: true
-featuredOrder: 3
+featured: false
 detailMode: internal
 status: 本地 MVP 已完成，尚未完成公开用户验证
 cardStatus: 本地 MVP

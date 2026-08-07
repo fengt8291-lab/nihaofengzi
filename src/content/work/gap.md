@@ -5,7 +5,7 @@ summary: 把抽象的人际关系原则，转化为一次可以亲自完成的�
 category: product-digital
 visibility: public
 featured: true
-featuredOrder: 2
+featuredOrder: 3
 detailMode: hybrid
 status: 首版产品已公开上线，题目和结果表达仍在继续调整
 cardStatus: 已上线

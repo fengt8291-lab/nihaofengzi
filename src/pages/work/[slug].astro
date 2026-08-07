@@ -29,7 +29,8 @@ const { entry } = Astro.props;
 const siteContent = await getSiteContent();
 const { Content } = await render(entry);
 const canonical = new URL(normalizePathname(Astro.url.pathname), siteContent.global.url);
-const hasCover = Boolean(entry.data.coverImage || entry.data.coverVariant);
+const hasCover =
+  entry.data.showHeroCover && Boolean(entry.data.coverImage || entry.data.coverVariant);
 const links = [
   entry.data.externalUrl
     ? { label: '访问项目', href: entry.data.externalUrl, external: true }
