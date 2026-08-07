@@ -407,6 +407,7 @@ const work = defineCollection({
         accessCode: z.string().min(1).optional(),
         coverImage: image().optional(),
         coverAlt: z.string().min(1).optional(),
+        coverFocus: z.enum(['center', 'top-left']).default('center'),
         showHeroCover: z.boolean().default(true),
         coverVariant: z.enum(WORK_COVER_VARIANTS).optional(),
         topics: z.array(z.string().min(1)).default([]),

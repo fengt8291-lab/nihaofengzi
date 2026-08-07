@@ -7,16 +7,23 @@ type WorkData = CollectionEntry<'work'>['data'];
 interface Props {
   coverImage?: WorkData['coverImage'];
   coverAlt?: string;
+  coverFocus?: WorkData['coverFocus'];
   coverVariant?: WorkData['coverVariant'];
   priority?: boolean;
 }
 
-const { coverImage, coverAlt, coverVariant, priority = false } = Astro.props;
+const {
+  coverImage,
+  coverAlt,
+  coverFocus = 'center',
+  coverVariant,
+  priority = false,
+} = Astro.props;
 ---
 
 {
   coverImage && coverAlt ? (
-    <div class="work-cover work-cover--image">
+    <div class:list={['work-cover', 'work-cover--image', `work-cover--focus-${coverFocus}`]}>
       <Image
         src={coverImage}
         alt={coverAlt}
@@ -53,6 +60,10 @@ const { coverImage, coverAlt, coverVariant, priority = false } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .work-cover--focus-top-left :global(img) {
+    object-position: left top;
   }
 
   .work-cover--abstract {

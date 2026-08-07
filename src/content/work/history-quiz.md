@@ -13,7 +13,8 @@ year: 2026
 order: 1
 role: 需求定义、题库整理、学习流程设计、前端开发、工程重构、测试与上线
 coverImage: ../../assets/work/history-quiz/cover.png
-coverAlt: 史纲闯关首页封面，展示 264 道题、本机学习档案以及闯关练习、考前模拟和记忆卡片入口
+coverAlt: 史纲闯关首页封面，展示 264 道题、学习统计、三种主要复习入口和专题练习
+coverFocus: top-left
 showHeroCover: false
 topics:
   - 史纲复习
@@ -28,7 +29,7 @@ relatedSlugs:
 
 它最初只是我为自己制作的备考工具。项目完成后，我将网站分享给一些同学使用，也收到了较多正向反馈。在最终考试中，我的《中国近现代史纲要》课程取得了 **97 分**。
 
-![史纲闯关首页封面，展示“把题库刷成肌肉记忆”、264 道题和三种主要复习入口](../../assets/work/history-quiz/cover.png)
+![史纲闯关首页封面，展示“把题库刷成肌肉记忆”、264 道题、三种主要复习入口和专题练习](../../assets/work/history-quiz/cover.png)
 
 <p class="work-figure-caption">项目首页：以 264 道原题为基础，提供闯关练习、考前模拟和记忆卡片三种主要复习入口。</p>
 
