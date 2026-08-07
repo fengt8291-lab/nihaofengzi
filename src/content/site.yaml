@@ -52,9 +52,9 @@ site:
       eyebrow:
         chinese: '你好丰子'
         english: 'Nihao Fengzi'
-        title: |-
-          你好，
-          我是田丰。
+      title: |-
+        你好，
+        我是田丰。
       supportingTitle: '我在管理、技术与真实生活之间持续学习和实践。'
       introduction: '我是首都经济贸易大学工商管理（数智管理实验班）本科生。这里记录我的校园经历、研究与作品，以及生活中仍在形成的想法。'
       actions:
